@@ -9,13 +9,14 @@ $(function() {
   var yTitle = ''
 
   Highcharts.data({
-    csvURL: 'https://gist.githubusercontent.com/jnschrag/dac0153211542fe6e8ca69bcf7b7827a/raw/df18abb6d84c6d353026c2ca7c9be023cd29be9f/data.csv',
-    beforeParse: function (csv) {
-      console.log(csv)
-    },
+    csvURL: 'https://defense360.csis.org/data.csv',
+    enablePolling: false,
+    // beforeParse: function (csv) {
+    //   console.log(csv)
+    // },
     // googleSpreadsheetKey: '1NyJlNTTLUrdhVjhVWO0f3BYnV4uWnCuUnoyOFaEBn2Q',
     // googleSpreadsheetWorksheet: 1,
-    switchRowsAndColumns: true,
+    // switchRowsAndColumns: true,
     parsed: function(columns) {
       console.log(columns)
       $.each(columns, function (i, code) {
