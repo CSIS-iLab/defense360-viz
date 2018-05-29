@@ -4,7 +4,7 @@ $(function() {
   var datasets
   var seriesData = []
   var fiveWin = []
-  var fivelose = []
+  var fiveLose = []
 
   Highcharts.data({
     googleSpreadsheetKey: '1ELTTTAvZMs5TXPQv2-BO2P_7cK3UfaPCDdMi_Sv-d74',
@@ -35,10 +35,7 @@ $(function() {
         var dataContent = dataArray[0].data;
         var lastDatum = dataContent.length;
         fiveWin = dataContent.slice(0,5);
-        fivelose = dataContent.slice(lastDatum-5,lastDatum).reverse();
-        console.log(fiveWin);
-        console.log(fivelose);
-
+        fiveLose = dataContent.slice(lastDatum-5,lastDatum).reverse();
 
         renderChart(dataArray);
 
@@ -48,14 +45,16 @@ $(function() {
           $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[1] + 'e2')+ 'e-2') + '%</text><br/>')
         })
 
+        $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 % decrease</b></text><br/>')
 
+        fiveLose.map(function(e){
+          $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[1] + 'e2')+ 'e-2') + '%</text><br/>')
+        })
       }
   })
 
 
   function renderChart(data) {
-    console.log();
-
     $('#hcContainer').highcharts({
       // General Chart Options
       chart: {
