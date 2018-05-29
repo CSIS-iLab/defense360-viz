@@ -58,7 +58,6 @@ $(function() {
     $('#hcContainer').highcharts({
       // General Chart Options
       chart: {
-        zoomType: 'x',
         type: 'column'
       },
       // Chart Title and Subtitle
