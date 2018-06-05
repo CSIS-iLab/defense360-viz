@@ -250,8 +250,9 @@
       },
       series: series
     });
+}
 
-    Highcharts.setOptions({
+Highcharts.setOptions({
       lang: {
         thousandsSep: ","
       }
@@ -375,7 +376,6 @@
 
   // Apply the theme
   Highcharts.setOptions(Highcharts.theme);
-}
 
 function slugify(words) {
   var slug = ''
