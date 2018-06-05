@@ -7,223 +7,382 @@
   - includes
   - Object.values//
   - findIndex
- */
+  */
 
+  import Highcharts from './js/highcharts.js';
+  import { csv } from 'd3-fetch';
+  import dataCSV from '/js/data.csv'
 
-const Highcharts = require('highcharts');
-require('highcharts/modules/data')(Highcharts);
-require('highcharts/modules/drilldown')(Highcharts);
-require('highcharts/modules/exporting')(Highcharts);
-// import '../../globals/defense360-highcharts-theme.js';
-import csv from '/js/data.csv'
+  const valueTypesInfo = {
+    'current': {
+      dropdown: 'Current',
+      yAxis: 'Current'
+    },
+    'constant': {
+      dropdown: 'Constant FY19',
+      yAxis: 'Constant FY19'
+    }
+  }
+  const valueTypes = ['current', 'constant']
+  const colors = ['#365F5A', '#96B586', '#DDB460', '#D05F4C', '#83373E', '#9B9B9B', '#3E8E9D', '#75657A', '#A2786A']
 
-const valueTypes = ['current', 'constant']
-const colors = ['#196c95', '#5db6d0', '#f9bc65', '#d66e42', '#4f9793', '#3e7a82', '#4b5255']
+  var data = {
+    'current': {},
+    'constant': {}
+  }
+  var datasets
+  var seriesData = {}
+  var years = []
 
-var data = {
-  'current': {},
-  'constant': {}
-}
-var datasets
-var seriesData = {}
-var years = []
+  var drilldownData = {
+    'current': {},
+    'constant': {}
+  }
 
-var drilldownData = {
-  'current': {},
-  'constant': {}
-}
-var seriesDrilldown = []
-var yTitle = ''
-let currentType = 'current'
+  let currentType = 'current'
+  let chart
 
-function populateSelect() {
-  var options = '';
-  datasets.forEach(function(i, dataset) {
-    options += '<option value="'+ i + '">' + dataset + '</option>';
-  })
-  // $('.datasets').append(options);
+  function populateSelect() {
+    var options = '';
+    datasets.forEach(function(dataset, i) {
+      options += '<option value="'+ dataset + '">' + valueTypesInfo[dataset].dropdown + ' Dollars</option>';
+    })
+    let select = document.querySelector('.datasets')
+    select.innerHTML = options
 
-  // Destroy & redraw chart so we get smooth animation when switching datasets.
-  // $('.datasets').on('change', function() {
-  //   var chart = $('#hcContainer').highcharts()
-  //   chart.destroy()
-  //   renderChart(seriesData[this.value], seriesDrilldown[this.value],datasets[this.value])
-  // })
-}
+    select.addEventListener('change', function() {
+      currentType = this.value
+      chart.destroy()
+      renderChart(seriesData[currentType])
+    })
+  }
 
-const chart = Highcharts.chart('hcContainer', {
-    colors: colors,
-    chart: {
-      type: 'area',
-      height: 600,
-      events: {
-        drilldown: function(e) {
-          if ( !e.seriesOptions ) {
-            let chart = this
-            let series = drilldownData[currentType][e.point.id]
-            for (let i = 0; i < series.length; i++ ) {
-              series[i].color = colors[i]
-              chart.addSingleSeriesAsDrilldown(e.point, series[i])
+  function createDrilldownObjects ({ rootObj, parentSlug, parentName, childSlug, year, value, drilldown,
+  }) {
+    let parentIndex = rootObj.findIndex(d => d.id === parentSlug)
+    if ( parentIndex === -1 ) {
+      rootObj.push({
+        name: parentName,
+        id: parentSlug,
+        drilldownID: parentSlug,
+        data: [{
+          name: 'Fiscal Year ' + year,
+          id: childSlug,
+          drilldownID: parentSlug,
+          drilldown: drilldown,
+          y: value
+        }]
+      })
+    } else {
+      let childIndex = rootObj[parentIndex].data.findIndex(d => d.id === childSlug)
+
+      if ( childIndex > -1 ) {
+        rootObj[parentIndex].data[childIndex].y += value
+      } else {
+        rootObj[parentIndex].data.push({
+          name: 'Fiscal Year ' + year,
+          id: childSlug,
+          drilldownID: parentSlug,
+          drilldown: drilldown,
+          y: value
+        })
+      }
+    }
+  }
+
+  csv(dataCSV).then(function(rows) {
+    rows.forEach(function(code, i) {
+      var level1 = code.level1;
+      var level2 = code.level2;
+      var level3 = code.level3;
+      var level4 = code.level4;
+      var year = code.Year;
+
+      const valueTypesColumns = {
+        'current': +code.current,
+        'constant': +code.constant
+      }
+
+      if ( !years.includes(year) ) {
+        years.push(year)
+      }
+
+      valueTypes.forEach(function(type, index) {
+        const level1Slug = slugify([year, level1])
+        const level1ID = slugify([level1])
+
+        data[type][level1] = data[type][level1] || {
+          name: level1,
+          colorByPoint: false,
+          data: {}
+        }
+
+        data[type][level1].data[level1Slug] = data[type][level1].data[level1Slug] || {
+          id: level1ID,
+          drilldownID: level1ID,
+          name: 'Fiscal Year ' + year,
+          drilldown: true,
+          y: 0
+        }
+
+        data[type][level1].data[level1Slug].y += valueTypesColumns[type]
+
+      // Drilldowns
+      let level2Slug = slugify([level1, level2])
+      let level3Slug = slugify([year, level2Slug])
+      let level3ID = slugify([level2Slug, level3])
+      let level4Slug = slugify([level3Slug, level4])
+      let level4ID = slugify([level3ID, level4])
+      
+      drilldownData[type][level1ID] = drilldownData[type][level1ID] || []
+      createDrilldownObjects({
+        rootObj: drilldownData[type][level1ID],
+        parentSlug: level2Slug,
+        parentName: level1 + ' ' + level2,
+        childSlug: level3Slug,
+        year: year,
+        value: valueTypesColumns[type],
+        drilldown: true
+      })
+
+      drilldownData[type][level2Slug] = drilldownData[type][level2Slug] || []
+      createDrilldownObjects({
+        rootObj: drilldownData[type][level2Slug],
+        parentSlug: level3ID,
+        parentName: level1 + ' ' + level2 + ' ' + level3,
+        childSlug: level3Slug,
+        year: year,
+        value: valueTypesColumns[type],
+        drilldown: true
+      })
+
+      drilldownData[type][level3ID] = drilldownData[type][level3ID] || []
+      createDrilldownObjects({
+        rootObj: drilldownData[type][level3ID],
+        parentSlug: level4ID,
+        parentName: level1 + ' ' + level2 + ' ' + level3 + ' ' + level4,
+        childSlug: level4Slug,
+        year: year,
+        value: valueTypesColumns[type],
+        drilldown: false
+      })
+
+    })
+    })
+
+    datasets = Object.keys(data)
+
+    valueTypes.forEach(function(type, index) {
+      seriesData[type] = Object.keys(data[type]).map(p => {
+        data[type][p].data = Object.values(data[type][p].data)
+        return data[type][p]
+      })
+    });
+
+    populateSelect()
+    renderChart(seriesData[currentType])
+  });
+
+  function renderChart(series) {
+    chart = Highcharts.chart('hcContainer', {
+      colors: colors,
+      chart: {
+        type: 'area',
+        height: 600,
+        events: {
+          drilldown: function(e) {
+            if ( !e.seriesOptions ) {
+              let chart = this
+              let series = drilldownData[currentType][e.point.drilldownID]
+              for (let i = 0; i < series.length; i++ ) {
+                let colorIndex = i
+                if ( i > colors.length ) {
+                  colorIndex = i - colors.length
+                }
+                series[i].color = colors[colorIndex]
+                chart.addSingleSeriesAsDrilldown(e.point, series[i])
+              }
+              chart.applyDrilldown()
             }
-            chart.applyDrilldown()
           }
         }
-      }
-    },
-    title: {
-      text: 'Procurement Funding'
-    },
-    subtitle: {
-      text: ''
-    },
-    data: {
-      csvURL: 'https://raw.githubusercontent.com/CSIS-iLab/defense360-viz/hc-template-variable/templates/hc-area-multiple-drilldown/js/data.csv',
-      switchRowsAndColumns: true,
-      parsed: function(columns) {
-        columns.forEach(function(code, i) {
-          if ( i == 0 ) {
-            return
-          }
-
-          var level1 = code[0];
-          var level2 = code[1];
-          var level3 = code[2];
-          var level4 = code[3];
-          var year = code[4];
-
-          const valueTypesColumns = {
-            'current': code[5],
-            'constant': code[6]
-          }
-
-          if ( !years.includes(year) ) {
-            years.push(year)
-          }
-          
-          valueTypes.forEach(function(type, index) {
-            data[type][level1] = data[type][level1] || {
-              name: level1,
-              colorByPoint: false,
-              data: {}
-            }
-
-            const level1Slug = slugify([year, level1])
-            const level1ID = slugify([level1])
-
-            data[type][level1].data[level1Slug] = data[type][level1].data[level1Slug] || {
-              id: level1ID,
-              name: 'Fiscal Year ' + year,
-              drilldown: true,
-              y: 0
-            }
-
-            data[type][level1].data[level1Slug].y += valueTypesColumns[type]
-
-            // Drilldowns
-            const level2Slug = slugify([level1, level2])
-            const level3Slug = slugify([year, level2Slug])
-
-            drilldownData[type][level1ID] = drilldownData[type][level1ID] || []
-            let level2Index = drilldownData[type][level1ID].findIndex(d => d.id === level2Slug)
-            if ( level2Index === -1 ) {
-              drilldownData[type][level1ID].push({
-                name: level1 + ' ' + level2,
-                id: level2Slug,
-                // color: colors[0],
-                data: [{
-                  name: 'Fiscal Year ' + year,
-                  id: level3Slug,
-                  drilldown: true,
-                  y: valueTypesColumns[type]
-                }]
-              })
-            } else {
-
-              let level3Index = drilldownData[type][level1ID][level2Index].data.findIndex(d => d.id === level3Slug)
-
-              if ( level3Index > -1 ) {
-                drilldownData[type][level1ID][level2Index].data[level3Index].y += valueTypesColumns[type]
-              } else {
-                drilldownData[type][level1ID][level2Index].data.push({
-                  name: 'Fiscal Year ' + year,
-                  id: level3Slug,
-                  drilldown: true,
-                  y: valueTypesColumns[type]
-                })
-              }
-            }
-
-            //data[type][level1].data[level1Slug].y += valueTypesColumns[type]
-
-          })
-        })
-
-        console.log(drilldownData[currentType])
-
-        datasets = Object.keys(data)
-
-        valueTypes.forEach(function(type, index) {
-          seriesData[type] = Object.keys(data[type]).map(p => {
-            data[type][p].data = Object.values(data[type][p].data)
-            return data[type][p]
-          })
-        });
-
-        console.log(seriesData)
-
-        populateSelect()
       },
-      complete: function(options) {
-        options.series = seriesData[currentType]
-        chart.xAxis[0].setCategories(years)
-      }
-    },
-    plotOptions:
-    {
-      area: {
-        stacking: 'normal',
-        lineColor: null,
-        lineWidth: 1,
-        marker: {
-          lineWidth: 1,
-          lineColor: null,
-          symbol: 'circle',
-          radius: 3
-        },
-        cursor: 'pointer',
-        trackByArea: true
-      }
-    },
-    tooltip: {
-      valueDecimals: 2,
-      valuePrefix: '$',
-      valueSuffix: 'M'
-    },
-    xAxis: {
-      title: 'Fiscal Year',
-      allowDecimals: false,
-      categories: ['FY99', 'FY00', 'FY01', 'FY02', 'FY03', 'FY04', 'FY05', 'FY06'],
-      tickmarkPlacement: 'on'
-    },
-    yAxis: {
       title: {
-        text: "Total Obligational Authority in Constant FY19 Dollars"
+        text: 'Procurement Funding'
       },
-      labels: {
-          formatter: function () {
-              var label = "$" + this.value/1000 +"B";
-              return label;
-          }
+      subtitle: {
+        text: ''
+      },
+      credits: {
+        enabled: true,
+        href: false,
+        text: "CSIS Defense360 | Source: NAME"
+      },
+      plotOptions:
+      {
+        area: {
+          stacking: 'normal',
+          lineColor: null,
+          lineWidth: 1,
+          marker: {
+            lineWidth: 1,
+            lineColor: null,
+            symbol: 'circle',
+            radius: 3
+          },
+          cursor: 'pointer',
+          trackByArea: true
+        }
+      },
+      tooltip: {
+        valuePrefix: '$'
+      },
+      xAxis: {
+        title: 'Fiscal Year',
+        allowDecimals: false,
+        categories: years,
+        tickmarkPlacement: 'on'
+      },
+      yAxis: {
+        title: {
+          text: "Total Obligational Authority in " + valueTypesInfo[currentType].yAxis + " Dollars"
+        }
+      },
+      series: series
+    });
+
+    Highcharts.setOptions({
+      lang: {
+        thousandsSep: ","
       }
-    },
-});
+    });
+
+    Highcharts.theme = {
+      colors: colors,
+      chart: {
+        backgroundColor: '#FFF',
+        border: 'none',
+        color: '#000',
+        plotShadow: false,
+        height: 500
+      },
+      title: {
+        style: {
+          color: '#000',
+          fontSize: '25px',
+          fontFamily: '"expo-serif-pro",serif',
+          fontWeight: '400'
+        },
+        widthAdjust: -60
+      },
+      subtitle: {
+        style: {
+          fontSize: '12px',
+          fontFamily: '"expo-serif-pro",serif',
+          color: '#808080'
+        }
+      },
+      credits: {
+        style: {
+          cursor: "default",
+          fontFamily: "'Source Sans Pro', 'Arial', sans-serif",
+          fontSize: '10px'
+        }
+      },
+      tooltip: {
+        style: {
+          fontSize: '13px',
+          fontFamily: "'Source Sans Pro', 'Arial', sans-serif"
+        },
+        headerFormat: '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Source Sans Pro\', arial, sans-serif;">{point.key}</span><br/>'
+      },
+      xAxis: {
+        labels: {
+          style: {
+            color: '#666',
+            fontSize: '12px',
+            fontFamily: '"expo-serif-pro",serif'
+          },
+        },
+        title: {
+          style: {
+            color: '#666',
+            fontSize: '14px',
+            fontFamily: '"expo-serif-pro",serif'
+          }
+        },
+        gridLineWidth: 1,
+        lineWidth: 0,
+        tickColor: '#e6e6e6'
+      },
+      yAxis: {
+        labels: {
+          style: {
+            color: '#666',
+            fontSize: '12px',
+            fontFamily: '"expo-serif-pro",serif'
+          },
+          x: -3
+        },
+        title: {
+          style: {
+            color: '#666',
+            fontSize: '14px',
+            fontFamily: '"expo-serif-pro",serif'
+          },
+          margin: 20
+        },
+        tickColor: '#e6e6e6'
+      },
+      legend: {
+        title: {
+          text: null,
+          style: {
+            fontFamily: '"expo-serif-pro",serif',
+            fontSize: "15px",
+            color: '#000',
+            fontStyle: 'normal'
+          }
+        },
+        itemStyle: {
+          color: '#000',
+          fontSize: '14px',
+          fontFamily: "'Source Sans Pro', 'Arial', sans-serif",
+          fontWeight: 'normal',
+          textOverflow: null
+
+        },
+        itemHoverStyle: {
+          color: '#36605a'
+        },
+        margin: 30
+      },
+      drilldown: {
+        activeAxisLabelStyle: {
+          color: '#666',
+          textDecoration: 'none',
+          fontWeight: 'normal',
+          cursor: 'default'
+        },
+        activeDataLabelStyle: {
+          color: '#666',
+          textDecoration: 'none',
+          fontWeight: 'normal',
+          cursor: 'default'
+        }
+      }
+    };
+
+  // Apply the theme
+  Highcharts.setOptions(Highcharts.theme);
+}
 
 function slugify(words) {
   var slug = ''
   words.forEach(function(word, i) {
     var prefix = '-'
     if ( i == 0 ) { prefix = '' }
-    slug += prefix + word
+      slug += prefix + word
   })
   slug = slug.replace(/\s+/g, '-').toLowerCase();
   return slug
