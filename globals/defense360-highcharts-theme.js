@@ -10,7 +10,7 @@ Highcharts.setOptions({
 });
 
 Highcharts.theme = {
-    colors: ['#196c95', '#5db6d0', '#f9bc65', '#d66e42', '#4f9793', '#3e7a82', '#4b5255'],
+    colors: ['#365F5A', '#96B586', '#DDB460', '#D05F4C', '#83373E', '#9B9B9B', '#3E8E9D', '#75657A', '#A2786A'],
     chart: {
         backgroundColor: '#FFF',
         border: 'none',
@@ -21,7 +21,7 @@ Highcharts.theme = {
     title: {
         style: {
             color: '#000',
-            font: '25px "Abel", Arial, sans-serif',
+            font: '25px "expo-serif-pro",serif',
             fontWeight: '400'
         },
         widthAdjust: -60
@@ -29,7 +29,7 @@ Highcharts.theme = {
     subtitle: {
         style: {
             fontSize: '12px',
-            fontFamily: "'Abel', 'Arial', sans-serif",
+            fontFamily: '"expo-serif-pro",serif',
             color: '#808080'
         }
     },
@@ -45,21 +45,21 @@ Highcharts.theme = {
             fontSize: '13px',
             fontFamily: "'Source Sans Pro', 'Arial', sans-serif"
         },
-        headerFormat: '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Roboto\', arial, sans-serif;">{point.key}</span><br/>'
+        headerFormat: '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Source Sans Pro\', arial, sans-serif;">{point.key}</span><br/>'
     },
     xAxis: {
         labels: {
             style: {
                 color: '#666',
                 fontSize: '12px',
-                fontFamily: "'Abel', 'Arial', sans-serif"
+                fontFamily: '"expo-serif-pro",serif'
             },
         },
         title: {
             style: {
                 color: '#666',
                 fontSize: '14px',
-                fontFamily: "'Abel', 'Arial', sans-serif"
+                fontFamily: '"expo-serif-pro",serif'
 
             }
         },
@@ -72,7 +72,7 @@ Highcharts.theme = {
             style: {
                 color: '#666',
                 fontSize: '12px',
-                fontFamily: "'Abel', 'Arial', sans-serif"
+                fontFamily: '"expo-serif-pro",serif'
             },
             x: -3
         },
@@ -80,7 +80,7 @@ Highcharts.theme = {
             style: {
                 color: '#666',
                 fontSize: '14px',
-                fontFamily: "'Abel', 'Arial', sans-serif"
+                fontFamily: '"expo-serif-pro",serif'
             },
             margin: 20
         },
@@ -90,7 +90,7 @@ Highcharts.theme = {
         title: {
             text: null,
             style: {
-                fontFamily: "'Abel', 'Arial', sans-serif",
+                fontFamily: '"expo-serif-pro",serif',
                 fontSize: "15px",
                 color: '#000',
                 fontStyle: 'normal'
