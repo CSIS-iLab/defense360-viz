@@ -98,7 +98,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({12:[function(require,module,exports) {
+})({6:[function(require,module,exports) {
 /*
  Highcharts JS v6.1.0 (2018-04-13)
 
@@ -507,7 +507,7 @@ g&&g.rules&&F(g.rules,function(c){void 0===c._id&&(c._id=a.uniqueKey());this.mat
 (l.callback||function(){return this.chartWidth<=e(l.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=e(l.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=e(l.minWidth,0)&&this.chartHeight>=e(l.minHeight,0)}).call(this)&&g.push(a._id)};C.prototype.currentOptions=function(e){function l(c,d,e,u){var k;a.objectEach(c,function(a,b){if(!u&&-1<D(b,["series","xAxis","yAxis"]))for(a=t(a),e[b]=[],k=0;k<a.length;k++)d[b][k]&&(e[b][k]={},l(a[k],d[b][k],e[b][k],u+1));else g(a)?(e[b]=r(a)?[]:{},l(a,d[b]||{},e[b],u+1)):
 e[b]=d[b]||null})}var u={};l(e,this.options,u,0);return u}})(K);return K});
 
-},{}],13:[function(require,module,exports) {
+},{}],14:[function(require,module,exports) {
 /*
  Highcharts JS v6.1.0 (2018-04-13)
  Highcharts Drilldown module
@@ -536,7 +536,7 @@ function(b){c.drilldownCategory(a,b)})):b&&b.drillable&&(b.styles={},b.css(b.bas
 b=this.chart.renderer;k(this.points,function(c){var d=c.options.dataLabels,f=t(c.dlOptions,d&&d.style,{});c.drilldown&&c.dataLabel&&("contrast"===a.color&&(f.color=b.getContrast(c.color||this.color)),d&&d.color&&(f.color=d.color),c.dataLabel.addClass("highcharts-drilldown-data-label"),c.dataLabel.css(a).css(f))},this)});var w=function(a,b,c){a[c?"addClass":"removeClass"]("highcharts-drilldown-point");a.css({cursor:b})};d.addEvent(d.Series,"afterDrawTracker",function(){k(this.points,function(a){a.drilldown&&
 a.graphic&&w(a.graphic,"pointer",!0)})});d.addEvent(d.Point,"afterSetState",function(){this.drilldown&&this.series.halo&&"hover"===this.state?w(this.series.halo,"pointer",!0):this.series.halo&&w(this.series.halo,"auto",!1)})})(p)});
 
-},{}],14:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 /*
  Highcharts JS v6.1.0 (2018-04-13)
  Exporting module
@@ -564,7 +564,7 @@ k=k&&k.select,l;delete h.states;f?l=function(a){a.stopPropagation();f.call(b,a)}
 h;a&&(k(a,function(a,c){a&&(a.onclick=a.ontouchstart=null,h="cache-"+a.menuClassName,b[h]&&delete b[h],b.exportSVGElements[c]=a.destroy())}),a.length=0);e&&(k(e,function(a,c){f.clearTimeout(a.hideTimer);H(a,"mouseleave");b.exportDivElements[c]=a.onmouseout=a.onmouseover=a.ontouchstart=a.onclick=null;B(a)}),e.length=0);c&&(k(c,function(a){a()}),c.length=0)}});J.menu=function(a,b,e,c){return["M",a,b+2.5,"L",a+e,b+2.5,"M",a,b+c/2+.5,"L",a+e,b+c/2+.5,"M",a,b+c-1.5,"L",a+e,b+c-1.5]};A.prototype.renderExporting=
 function(){var a=this,b=a.options.exporting,e=b.buttons,c=a.isDirtyExporting||!a.exportSVGElements;a.buttonOffset=0;a.isDirtyExporting&&a.destroyExport();c&&!1!==b.enabled&&(a.exportEvents=[],E(e,function(b){a.addButton(b)}),a.isDirtyExporting=!1);w(a,"destroy",a.destroyExport)};A.prototype.callbacks.push(function(a){a.renderExporting();w(a,"redraw",a.renderExporting);k(["exporting","navigation"],function(b){a[b]={update:function(e,c){a.isDirtyExporting=!0;p(!0,a.options[b],e);r(c,!0)&&a.redraw()}}})})})(h)});
 
-},{}],6:[function(require,module,exports) {
+},{}],3:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -594,7 +594,7 @@ if (!_highcharts2.default.Chart.prototype.exportChart) {
 }
 
 exports.default = _highcharts2.default;
-},{"highcharts":12,"highcharts/modules/drilldown":13,"highcharts/modules/exporting":14}],18:[function(require,module,exports) {
+},{"highcharts":6,"highcharts/modules/drilldown":14,"highcharts/modules/exporting":15}],7:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -609,7 +609,7 @@ function responseBlob(response) {
   if (!response.ok) throw new Error(response.status + " " + response.statusText);
   return response.blob();
 }
-},{}],19:[function(require,module,exports) {
+},{}],8:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -624,7 +624,7 @@ function responseArrayBuffer(response) {
   if (!response.ok) throw new Error(response.status + " " + response.statusText);
   return response.arrayBuffer();
 }
-},{}],33:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -765,7 +765,7 @@ function inferColumns(rows) {
 
   return columns;
 }
-},{}],34:[function(require,module,exports) {
+},{}],18:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -785,7 +785,7 @@ var csvParse = exports.csvParse = csv.parse;
 var csvParseRows = exports.csvParseRows = csv.parseRows;
 var csvFormat = exports.csvFormat = csv.format;
 var csvFormatRows = exports.csvFormatRows = csv.formatRows;
-},{"./dsv":33}],35:[function(require,module,exports) {
+},{"./dsv":17}],19:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -805,7 +805,7 @@ var tsvParse = exports.tsvParse = tsv.parse;
 var tsvParseRows = exports.tsvParseRows = tsv.parseRows;
 var tsvFormat = exports.tsvFormat = tsv.format;
 var tsvFormatRows = exports.tsvFormatRows = tsv.formatRows;
-},{"./dsv":33}],32:[function(require,module,exports) {
+},{"./dsv":17}],16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -876,7 +876,7 @@ Object.defineProperty(exports, "tsvFormatRows", {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./src/dsv":33,"./src/csv":34,"./src/tsv":35}],23:[function(require,module,exports) {
+},{"./src/dsv":17,"./src/csv":18,"./src/tsv":19}],12:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -891,7 +891,7 @@ function responseText(response) {
   if (!response.ok) throw new Error(response.status + " " + response.statusText);
   return response.text();
 }
-},{}],20:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -927,7 +927,7 @@ function dsv(delimiter, input, init, row) {
 
 var csv = exports.csv = dsvParse(_d3Dsv.csvParse);
 var tsv = exports.tsv = dsvParse(_d3Dsv.tsvParse);
-},{"d3-dsv":32,"./text":23}],21:[function(require,module,exports) {
+},{"d3-dsv":16,"./text":12}],10:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -945,7 +945,7 @@ exports.default = function (input, init) {
     image.src = input;
   });
 };
-},{}],22:[function(require,module,exports) {
+},{}],11:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -960,7 +960,7 @@ function responseJson(response) {
   if (!response.ok) throw new Error(response.status + " " + response.statusText);
   return response.json();
 }
-},{}],24:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -986,7 +986,7 @@ exports.default = parser("application/xml");
 var html = exports.html = parser("text/html");
 
 var svg = exports.svg = parser("image/svg+xml");
-},{"./text":23}],10:[function(require,module,exports) {
+},{"./text":12}],5:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1081,9 +1081,9 @@ Object.defineProperty(exports, "svg", {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./src/blob":18,"./src/buffer":19,"./src/dsv":20,"./src/image":21,"./src/json":22,"./src/text":23,"./src/xml":24}],7:[function(require,module,exports) {
+},{"./src/blob":7,"./src/buffer":8,"./src/dsv":9,"./src/image":10,"./src/json":11,"./src/text":12,"./src/xml":13}],4:[function(require,module,exports) {
 module.exports="/data.442c30d3.csv";
-},{}],4:[function(require,module,exports) {
+},{}],2:[function(require,module,exports) {
 'use strict';
 
 var _highcharts = require('./js/highcharts.js');
@@ -1493,7 +1493,7 @@ function slugify(words) {
   slug = slug.replace(/\s+/g, '-').toLowerCase();
   return slug;
 }
-},{"./js/highcharts.js":6,"d3-fetch":10,"/js/data.csv":7}],36:[function(require,module,exports) {
+},{"./js/highcharts.js":3,"d3-fetch":5,"/js/data.csv":4}],20:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -1522,7 +1522,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54993' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60277' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -1663,5 +1663,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[36,4], null)
+},{}]},{},[20,2], null)
 //# sourceMappingURL=/hc-area-multiple-drilldown.c31705c1.map
