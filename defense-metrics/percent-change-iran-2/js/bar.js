@@ -1,8 +1,6 @@
 $(function() {
 
   var data = {}
-  var datasets
-  var seriesData = []
   var fiveWin = []
   var fiveLose = []
 
@@ -23,8 +21,6 @@ $(function() {
             data[code[0]].data.push([code[1], code[2]*100])
 
         })
-
-        datasets = Object.keys(data)
 
         // Convert object to array - we no longer need the keys
         var dataArray = $.map(data, function(value, index) {
@@ -64,12 +60,6 @@ $(function() {
       title: {
         text: "Percent Change in Imports/Exports with Iran, 2013-2016"
       },
-      /*
-      subtitle: {
-        text: "Excluding Luxembourg (856% increase)"
-      },      */
-
-
       // Credits
       credits: {
         enabled: true,
@@ -79,9 +69,6 @@ $(function() {
       // Chart Legend
       legend: {
         enabled: false,
-        align: 'center',
-        verticalAlign: 'bottom',
-        layout: 'horizontal'
       },
       // X Axis
       xAxis: {
