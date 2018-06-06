@@ -92,7 +92,12 @@ $(function() {
           text:"Year"
         },
         labels: {
-            rotation: 45
+            rotation: -90,
+            formatter: function() {
+              var yearStr = this.value.toString();
+              var twoDigitsYear = yearStr.slice(2);
+              return 'FY' + twoDigitsYear;
+            }
         },
         tickInterval: 1,
         allowDecimals: false
@@ -101,6 +106,7 @@ $(function() {
       yAxis: [{ // Primary yAxis
           title: {
               text: 'Army End Strength',
+              rotation: 90,
               style: {
                   color: Highcharts.getOptions().colors[1]
               }
@@ -114,7 +120,7 @@ $(function() {
           reversedStacks: false
       }, { // Secondary yAxis
           title: {
-              text: 'Army Total Budget Authority (discretionary and mandatory funding in FY19 dollars)',
+              text: 'Discretionary & Mandatory Budget Authority (in FY19 Dollars)',
               style: {
                   color: Highcharts.getOptions().colors[4]
               }
