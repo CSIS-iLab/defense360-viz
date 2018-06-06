@@ -1,8 +1,6 @@
 $(function() {
 
   var data = {}
-  var datasets
-  var seriesData = []
 
   Highcharts.data({
     googleSpreadsheetKey: '1z3i0mILf9PGGhCh42lSh6BejOt9P3eolANl8ic0MnZA',
@@ -42,20 +40,17 @@ $(function() {
 
             data[code[1]].data.push({
               x: code[2],
-              y: code[3]
+              y: code[3]/1000
             })
 
           }
 
         })
 
-        datasets = Object.keys(data)
-
         // Convert object to array - we no longer need the keys
         var dataArray = $.map(data, function(value, index) {
             return [value];
         });
-
         renderChart(dataArray);
 
       }
@@ -114,12 +109,12 @@ $(function() {
               style: {
                   color: Highcharts.getOptions().colors[1]
               },
-              format: '{value}K'
+              format: '{value}k'
           },
           reversedStacks: false
       }, { // Secondary yAxis
           title: {
-              text: 'Discretionary & Mandatory Budget Authority (In FY18 Dollars)',
+              text: 'Army Total Budget Authority (discretionary and mandatory funding in FY19 dollars)',
               style: {
                   color: Highcharts.getOptions().colors[4]
               }
@@ -137,6 +132,22 @@ $(function() {
           opposite: true
       }],
       series: data,
+      // Tooltip
+      tooltip: {
+          formatter: function () {
+
+              var unit;
+              var chartType = this.series.userOptions.type;
+              var rounded = Number(Math.round(this.y + 'e2')+ 'e-2');
+
+              if (chartType == "spline") {
+                unit = " Billion";
+              } else if (chartType == "column") {
+                unit = "k"
+              }
+              return '<b>' + this.key + '</b>' + '<br/><span style="color:' + this.series.color + '">● </span>' + this.series.name + ': ' + rounded + unit;
+          }
+      },
       // Additional Plot Options
       plotOptions:
       {
