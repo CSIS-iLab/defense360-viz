@@ -106,7 +106,6 @@ $(function() {
       yAxis: [{ // Primary yAxis
           title: {
               text: 'Army End Strength',
-              rotation: 90,
               style: {
                   color: Highcharts.getOptions().colors[1]
               }
@@ -120,7 +119,8 @@ $(function() {
           reversedStacks: false
       }, { // Secondary yAxis
           title: {
-              text: 'Discretionary & Mandatory Budget Authority (in FY19 Dollars)',
+              text: 'Discretionary & Mandatory Budget Authority<br/>(in FY19 Dollars)',
+              rotation: -90,
               style: {
                   color: Highcharts.getOptions().colors[4]
               }
