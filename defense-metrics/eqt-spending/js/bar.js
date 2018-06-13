@@ -51,12 +51,21 @@ $(function() {
   })
 
   function renderChart(data, subdata) {
-    console.log(data, subdata);
     $('#hcContainer').highcharts({
       // General Chart Options
       chart: {
         zoomType: 'x',
-        type: 'column'
+        type: 'column',
+        events: {
+          drilldown: function(e) {
+            this.xAxis[0].setTitle({ text:this.ddDupes[0] });
+            this.yAxis[0].setTitle({ text:'Percent'});
+          },
+          drillup: function(e) {
+            this.xAxis[0].setTitle({ text:"Countries" });
+            this.yAxis[0].setTitle({ text:"Percent" });
+          }
+        }
       },
       // Chart Title and Subtitle
       title: {
@@ -73,6 +82,7 @@ $(function() {
       },
       // Chart Legend
       legend: {
+        enabled: false,
         align: 'center',
         verticalAlign: 'bottom',
         layout: 'horizontal'
@@ -80,15 +90,20 @@ $(function() {
       // X Axis
       xAxis: {
         title: {
-          text: "X Axis Title"
+          text: 'Countries'
         },
         type: 'category'
       },
       // Y Axis
       yAxis: {
         title: {
-          text: "Y Axis Title"
+          text: 'Percent'
         },
+        plotLines: [{
+          value: 20,
+          color: '#d05133',
+          width: 2
+        }]
       },
       series: data,
       drilldown: {
