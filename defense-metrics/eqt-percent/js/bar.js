@@ -56,7 +56,22 @@ $(function() {
         margin: 10
       },
       max: 100,
-      reversedStacks: false
+      reversedStacks: false,
+      plotLines: [{
+        value: 20,
+        color: '#d05133',
+        width: 1.5,
+        zIndex: 5,
+      }],
+      labels: {
+        formatter: function () {
+          if (this.value === 20){
+            return '<span style="fill: #d05133;">'+ this.value +'%</span>';
+          } else {
+            return this.value + '%';
+          }
+        }
+      }
     },
     // Tooltip
     tooltip: {
