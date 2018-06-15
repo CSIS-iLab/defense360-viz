@@ -1,7 +1,6 @@
 $(function() {
 
   var data = {}
-  var seriesData = []
   var fiveWin = []
 
   Highcharts.data({
