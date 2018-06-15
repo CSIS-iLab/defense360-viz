@@ -122,7 +122,6 @@ $(function() {
           valueSuffix: '%',
           valueDecimals: 3,
           positioner: function(boxWidth, boxHeight, point) {
-              console.log(point);
               return {
                   x: point.plotX - 5,
                   y: point.plotY
