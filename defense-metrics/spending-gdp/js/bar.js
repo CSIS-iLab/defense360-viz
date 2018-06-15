@@ -41,7 +41,7 @@ $(function() {
         woEu.shift();
         fiveWin = woEu.slice(0,5);
 
-        $('.top-container').append('<div style="margin-bottom: 3px;"><text style="color:#666;cursor:default;font-size:11px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 Avg. Spenders</b><br/><i>(Excl. EU Commission)</i>:</text></div>')
+        $('.top-container').append('<div style="margin-bottom: 3px;"><text style="color:#666;cursor:default;font-size:11px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 Avg. Spenders by % GDP</b><br/><i>(Excl. EU Commission)</i>:</text></div>')
 
         fiveWin.map(function(e){
           $('.top-container').append('<text style="color:#666;cursor:default;font-size:11px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e3')+ 'e-3') + '%</text><br/>')
@@ -62,12 +62,9 @@ $(function() {
       title: {
         text: "Average Reported Security Assistance as Percent of GDP, 2013-2018"
       },
-      /*
       subtitle: {
-        text: "Excluding Luxembourg (856% increase)"
-      },      */
-
-
+        text: "Figures are conservative estimates."
+      },
       // Credits
       credits: {
         position: {
@@ -92,7 +89,7 @@ $(function() {
             enabled: true
         },
         min:0,
-        max:20,
+        max:15,
         tickLength: 0,
         tickmarkPlacement: 'on',
         labels: {
@@ -107,7 +104,8 @@ $(function() {
         labels: {
           format: '{value}%'
         },
-        reversedStacks: false
+        reversedStacks: false,
+        max: 4
       },
       series: data,
       // Tooltip
@@ -121,14 +119,6 @@ $(function() {
 
           valueSuffix: '%',
           valueDecimals: 3,
-          positioner: function(boxWidth, boxHeight, point) {
-              return {
-                  x: point.plotX - 5,
-                  y: point.plotY
-              };
-          },
-          borderWidth: 0,
-          backgroundColor: 'rgba(255,255,255,0.8)',
           shared: true
       },
       // Additional Plot Options
