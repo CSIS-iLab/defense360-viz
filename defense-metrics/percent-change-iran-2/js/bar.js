@@ -1,8 +1,6 @@
 $(function() {
 
   var data = {}
-  var datasets
-  var seriesData = []
   var fiveWin = []
   var fiveLose = []
 
@@ -24,7 +22,6 @@ $(function() {
 
         })
 
-        datasets = Object.keys(data)
 
         // Convert object to array - we no longer need the keys
         var dataArray = $.map(data, function(value, index) {
