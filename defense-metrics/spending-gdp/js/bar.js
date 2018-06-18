@@ -64,7 +64,7 @@ $(function() {
         text: "Average Reported Security Assistance as Percent of GDP, 2013-2018"
       },
       subtitle: {
-        text: "Click legend to hide; click and drag chart to zoom. Figures are conservative estimates."
+        text: "Click legend to hide; click and drag chart to zoom. Figures are conservative estimates. Scroll to view more countries."
       },
       // Credits
       credits: {
