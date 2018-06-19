@@ -68,13 +68,16 @@ $(function() {
       subtitle: {
         text: "Excluding Luxembourg (856% increase)"
       },      */
-
-
+      navigation: {
+        buttonOptions: {
+          align: 'left',
+        }
+      },
       // Credits
       credits: {
         enabled: true,
         href: false,
-        text: "CSIS Defense360 | Source: NAME"
+        text: "CSIS Defense360 | Source: <a href='http://data.imf.org/?sk=9D6028D4-F14A-464C-A2F2-59B2CD424B85&sId=1514498277103'>IMF</a>"
       },
       // Chart Legend
       legend: {
