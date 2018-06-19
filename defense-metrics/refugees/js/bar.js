@@ -75,14 +75,16 @@ $(function() {
       // General Chart Options
       chart: {
         type: 'bar',
-        spacingBottom: 30
+        zoomType: 'x',
+        spacingBottom: 30,
+        height: 600
       },
       // Chart Title and Subtitle
       title: {
         text: title
       },
       subtitle: {
-        text: "Scroll to view additional countries"
+        text: "Click and drag chart to zoom."
       },
       // Credits
       credits: {
@@ -102,13 +104,11 @@ $(function() {
         title: {
           text: 'Country'
         },
-        scrollbar: {
-            enabled: true
-        },
         type: 'category',
-        min:0,
-        max:20,
-        tickLength: 0
+        tickmarkPlacement: 'on',
+        labels: {
+          step: 1
+        }
       },
       // Y Axis
       yAxis: {

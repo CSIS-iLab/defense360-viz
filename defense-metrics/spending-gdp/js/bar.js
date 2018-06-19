@@ -57,14 +57,15 @@ $(function() {
       chart: {
         type: 'bar',
         spacingBottom: 46,
-        zoomType: 'xy'
+        zoomType: 'xy',
+        height: 600
       },
       // Chart Title and Subtitle
       title: {
         text: "Average Reported Security Assistance as Percent of GDP, 2013-2018"
       },
       subtitle: {
-        text: "Click legend to hide; click and drag chart to zoom. Figures are conservative estimates. Scroll to view more countries."
+        text: "Click legend to hide. Click and drag chart to zoom. Figures are conservative estimates."
       },
       // Export Menu
       navigation: {
@@ -92,12 +93,6 @@ $(function() {
       // X Axis
       xAxis: {
         type: "category",
-        scrollbar: {
-            enabled: true
-        },
-        min:0,
-        max:15,
-        tickLength: 0,
         tickmarkPlacement: 'on',
         labels: {
           step: 1
