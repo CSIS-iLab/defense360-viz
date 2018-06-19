@@ -66,6 +66,12 @@ $(function() {
       subtitle: {
         text: "Click legend to hide; click and drag chart to zoom. Figures are conservative estimates. Scroll to view more countries."
       },
+      // Export Menu
+      navigation: {
+        buttonOptions: {
+          align: 'left',
+        }
+      },
       // Credits
       credits: {
         position: {

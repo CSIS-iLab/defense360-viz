@@ -74,6 +74,12 @@ $(function() {
       title: {
         text: "Defense Expenditure as a Share of GDP"
       },
+      // Export Menu
+      navigation: {
+        buttonOptions: {
+          align: 'left',
+        }
+      },
       // Credits
       credits: {
         enabled: true,
