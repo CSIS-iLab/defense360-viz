@@ -117,11 +117,24 @@ $(function() {
         },
         labels: {
           formatter: function () {
+            var num = this.value
             if (title == 'Average Refugees per Year') {
-              var num = this.value/1000000;
-              return num + 'm'
+              if (this.value == 0) {
+                return num;
+              }
+              else if (num < 1000) {
+                return num;
+              }
+              else if (num < 1000000 && num > 999) {
+                var num1 = num/1000;
+                return num1 + 'k';
+              }
+              else if (num > 999999) {
+                var num2 = num/1000000;
+                return num2 + 'm';
+              }
             } else {
-              return this.value
+              return this.value;
             }
           },
         }
