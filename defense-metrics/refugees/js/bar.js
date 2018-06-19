@@ -117,7 +117,6 @@ $(function() {
         },
         labels: {
           formatter: function () {
-            console.log(title);
             if (title == 'Average Refugees per Year') {
               var num = this.value/1000000;
               return num + 'm'
