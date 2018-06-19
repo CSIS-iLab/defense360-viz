@@ -106,14 +106,8 @@ $(function() {
       yAxis: [{ // Primary yAxis
           title: {
               text: 'Army End Strength',
-              style: {
-                  color: Highcharts.getOptions().colors[1]
-              }
           },
           labels: {
-              style: {
-                  color: Highcharts.getOptions().colors[1]
-              },
               format: '{value}k'
           },
           reversedStacks: false
