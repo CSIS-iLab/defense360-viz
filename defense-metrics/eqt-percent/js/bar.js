@@ -8,14 +8,16 @@ $(function() {
     // General Chart Options
     chart: {
       type: 'bar',
-      spacingBottom: 46
+      spacingBottom: 46,
+      height: 600,
+      zoomType: 'x'
     },
     // Chart Title and Subtitle
     title: {
       text: "Distribution of Defense Expenditure by Main Category"
     },
     subtitle: {
-      text: "Scroll to view additional countries"
+      text: "Click and drag chart to zoom."
     },
     // Credits
     credits: {
@@ -42,12 +44,10 @@ $(function() {
     },
     // X Axis
     xAxis: {
-      scrollbar: {
-          enabled: true
+      tickmarkPlacement: 'on',
+      labels: {
+        step: 1
       },
-      min:0,
-      max:15,
-      tickLength: 0
     },
     // Y Axis
     yAxis: {
