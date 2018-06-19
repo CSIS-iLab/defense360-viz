@@ -108,13 +108,24 @@ $(function() {
         tickmarkPlacement: 'on',
         labels: {
           step: 1
-        }
+        },
       },
       // Y Axis
       yAxis: {
         title: {
           text: "Average Number of Refugees"
         },
+        labels: {
+          formatter: function () {
+            console.log(title);
+            if (title == 'Average Refugees per Year') {
+              var num = this.value/1000000;
+              return num + 'm'
+            } else {
+              return this.value
+            }
+          },
+        }
       },
       series: data,
       // Tooltip
