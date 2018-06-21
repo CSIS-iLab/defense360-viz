@@ -18,7 +18,7 @@ $(function() {
               name: code[0],
               data: []
             }
-            data[code[0]].data.push([code[1], code[2]*100])
+            data[code[0]].data.push([code[1], code[2]*100, code[3]])
 
         })
 
@@ -27,25 +27,31 @@ $(function() {
         var dataArray = $.map(data, function(value, index) {
             return [value];
         });
+        renderChart(dataArray);
 
         //Get top five and last five countries
         var dataContent = dataArray[0].data;
-        var lastDatum = dataContent.length;
-        fiveWin = dataContent.slice(0,5);
-        fiveLose = dataContent.slice(lastDatum-5,lastDatum).reverse();
 
-        renderChart(dataArray);
-
-        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 % increase</b></text><br/>')
-
-        fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[1] + 'e2')+ 'e-2') + '%</text><br/>')
+        var sortedByDollar = dataContent.sort(function(a,b){
+          return b[2] - a[2];
         })
 
-        $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 % decrease</b></text><br/>')
+        var lastDatum = sortedByDollar.length;
+        fiveWin = sortedByDollar.slice(0,5);
+        fiveLose = sortedByDollar.slice(lastDatum-5,lastDatum).reverse();
+
+        $('.container').append('<div style="color:#9b9b9b;font-size:11px;">(Hundreds of Millions of USD)</div>')
+
+        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5, $ increases</b></text><br/>')
+
+        fiveWin.map(function(e){
+          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
+        })
+
+        $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5, $ decreases</b></text><br/>')
 
         fiveLose.map(function(e){
-          $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[1] + 'e2')+ 'e-2') + '%</text><br/>')
+          $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
         })
       }
   })
@@ -87,6 +93,10 @@ $(function() {
         title: {
           text: "Country"
         },
+        labels: {
+          step: 1,
+          rotation: -45
+        },
         type: "category"
       },
       // Y Axis
@@ -103,7 +113,7 @@ $(function() {
       tooltip: {
           formatter: function () {
               var rounded = Number(Math.round(this.y + 'e2')+ 'e-2');
-              return '<span style="color:' + this.series.color + '">● </span><b>' + this.key + '</b><br/>Total Change: ' + rounded + '%</i>';
+              return '<span style="color:' + this.series.color + '">● </span><b>' + this.key + '</b><br/>Total Change: ' + rounded + '%</i><br>$ Difference: ' + data[0].data[this.x][2];
           }
       },
       // Additional Plot Options
