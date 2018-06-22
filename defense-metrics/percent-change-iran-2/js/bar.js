@@ -41,7 +41,7 @@ $(function() {
         fiveWin = sortedByDollar.slice(0,5);
         fiveLose = sortedByDollar.slice(lastDatum-5,lastDatum).reverse();
 
-        $('.container').append('<div style="color:#9b9b9b;font-size:11px;">(Hundreds of Millions of USD)</div>')
+        $('.container').append('<div style="color:#9b9b9b;font-size:11px;">(Millions of USD)</div>')
 
         $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5, $ increase</b></text><br/>')
 
