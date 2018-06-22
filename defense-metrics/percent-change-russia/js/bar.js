@@ -67,9 +67,6 @@ $(function() {
       title: {
         text: "Percent Change in Imports/Exports with Russia 2012-2016"
       },
-      subtitle: {
-        text: "Excluding Luxembourg (856% increase)"
-      },
       navigation: {
         buttonOptions: {
           align: 'left',
