@@ -12,14 +12,14 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{
 }).addTo(map);
 
 var client = new carto.Client({
-  apiKey: 'hfB5I34E3XqrNbKstvX6fA',
+  apiKey: 'RoNKupXWKtMngcY5aciIdQ',
   username: 'csis'
 });
 
-const europeanCountriesDataset = new carto.source.Dataset(`
-  ne_adm0_europe_1
+const europeanCountriesDataset0 = new carto.source.Dataset(`
+  ne_adm0_europe_2
 `);
-const europeanCountriesStyle = new carto.style.CartoCSS(`
+const europeanCountriesStyle0 = new carto.style.CartoCSS(`
   #layer {
   polygon-fill: #162945;
     polygon-opacity: 0.5;
@@ -30,9 +30,26 @@ const europeanCountriesStyle = new carto.style.CartoCSS(`
     }
   }
 `);
-const europeanCountries = new carto.layer.Layer(europeanCountriesDataset, europeanCountriesStyle);
+const europeanCountries0 = new carto.layer.Layer(europeanCountriesDataset0, europeanCountriesStyle0);
+
+const europeanCountriesDataset1 = new carto.source.SQL(`
+  SELECT *
+    FROM ne_adm0_europe_2
+    WHERE admin IN (SELECT field_1 FROM ground_mobility_rating_sheet1_1 WHERE spod=1)
+`);
+const europeanCountriesStyle1 = new carto.style.CartoCSS(`
+  #layer {
+  polygon-fill: #647A32;
+    polygon-opacity: 0.5;
+    ::outline {
+      line-width: 1;
+      line-color: #FFFFFF;
+      line-opacity: 0.5;
+    }
+  }
+`);
+const europeanCountries1 = new carto.layer.Layer(europeanCountriesDataset1, europeanCountriesStyle1);
 
 
-
-client.addLayers([europeanCountries]);
+client.addLayers([europeanCountries1]);
 client.getLeafletLayer().addTo(map);
