@@ -1,77 +1,65 @@
 let operations = []
-let num_operations = 0
 let countries = []
 let num_countries = 0
 var seriesData = []
 
-
-// Highcharts.data({
-//   googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
-//   googleSpreadsheetWorksheet: 1,
-//   switchRowsAndColumns: true,
-//   parsed: function(columns) {
-//     columns.forEach(function(row, i) {
-//       if ( i == 0 ) {
-//         row.shift()
-//         operations = row
-//         num_operations = operations.length
-//         return
-//       }
-
-//       countries.push(row[0])
-
-//       for(let i = 0; i <= operations.length - 1; i++) {
-//         let countryIndex = countries.indexOf(row[0])
-//         seriesData.push({
-//           x: i,
-//           y: countryIndex,
-//           value: row[i + 1],
-//           name: row[0]
-//         })
-//       }
-//     })
-//     renderChart(operations, countries, seriesData);
-//   }
-// })
-
-  Highcharts.data({
-    googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
-      googleSpreadsheetWorksheet: 1,
-      parsed: function(columns) {
-        columns.forEach(function(column, i) {
-          if ( i == 0 ) {
-            column.shift()
-            countries = column
-            num_countries = countries.length
-            return
-          }
-
-          let operation = column[0]
-          operations.push(operation)
-          column.shift()
-
-          const sortedColumn = column.slice().sort()
-          if (i == columns.length - 1) {
-            console.log(column)
-            console.log(sortedColumn);
-            console.log(quantileRankSorted(sortedColumn, 0))
-          }
-
-          for(let i = 0; i <= countries.length - 1; i++) {
-            let operationIndex = operations.indexOf(operation)
-            seriesData.push({
-              x: operationIndex,
-              y: i,
-              value: quantileRankSorted(sortedColumn, column[i]),
-              name: operation + ': ' + countries[i],
-              realValue: roundTo(column[i],2)
-            })
-          }
-        })
-        renderChart(operations, countries, seriesData);
+Highcharts.data({
+  googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
+  googleSpreadsheetWorksheet: 1,
+  parsed: function(columns) {
+    columns.forEach(function(column, i) {
+      if ( i == 0 ) {
+        column.shift()
+        countries = column
+        num_countries = countries.length
+        return
       }
-  })
 
+      let operation = column[0]
+      operations.push(operation)
+      column.shift()
+
+      const sortedColumn = column.slice().sort()
+
+      let q1 = quantileSorted(sortedColumn, 0.25)
+      let q2 = quantileSorted(sortedColumn, 0.5)
+      let q3 = quantileSorted(sortedColumn, 0.75)
+      let q4 = quantileSorted(sortedColumn, 1)
+
+      // console.table({q1,q2,q3,q4})
+
+      for(let i = 0; i <= num_countries - 1; i++) {
+        let operationIndex = operations.indexOf(operation)
+        let color = undefined
+
+        let value = column[i]
+        if ( value <= q1 ) {
+          value = 1
+        } else if ( value <= q2 ) {
+          value = 2
+        } else if ( value <= q3 ) {
+          value = 3
+        } else if ( value > q3 ) {
+          value = 4
+        }
+
+        // 0 values are contectually different than other 0s, so visualize them differently.
+        if ( operation === 'NATO Enhanced Forward Presence (2017-2018)' && column[i] == 0 ) {
+          value = -1
+        }
+
+        seriesData.push({
+          x: operationIndex,
+          y: i,
+          value: value,
+          name: operation + ': ' + countries[i],
+          realValue: roundTo(column[i],2)
+        })
+      }
+    })
+    renderChart(operations, countries, seriesData);
+  }
+})
 
 function renderChart(operations, countries, data) {
   Highcharts.chart('hcContainer', {
@@ -99,28 +87,34 @@ function renderChart(operations, countries, data) {
       reversed: true,
       dataClasses: [
         {
-          from: 0.75,
-          to: 1,
+          from: 3,
+          to: 4,
           name: 'First',
           color: Highcharts.getOptions().colors[0]
         },
         {
-          from: 0.5,
-          to: 0.75,
+          from: 2,
+          to: 3,
           name: 'Second',
           color: Highcharts.getOptions().colors[1]
         },
         {
-          from: 0.25,
-          to: 0.5,
+          from: 1,
+          to: 2,
           name: 'Third',
           color: Highcharts.getOptions().colors[2]
         },
         {
           from: 0,
-          to: 0.25,
+          to: 1,
           name: 'Fourth',
           color: Highcharts.getOptions().colors[3]
+        },
+        {
+          from: -1,
+          to: 0,
+          color: '#9B9B9B',
+          name: 'Other'
         }
       ],
       min: 0
@@ -160,7 +154,7 @@ function renderChart(operations, countries, data) {
 }
 
 // Taken from: https://github.com/simple-statistics/simple-statistics
-function quantileRankSorted(r,n){if(n<r[0])return 0;if(n>r[r.length-1])return 1;var e=lowerBound(r,n);if(r[e]!==n)return e/r.length;e++;var t=upperBound(r,n);if(t===e)return e/r.length;var u=t-e+1;return u*(t+e)/2/u/r.length}function lowerBound(r,n){for(var e=0,t=0,u=r.length;t<u;)n<=r[e=t+u>>>1]?u=e:t=-~e;return t}function upperBound(r,n){for(var e=0,t=0,u=r.length;t<u;)n>=r[e=t+u>>>1]?t=-~e:u=e;return t}
+function quantileSorted(e,t){var n=e.length*t;if(0===e.length)throw new Error("quantile requires at least one data point.");if(t<0||t>1)throw new Error("quantiles must be between 0 and 1");return 1===t?e[e.length-1]:0===t?e[0]:n%1!=0?e[Math.ceil(n)-1]:e.length%2==0?(e[n-1]+e[n])/2:e[n]}
 
 // Taken from: https://stackoverflow.com/a/15762794
 function roundTo(o,t){var r=!1;void 0===t&&(t=0),o<0&&(r=!0,o*=-1);var a=Math.pow(10,t);return o=parseFloat((o*a).toFixed(11)),o=(Math.round(o)/a).toFixed(2),r&&(o=(-1*o).toFixed(2)),o}
