@@ -7,15 +7,19 @@ Highcharts.data({
   googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
   googleSpreadsheetWorksheet: 1,
   parsed: function(columns) {
-    columns.forEach(function(column, i) {
-      if ( i == 0 ) {
+    columns.forEach(function(column, index) {
+      if ( index == 0 ) {
         column.shift()
         countries = column
         num_countries = countries.length
         return
       }
 
-      let operation = column[0]
+      if ( column[0].indexOf('-percentage') === -1 ) {
+        return
+      }
+
+      let operation = column[0].replace('-percentage', '')
       operations.push(operation)
       column.shift()
 
@@ -25,8 +29,6 @@ Highcharts.data({
       let q2 = quantileSorted(sortedColumn, 0.5)
       let q3 = quantileSorted(sortedColumn, 0.75)
       let q4 = quantileSorted(sortedColumn, 1)
-
-      // console.table({q1,q2,q3,q4})
 
       for(let i = 0; i <= num_countries - 1; i++) {
         let operationIndex = operations.indexOf(operation)
@@ -48,12 +50,16 @@ Highcharts.data({
           value = -1
         }
 
+        // Assuming the columns are in percentage - raw order, get the troop values from the next column.
+        let troops = columns[index + 1][i + 1]
+
         seriesData.push({
           x: operationIndex,
           y: i,
           value: value,
           name: operation + ': ' + countries[i],
-          realValue: roundTo(column[i],2)
+          realValue: roundTo(column[i],2),
+          troops: troops
         })
       }
     })
@@ -65,7 +71,8 @@ function renderChart(operations, countries, data) {
   Highcharts.chart('hcContainer', {
     chart: {
       type: 'heatmap',
-      height: 1000
+      height: 1020,
+      spacingBottom: 46
     },
     title: {
       text: "Troop Contributions"
@@ -73,9 +80,15 @@ function renderChart(operations, countries, data) {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      position: {
+        y: -15
+      },
+      text: "* NATO Partner<br />CSIS Defense360 | Source: See below for more detailed information"
     },
     legend: {
+      title: {
+        text: "Quartiles"
+      },
       align: 'right',
       layout: 'vertical',
       margin: 0,
@@ -126,7 +139,7 @@ function renderChart(operations, countries, data) {
     yAxis: {
       title: null,
       reversed: true,
-      categories: ["Albania", "Austria*", "Belgium", "Bulgaria", "Canada", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland*", "France", "Georgia*", "Germany", "Greece", "Hungary", "Iceland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Moldova*", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "Slovak Republic", "Slovenia", "Spain", "Sweden*", "Turkey", "Ukraine*", "United Kingdom", "United States"]
+      categories: countries
     },
     series: [{
       borderWidth: 1,
@@ -147,7 +160,7 @@ function renderChart(operations, countries, data) {
     },
     tooltip: {
       formatter: function() {
-        return '<span style="font-weight:bold">' + this.key + '</span><br/>Troop Contribution: ' + this.point.realValue + '%'
+        return '<span style="font-weight:bold">' + this.key + '</span><br/>Troop Contribution: ' + this.point.realValue + '%<br />Average Annual Troop Contribution: ' + this.point.troops.toLocaleString()
       }
     }
   });
