@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Multilayer | CARTO</title>
+    <title>Defense Metrics | NATO</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Include Leaflet -->
@@ -17,11 +17,16 @@
     <aside class="toolbox">
       <div class="box">
         <header>
-          <h1>Add more layers</h1>
-          <button class="github-logo js-source-link"></button>
+          <h1 class="title">NATO Security Investment</h1>
+          <p>Shading reflects countries’ composite scores for overall mobility, ground mobility, and air mobility, respectively, based on data collected by U.S. Army Europe and analyzed by CSIS.</p>
         </header>
         <section>
-          <p class="description open-sans">Add multiple CARTO layers to your map.</p>
+          <label for="mobility" class="filter-label">Shade by</label>
+          <select name="mobility" id="mobility" class="js-mobility selection">
+            <option value="overall" selected>Overall Mobility</option>
+            <option value="ground">Ground Mobility</option>
+            <option value="air">Air Mobility</option>
+          </select>
         </section>
         <footer class="js-footer"></footer>
       </div>
