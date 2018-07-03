@@ -51,14 +51,6 @@ p {
   color: #000;
 }
 
-.value-changed {
-  border-bottom: 2px solid #d66e42;
-}
-
-.widget {
-  margin-bottom: 0.5rem;
-}
-
 .filter-label {
   font-size: 12px;
   font-weight: 400;
@@ -69,21 +61,6 @@ p {
 
 .selection {
   margin-bottom: 10px;
-}
-
-.js-size,
-.js-inclinations {
-  min-width: 100%;
-}
-
-@media screen and (min-width: 48em) {
-  .js-size {
-    min-width: 65%;
-  }
-
-  .js-inclinations {
-    min-width: 25%;
-  }
 }
 
 .legend-bar-container {
@@ -107,9 +84,49 @@ p {
   height: 12px;
   border: 1px solid #d8d8d8;
   border-radius: 5px;
-  background: rgb(253,224,197);
-  background: linear-gradient(90deg, rgba(253,224,197,1) 0%, rgba(250,203,166,1) 14%, rgba(248,181,139,1) 28%, rgba(245,158,114,1) 42%, rgba(242,133,93,1) 56%, rgba(239,106,76,1) 70%, rgba(235,74,64,1) 84%);
+  background: #fbe4a3;
+  background: linear-gradient(90deg, #fbe4a3 0%, #d0d197 20%, #96b586 40%, #4ba292 60%, #008e9d 80%);
+  margin-bottom: 1.5rem;
+}
+
+.partner-country {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.partner-country::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background-color: #b7c7d1;
+  background-image: url(https://i.imgur.com/k3J0pnR.png);
+  background-repeat: repeat;
+}
+
+.label-base {
+  position: relative;
+  padding-left: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+.label-base::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #75657A;
+}
+
+.label-base.base-us::before {
+  background-color: #D05F4C;
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
