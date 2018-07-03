@@ -2,6 +2,7 @@ $(function() {
 
   var data = {}
   var fiveWin = []
+  var fiveActual = ['$618B', '$59B', '$51B', '$48B', '$24B']
 
   Highcharts.data({
     // Load Data in from Google Sheets
@@ -51,12 +52,16 @@ $(function() {
         })
         fiveWin = dataContent3.slice(0,5);
 
+        for(var i = 0; i <= fiveWin.length - 1; i++) {
+          fiveWin[i].actual = fiveActual[i]
+        }
+
         renderChart(dataArray);
 
-        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>' + topFiveTitle + '</b></text><br/>')
+        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>' + topFiveTitle + '</b></text><br/>')
 
         fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e2')+ 'e-2') + '%</text><br/>')
+          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e2')+ 'e-2') + '% (' + e.actual + ')</text><br/>')
         })
 
       }

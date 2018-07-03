@@ -3,6 +3,7 @@ $(function() {
   var data = {}
   var fiveWin = []
   var fiveLose = []
+  var fiveActual = ['$9,298M', '$2,695M', '$482M', '$363M', '$311M']
 
   Highcharts.data({
     googleSpreadsheetKey: '17Paq5u7wNkLkDgmhbGur15KBSWjG3JIjzNaLd5hRDvs',
@@ -41,10 +42,14 @@ $(function() {
         woEu.shift();
         fiveWin = woEu.slice(0,5);
 
-        $('.top-container').append('<div style="margin-bottom: 3px;"><text style="color:#666;cursor:default;font-size:11px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5 Avg. Spenders by % GDP</b><br/><i>(Excl. EU Commission)</i>:</text></div>')
+        for(var i = 0; i <= fiveWin.length - 1; i++) {
+          fiveWin[i].actual = fiveActual[i]
+        }
+
+        $('.top-container').append('<div style="margin-bottom: 3px;"><text style="color:#666;cursor:default;font-size:11px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>Top 5 Avg. Spenders by % GDP</b><br/><i>(Excl. EU Commission)</i>:</text></div>')
 
         fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:11px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e3')+ 'e-3') + '%</text><br/>')
+          $('.top-container').append('<text style="color:#666;cursor:default;font-size:11px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e3')+ 'e-3') + '% (' + e.actual + ')</text><br/>')
         })
 
       }

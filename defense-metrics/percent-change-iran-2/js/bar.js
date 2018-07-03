@@ -43,16 +43,16 @@ $(function() {
 
         $('.container').append('<div style="color:#9b9b9b;font-size:11px;">(Millions of USD)</div>')
 
-        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5, $ increase</b></text><br/>')
+        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>Top 5, $ increase</b></text><br/>')
 
         fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
+          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
         })
 
-        $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;"><b>Top 5, $ decrease</b></text><br/>')
+        $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>Top 5, $ decrease</b></text><br/>')
 
         fiveLose.map(function(e){
-          $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family:Abel, Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
+          $('.low-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e[0] + ': ' + Number(Math.round(e[2] + 'e2')+ 'e-2').toLocaleString() + '</text><br/>')
         })
       }
   })
