@@ -97,7 +97,6 @@ $(function() {
         },
         labels: {
           formatter: function () {
-            console.log(this.value);
             if (this.value == '1992') {
               return this.value+'*';
             }
