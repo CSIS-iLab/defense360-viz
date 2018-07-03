@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+#map {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+aside.toolbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40%;
+  max-height: 80%;
+  overflow-y: scroll;
+  z-index: 2;
+  background: #FFFFFF;
+  padding: 16px;
+  margin: 0 0 10px;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.24);
+}
+
+@media screen and (min-width: 48em) {
+  aside.toolbox {
+    width: 33%;
+  }
+}
+
+.title {
+  color: #000;
+  font-size: 1.5rem;
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+}
+
+p {
+  margin: 0 0 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.67;
+  color: #000;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #636d72;
+}
+
+.selection {
+  margin-bottom: 10px;
+}
+
+.legend-bar-container {
+  display: flex;
+}
+
+.legend-label {
+  flex: 1 0 auto;
+  flex-basis: 50%;
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  font-size: 12px;
+  padding: 0 3px 5px;
+}
+
+#legend-max {
+  text-align: right;
+}
+
+#legend-bar {
+  width: 100%;
+  height: 12px;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  background: #fbe4a3;
+  background: linear-gradient(90deg, #fbe4a3 0%, #d0d197 20%, #96b586 40%, #4ba292 60%, #008e9d 80%);
+  margin-bottom: 1.5rem;
+}
+
+.partner-country {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.partner-country::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background-color: #b7c7d1;
+  background-image: url(https://i.imgur.com/k3J0pnR.png);
+  background-repeat: repeat;
+}
+
+.label-base {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.label-base::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #75657A;
+}
+
+.label-base.base-us::before {
+  background-color: #D05F4C;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.24);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0;
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.leaflet-popup-content {
+  line-height: 2;
+}
+
+.country-name {
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 0.25rem;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #636d72;
+}
