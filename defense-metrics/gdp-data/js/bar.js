@@ -61,7 +61,7 @@ $(function() {
         $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>' + topFiveTitle + '</b></text><br/>')
 
         fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + Number(Math.round(e.y + 'e2')+ 'e-2') + '% (' + e.actual + ')</text><br/>')
+          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + e.actual + '</text><br/>')
         })
 
       }
