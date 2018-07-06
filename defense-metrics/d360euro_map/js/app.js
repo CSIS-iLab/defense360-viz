@@ -57,23 +57,23 @@ natoCountriesLayer.on(carto.layer.events.FEATURE_OVER, featureEvent => {
   popup.setLatLng(featureEvent.latLng);
   popup.setContent(`
     <span class="country-name">${data.country_name}</span>
-    <span class="label">2017 % GDP on Defense:</span> 
+    <span class="label">2017 % GDP on Defense:</span>
     ${validatePopupValue(data.gdp_percentage, '', '%')}<br />
-    <span class="label">2017 GDP (2010 US$):</span> 
+    <span class="label">2017 GDP (2010 US$):</span>
     ${validatePopupValue(data.gdp_raw, '$', 'B')}<br />
-    <span class="label">Defense Budget (2010 US$):</span> 
-    ${validatePopupValue(data.defense_budget, '$', 'B')}<br />
-    <span class="label">2017 Equipment %:</span> 
+    <span class="label">Defense Budget (2010 US$):</span>
+    ${validatePopupValue(data.defense_budget, '$', 'M')}<br />
+    <span class="label">2017 Equipment %:</span>
     ${validatePopupValue(data.equipment_percentage, '', '%')}<br />
-    <span class="label">2017 Total Active Duty Force:</span> 
+    <span class="label">2017 Total Active Duty Force:</span>
     ${validatePopupValue(data.total_active_duty_force.toLocaleString())}<br />
-    <span class="label">2018 Active Duty U.S. Troops in Country:</span> 
+    <span class="label">2018 Active Duty U.S. Troops in Country:</span>
     ${validatePopupValue(data.active_us_troops.toLocaleString())}<br />
-    <span class="label">Overall Mobility:</span> 
+    <span class="label">Overall Mobility:</span>
     ${validatePopupValue(data.mobility_score)} <span class="label">/ 24</span><br />
-    <span class="label">Ground Mobility:</span> 
+    <span class="label">Ground Mobility:</span>
     ${validatePopupValue(data.ground_mobility)} <span class="label">/ 3</span><br />
-    <span class="label">Air Mobility:</span> 
+    <span class="label">Air Mobility:</span>
     ${validatePopupValue(data.air_mobility)} <span class="label">/ 4</span><br />
   `);
   if (!popup.isOpen()) {
@@ -174,4 +174,3 @@ function updateLegend(max) {
 
 updateLayerStyles(currentLayer.field)
 updateLegend(currentLayer.max)
-
