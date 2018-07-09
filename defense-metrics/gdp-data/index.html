@@ -8,10 +8,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Include Project Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
+  <style>
+    .top-container {
+      display: inline-block;
+      margin: 10px 5px 10px 15px;
+      color:#666;
+      cursor:default;
+      font-size:11px;
+      line-height: 1.3;
+      font-family: \'Source Sans Pro\', Arial, sans-serif;
+    }
+    .calloutbox-header {
+      display: block;
+      margin-bottom: 3px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div style="background-color: white;border: #666 solid 1px; box-shadow: 3px 3px #888888; position: absolute; right: 38px; top: 65px; z-index: 2;width: auto;height: auto;">
-    <div class="top-container" style="display: inline-block; margin: 10px 5px 10px 15px;"></div>
+    <div class="top-container" style="display: inline-block; margin: 10px 5px 10px 15px;">
+      <span class="calloutbox-header">Top 5 Spenders</span>
+      United States: $618B<br />
+      United Kingdom: $59B<br /> 
+      France: $51B<br /> 
+      Germany: $48B<br /> 
+      Canada: $24B<br /> 
+    </div>
   </div>
   <!-- Highcharts chart container -->
   <div id="hcContainer"></div>

@@ -62,7 +62,7 @@ natoCountriesLayer.on(carto.layer.events.FEATURE_OVER, featureEvent => {
     <span class="label">2017 GDP (2010 US$):</span>
     ${validatePopupValue(data.gdp_raw, '$', 'B')}<br />
     <span class="label">Defense Budget (2010 US$):</span>
-    ${validatePopupValue(data.defense_budget, '$', 'M')}<br />
+    ${validatePopupValue(data.defense_budget, '$', 'B')}<br />
     <span class="label">2017 Equipment %:</span>
     ${validatePopupValue(data.equipment_percentage, '', '%')}<br />
     <span class="label">2017 Total Active Duty Force:</span>

@@ -58,11 +58,11 @@ $(function() {
 
         renderChart(dataArray);
 
-        $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>' + topFiveTitle + '</b></text><br/>')
+        // $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;"><b>' + topFiveTitle + '</b></text><br/>')
 
-        fiveWin.map(function(e){
-          $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + e.actual + '</text><br/>')
-        })
+        // fiveWin.map(function(e){
+        //   $('.top-container').append('<text style="color:#666;cursor:default;font-size:12px;font-family: \'Source Sans Pro\', Arial, sans-serif;fill:#666;">' + e.name + ': ' + e.actual + '</text><br/>')
+        // })
 
       }
 
