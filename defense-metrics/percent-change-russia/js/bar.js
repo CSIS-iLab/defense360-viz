@@ -1,6 +1,6 @@
 $(function() {
 
-  var data = {}
+  var data = []
   var fiveWin = []
   var fiveLose = []
 
@@ -11,28 +11,22 @@ $(function() {
       parsed: function(columns) {
         $.each(columns, function (i, code) {
           if ( i == 0 ) {
+            data.push({
+              name: "1",
+              data:[]
+            })
             return
           }
-
-            data[code[0]] = data[code[0]] || {
-              name: code[0],
-              data: []
-            }
-            data[code[0]].data.push([code[1], code[2]*100, code[3]])
-
+          data[0].data.push([code[1], code[2]*100, code[3]])
         })
 
-
-        // Convert object to array - we no longer need the keys
-        var dataArray = $.map(data, function(value, index) {
-            return [value];
-        });
-        renderChart(dataArray);
+        renderChart(data);
 
         //Get top five and last five countries
-        var dataContent = dataArray[0].data;
+        const dataContent = data[0].data;
+        var lastDatum = dataContent.length;
 
-        var sortedByDollar = dataContent.sort(function(a,b){
+        var sortedByDollar = dataContent.slice().sort(function(a,b){
           return b[2] - a[2];
         })
 

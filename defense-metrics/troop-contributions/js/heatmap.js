@@ -7,6 +7,7 @@ Highcharts.data({
   googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
   googleSpreadsheetWorksheet: 1,
   parsed: function(columns) {
+    console.log(columns)
     columns.forEach(function(column, index) {
       if ( index == 0 ) {
         column.shift()
