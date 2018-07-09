@@ -3,7 +3,7 @@ $(function() {
   var data = {}
   var fiveWin = []
   var fiveLose = []
-  var fiveActual = ['$9,298M', '$2,695M', '$482M', '$363M', '$311M']
+  var fiveActual = ['$2,142M', '$8,580M', '$238M', '$324M', '$7M']
 
   Highcharts.data({
     googleSpreadsheetKey: '17Paq5u7wNkLkDgmhbGur15KBSWjG3JIjzNaLd5hRDvs',
