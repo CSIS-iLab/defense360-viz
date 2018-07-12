@@ -127,7 +127,7 @@ const mobilitySelector = document.querySelector('.js-mobility')
 mobilitySelector.addEventListener("change", function() {
   currentLayer = layerStyles[this.value]
   updateLayerStyles(currentLayer.field)
-  updateLegend(currentLayer.max)
+  // updateLegend(currentLayer.max)
 })
 
 const colors = '#fbe4a3, #d0d197, #96b586, #4ba292,#008e9d';
@@ -168,9 +168,9 @@ function updateLayerStyles(layer) {
   }`);
 }
 
-function updateLegend(max) {
-  document.getElementById('legend-max').innerHTML = max;
-}
+// function updateLegend(max) {
+//   document.getElementById('legend-max').innerHTML = max;
+// }
 
 updateLayerStyles(currentLayer.field)
-updateLegend(currentLayer.max)
+// updateLegend(currentLayer.max)
