@@ -98,7 +98,7 @@ $(function() {
         },
         tickInterval: 1,
         allowDecimals: false
-      }
+      },
       yAxis: [{
           title: {
               text: 'Army End Strength',
@@ -107,7 +107,7 @@ $(function() {
               format: '{value}K'
           },
           reversedStacks: false
-      }, { 
+      }, {
           title: {
               text: 'Discretionary & Mandatory Budget Authority<br/>(in FY19 Dollars)',
               rotation: -90,
