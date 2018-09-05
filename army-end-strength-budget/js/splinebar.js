@@ -47,7 +47,6 @@ $(function() {
 
         })
 
-        // Convert object to array - we no longer need the keys
         var dataArray = $.map(data, function(value, index) {
             return [value];
         });
@@ -59,18 +58,15 @@ $(function() {
 
   function renderChart(data) {
     $('#hcContainer').highcharts({
-      // General Chart Options
       chart: {
         zoomType: 'x',
       },
-      // Chart Title and Subtitle
       title: {
         text: "Army End Strength and Budget, FY 1975 to FY 2018"
       },
       subtitle: {
         text: "Click and drag to zoom in"
       },
-      // Credits
       credits: {
         position: {
           y: -15
@@ -79,7 +75,6 @@ $(function() {
         href: false,
         text: "CSIS Defense360 | Source: Defense Budget Analysis"
       },
-      // Chart Legend
       legend: {
         y: -15,
         align: 'center',
@@ -89,7 +84,6 @@ $(function() {
           text: 'Legend Title<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
         },
       },
-      // X Axis
       xAxis: {
         title: {
           text:"Year"
@@ -104,9 +98,8 @@ $(function() {
         },
         tickInterval: 1,
         allowDecimals: false
-      },
-      // Y Axis
-      yAxis: [{ // Primary yAxis
+      }
+      yAxis: [{
           title: {
               text: 'Army End Strength',
           },
@@ -114,7 +107,7 @@ $(function() {
               format: '{value}K'
           },
           reversedStacks: false
-      }, { // Secondary yAxis
+      }, { 
           title: {
               text: 'Discretionary & Mandatory Budget Authority<br/>(in FY19 Dollars)',
               rotation: -90,
@@ -129,13 +122,9 @@ $(function() {
               format: '${value}B'
           },
           max: 300,
-          /*
-          tickInterval: 25,
-          */
           opposite: true
       }],
       series: data,
-      // Tooltip
       tooltip: {
           formatter: function () {
 
@@ -151,7 +140,6 @@ $(function() {
               return '<b>' + this.key + '</b>' + '<br/><span style="color:' + this.series.color + '">● </span>' + this.series.name + ': ' + rounded + unit;
           }
       },
-      // Additional Plot Options
       plotOptions:
       {
         column: {
