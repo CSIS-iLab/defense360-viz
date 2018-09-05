@@ -21,7 +21,7 @@ $(function() {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      text: "CSIS Defense360 | Source: Defense Budget Analysis"
     },
     // Chart Legend
     legend: {

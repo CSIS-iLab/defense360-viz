@@ -22,13 +22,16 @@ $(function() {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      text: "CSIS Defense360 | Source: Defense Budget Analysis"
     },
     // Chart Legend
     legend: {
       align: 'center',
       verticalAlign: 'bottom',
-      layout: 'horizontal'
+      layout: 'horizontal',
+      title: {
+        text: 'Legend Title<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+      },
     },
     // Y Axis
     yAxis: {
