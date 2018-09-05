@@ -28,7 +28,7 @@ Highcharts.theme = {
     },
     subtitle: {
         style: {
-            fontSize: '12px',
+            fontSize: '14px',
             fontFamily: '"expo-serif-pro",serif',
             color: '#808080'
         }
@@ -42,23 +42,23 @@ Highcharts.theme = {
     },
     tooltip: {
         style: {
-            fontSize: '13px',
+            fontSize: '14px',
             fontFamily: "'Source Sans Pro', 'Arial', sans-serif"
         },
-        headerFormat: '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Source Sans Pro\', arial, sans-serif;">{point.key}</span><br/>'
+        headerFormat: '<span style="font-size: 14px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Source Sans Pro\', arial, sans-serif;">{point.key}</span><br/>'
     },
     xAxis: {
         labels: {
             style: {
                 color: '#666',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontFamily: '"expo-serif-pro",serif'
             },
         },
         title: {
             style: {
                 color: '#666',
-                fontSize: '14px',
+                fontSize: '16px',
                 fontFamily: '"expo-serif-pro",serif'
 
             }
@@ -71,7 +71,7 @@ Highcharts.theme = {
         labels: {
             style: {
                 color: '#666',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontFamily: '"expo-serif-pro",serif'
             },
             x: -3
@@ -79,7 +79,7 @@ Highcharts.theme = {
         title: {
             style: {
                 color: '#666',
-                fontSize: '14px',
+                fontSize: '16px',
                 fontFamily: '"expo-serif-pro",serif'
             },
             margin: 20

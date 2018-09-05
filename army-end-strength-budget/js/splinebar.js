@@ -77,7 +77,7 @@ $(function() {
         },
         enabled: true,
         href: false,
-        text: "CSIS Defense360 | Source: NAME"
+        text: "CSIS Defense360 | Source: Defense Budget Analysis"
       },
       // Chart Legend
       legend: {
@@ -108,7 +108,7 @@ $(function() {
               text: 'Army End Strength',
           },
           labels: {
-              format: '{value}k'
+              format: '{value}K'
           },
           reversedStacks: false
       }, { // Secondary yAxis
