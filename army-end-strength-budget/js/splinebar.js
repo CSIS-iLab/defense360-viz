@@ -81,7 +81,7 @@ $(function() {
         verticalAlign: 'bottom',
         layout: 'horizontal',
         title: {
-          text: 'Legend Title<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+          text: '<span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
         },
       },
       xAxis: {
