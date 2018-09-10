@@ -1,3 +1,6 @@
+.gitignore
 .DS_Store
 templates/*/node_modules
 templates/*/.cache
+node_modules
+package-lock.json
