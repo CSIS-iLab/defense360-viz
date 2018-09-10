@@ -151,7 +151,10 @@ $(function() {
         legend: {
           align: 'center',
           verticalAlign: 'bottom',
-          layout: 'horizontal'
+          layout: 'horizontal',
+          title: {
+            text: '<span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+          },
         },
         // X Axis
         xAxis: {
@@ -173,9 +176,22 @@ $(function() {
         },
         // Tooltip
         tooltip: {
-          valueDecimals: 2,
-          valuePrefix: '$',
-          valueSuffix: 'M'
+          formatter: function () {
+              var unit;
+              var chartType = this.series.userOptions.type;
+              var rounded
+              if (chartType == "spline") {
+                unit = " Billion";
+                rounded = (Number(Math.round(this.y + 'e2')+ 'e-2')).toFixed(2);
+              } else if (chartType == "column") {
+                unit = "k"
+                rounded = Number(Math.round(this.y + 'e2')+ 'e-2')
+              }
+              return '<b>' + this.key + '</b>' + '<br/><span style="color:' + this.series.color + '">● </span>' + this.series.name + ': ' + rounded + unit;
+          }
+          // valueDecimals: 0,
+          // valuePrefix: '$',
+          // valueSuffix: 'M'
         },
         series: data,
         drilldown: {

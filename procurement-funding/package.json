@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
-    "d3-fetch": "^1.1.0",
-    "highcharts": "^6.1.0",
+    "d3-fetch": "^1.1.2",
+    "highcharts": "^6.1.2",
     "js": "^0.1.0"
   }
 }

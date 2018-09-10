@@ -307,7 +307,7 @@ Highcharts.theme = {
   },
   subtitle: {
     style: {
-      fontSize: "12px",
+      fontSize: "14px",
       fontFamily: '"expo-serif-pro",serif',
       color: "#808080"
     }
@@ -331,14 +331,14 @@ Highcharts.theme = {
     labels: {
       style: {
         color: "#666",
-        fontSize: "12px",
+        fontSize: "14px",
         fontFamily: '"expo-serif-pro",serif'
       }
     },
     title: {
       style: {
         color: "#666",
-        fontSize: "14px",
+        fontSize: "16px",
         fontFamily: '"expo-serif-pro",serif'
       }
     },
@@ -350,7 +350,7 @@ Highcharts.theme = {
     labels: {
       style: {
         color: "#666",
-        fontSize: "12px",
+        fontSize: "14px",
         fontFamily: '"expo-serif-pro",serif'
       },
       x: -3
@@ -358,7 +358,7 @@ Highcharts.theme = {
     title: {
       style: {
         color: "#666",
-        fontSize: "14px",
+        fontSize: "16px",
         fontFamily: '"expo-serif-pro",serif'
       },
       margin: 20
@@ -367,7 +367,7 @@ Highcharts.theme = {
   },
   legend: {
     title: {
-      text: null,
+      text: '<span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>',
       style: {
         fontFamily: '"expo-serif-pro",serif',
         fontSize: "15px",
