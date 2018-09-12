@@ -1350,7 +1350,7 @@ function renderChart(series) {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      text: "CSIS Defense360 | Source: Defense Budget Analysis"
     },
     plotOptions: {
       area: {
@@ -1576,7 +1576,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49711' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53768' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
