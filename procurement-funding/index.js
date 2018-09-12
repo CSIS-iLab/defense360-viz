@@ -346,14 +346,11 @@ function renderChart(series) {
       },
       labels: {
         formatter: function() {
-          let suffix =
-            this.y > 999 && this.y < 999999
-              ? "K"
-              : this.y > 999999 && this.y < 999999999
-                ? "M"
-                : "B";
-
-          return `$${this.value / 1000000}${suffix}`;
+          return this.axis.max > 999 && this.axis.max < 999999
+            ? `$${this.value / 1000}K`
+            : this.axis.max > 999999 && this.axis.max < 999999999
+              ? `$${this.value / 1000000}M`
+              : `$${this.value / 1000000000}B`;
         }
       }
     },
