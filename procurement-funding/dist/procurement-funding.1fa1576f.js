@@ -1097,7 +1097,7 @@ var _highcharts2 = _interopRequireDefault(_highcharts);
 
 var _d3Fetch = require("d3-fetch");
 
-var _data = require("/js/data.csv");
+var _data = require("./js/data.csv");
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -1156,6 +1156,11 @@ function populateSelect() {
     renderChart(seriesData[currentType]);
   });
 }
+function titleize(str) {
+  return str.toLowerCase().split(" ").map(function (s) {
+    return s.charAt(0).toUpperCase() + s.substring(1);
+  }).join(" ");
+}
 
 function createDrilldownObjects(_ref) {
   var rootObj = _ref.rootObj,
@@ -1164,13 +1169,17 @@ function createDrilldownObjects(_ref) {
       childSlug = _ref.childSlug,
       year = _ref.year,
       value = _ref.value,
-      drilldown = _ref.drilldown;
+      drilldown = _ref.drilldown,
+      title = _ref.title,
+      path = _ref.path;
 
   var parentIndex = rootObj.findIndex(function (d) {
     return d.id === parentSlug;
   });
   if (parentIndex === -1) {
     rootObj.push({
+      title: title,
+      path: path,
       name: parentName,
       id: parentSlug,
       drilldownID: parentSlug,
@@ -1203,10 +1212,10 @@ function createDrilldownObjects(_ref) {
 
 (0, _d3Fetch.csv)(_data2.default).then(function (rows) {
   rows.forEach(function (code, i) {
-    var level1 = code.level1;
-    var level2 = code.level2;
-    var level3 = code.level3;
-    var level4 = code.level4;
+    var level1 = titleize(code.level1);
+    var level2 = titleize(code.level2);
+    var level3 = titleize(code.level3);
+    var level4 = titleize(code.level4);
     var year = code.Year;
 
     var valueTypesColumns = {
@@ -1223,7 +1232,9 @@ function createDrilldownObjects(_ref) {
       var level1ID = slugify([level1]);
 
       data[type][level1] = data[type][level1] || {
-        name: level1,
+        name: "Overview",
+        path: level1,
+        title: level1,
         colorByPoint: false,
         data: {}
       };
@@ -1249,7 +1260,9 @@ function createDrilldownObjects(_ref) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level1ID],
         parentSlug: level2Slug,
-        parentName: level1 + " " + level2,
+        path: level1 + " » " + level2,
+        title: level2,
+        parentName: level1,
         childSlug: level3Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -1260,7 +1273,9 @@ function createDrilldownObjects(_ref) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level2Slug],
         parentSlug: level3ID,
-        parentName: level1 + " " + level2 + " " + level3,
+        path: level1 + " » " + level2 + " » " + level3,
+        title: level3,
+        parentName: level2,
         childSlug: level3Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -1271,7 +1286,9 @@ function createDrilldownObjects(_ref) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level3ID],
         parentSlug: level4ID,
-        parentName: level1 + " " + level2 + " " + level3 + " " + level4,
+        path: level1 + " » " + level2 + " » " + level3 + " » " + level4,
+        title: level4,
+        parentName: level3,
         childSlug: level4Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -1297,10 +1314,17 @@ function renderChart(series) {
   chart = _highcharts2.default.chart("hcContainer", {
     colors: colors,
     chart: {
+      zoomType: "x",
       type: "area",
       height: 600,
       events: {
+        drillup: function drillup(e) {
+          e.seriesOptions.name === "Overview" ? chart.setTitle({ text: "Procurement Funding" }) : chart.setTitle({
+            text: e.seriesOptions.path.replace(" \xBB " + e.seriesOptions.title, "")
+          });
+        },
         drilldown: function drilldown(e) {
+          chart.setTitle({ text: e.point.series.options.path });
           if (!e.seriesOptions) {
             var _chart = this;
             var _series = drilldownData[currentType][e.point.drilldownID];
@@ -1321,7 +1345,7 @@ function renderChart(series) {
       text: "Procurement Funding"
     },
     subtitle: {
-      text: ""
+      text: "Click and drag to zoom in"
     },
     credits: {
       enabled: true,
@@ -1340,21 +1364,49 @@ function renderChart(series) {
           radius: 3
         },
         cursor: "pointer",
-        trackByArea: true
+        trackByArea: true,
+        stickyTracking: false
       }
     },
     tooltip: {
-      valuePrefix: "$"
+      headerFormat: "<b>{point.x}</b><br>",
+      pointFormatter: function pointFormatter() {
+        var point = this.y > 999 && this.y < 999999 ? Math.round(this.y / 1000 * 10) / 10 : this.y > 999999 && this.y < 999999999 ? Math.round(this.y / 1000000 * 10) / 10 : this.y;
+        var suffix = this.y > 999 && this.y < 999999 ? "K" : this.y > 999999 && this.y < 999999999 ? "M" : "";
+
+        return "<span style=\"font-size:18px;color:" + this.series.color + "\">\u25CF</span> " + this.series.options.title + ": $" + point + suffix;
+      }
+    },
+    legend: {
+      labelFormatter: function labelFormatter() {
+        return this.userOptions.title;
+      },
+      title: {
+        text: '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+      }
     },
     xAxis: {
       title: "Fiscal Year",
       allowDecimals: false,
       categories: years,
-      tickmarkPlacement: "on"
+      tickmarkPlacement: "on",
+      labels: {
+        rotation: -90,
+        formatter: function formatter() {
+          return this.value.toString().slice(2, 4).replace(/^/, "FY");
+        }
+      }
     },
     yAxis: {
       title: {
         text: "Total Obligational Authority in " + valueTypesInfo[currentType].yAxis + " Dollars"
+      },
+      labels: {
+        formatter: function formatter() {
+          var suffix = this.y > 999 && this.y < 999999 ? "K" : this.y > 999999 && this.y < 999999999 ? "M" : "B";
+
+          return "$" + this.value / 1000000 + suffix;
+        }
       }
     },
     series: series
@@ -1368,7 +1420,7 @@ _highcharts2.default.setOptions({
 });
 
 _highcharts2.default.theme = {
-  colors: colors,
+  colors: ["#365F5A", "#96B586", "#DDB460", "#D05F4C", "#83373E", "#9B9B9B", "#3E8E9D", "#75657A", "#A2786A"],
   chart: {
     backgroundColor: "#FFF",
     border: "none",
@@ -1379,8 +1431,7 @@ _highcharts2.default.theme = {
   title: {
     style: {
       color: "#000",
-      fontSize: "25px",
-      fontFamily: '"expo-serif-pro",serif',
+      font: '25px "expo-serif-pro",serif',
       fontWeight: "400"
     },
     widthAdjust: -60
@@ -1458,11 +1509,10 @@ _highcharts2.default.theme = {
       color: "#000",
       fontSize: "14px",
       fontFamily: "'Source Sans Pro', 'Arial', sans-serif",
-      fontWeight: "normal",
       textOverflow: null
     },
     itemHoverStyle: {
-      color: "#36605a"
+      color: "#5db6d0"
     },
     margin: 30
   },
@@ -1497,7 +1547,7 @@ function slugify(words) {
   slug = slug.replace(/\s+/g, "-").toLowerCase();
   return slug;
 }
-},{"./js/highcharts.js":"js/highcharts.js","d3-fetch":"node_modules/d3-fetch/index.js","/js/data.csv":"js/data.csv"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./js/highcharts.js":"js/highcharts.js","d3-fetch":"node_modules/d3-fetch/index.js","./js/data.csv":"js/data.csv"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 

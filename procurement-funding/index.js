@@ -11,7 +11,7 @@
 
 import Highcharts from "./js/highcharts.js";
 import { csv } from "d3-fetch";
-import dataCSV from "/js/data.csv";
+import dataCSV from "./js/data.csv";
 
 const valueTypesInfo = {
   current: {
@@ -71,6 +71,13 @@ function populateSelect() {
     renderChart(seriesData[currentType]);
   });
 }
+function titleize(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(" ");
+}
 
 function createDrilldownObjects({
   rootObj,
@@ -79,11 +86,15 @@ function createDrilldownObjects({
   childSlug,
   year,
   value,
-  drilldown
+  drilldown,
+  title,
+  path
 }) {
   let parentIndex = rootObj.findIndex(d => d.id === parentSlug);
   if (parentIndex === -1) {
     rootObj.push({
+      title: title,
+      path: path,
       name: parentName,
       id: parentSlug,
       drilldownID: parentSlug,
@@ -118,10 +129,10 @@ function createDrilldownObjects({
 
 csv(dataCSV).then(function(rows) {
   rows.forEach(function(code, i) {
-    var level1 = code.level1;
-    var level2 = code.level2;
-    var level3 = code.level3;
-    var level4 = code.level4;
+    var level1 = titleize(code.level1);
+    var level2 = titleize(code.level2);
+    var level3 = titleize(code.level3);
+    var level4 = titleize(code.level4);
     var year = code.Year;
 
     const valueTypesColumns = {
@@ -138,7 +149,9 @@ csv(dataCSV).then(function(rows) {
       const level1ID = slugify([level1]);
 
       data[type][level1] = data[type][level1] || {
-        name: level1,
+        name: "Overview",
+        path: level1,
+        title: level1,
         colorByPoint: false,
         data: {}
       };
@@ -166,7 +179,9 @@ csv(dataCSV).then(function(rows) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level1ID],
         parentSlug: level2Slug,
-        parentName: level1 + " " + level2,
+        path: level1 + " » " + level2,
+        title: level2,
+        parentName: level1,
         childSlug: level3Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -177,7 +192,9 @@ csv(dataCSV).then(function(rows) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level2Slug],
         parentSlug: level3ID,
-        parentName: level1 + " " + level2 + " " + level3,
+        path: level1 + " » " + level2 + " » " + level3,
+        title: level3,
+        parentName: level2,
         childSlug: level3Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -188,7 +205,9 @@ csv(dataCSV).then(function(rows) {
       createDrilldownObjects({
         rootObj: drilldownData[type][level3ID],
         parentSlug: level4ID,
-        parentName: level1 + " " + level2 + " " + level3 + " " + level4,
+        path: level1 + " » " + level2 + " » " + level3 + " » " + level4,
+        title: level4,
+        parentName: level3,
         childSlug: level4Slug,
         year: year,
         value: valueTypesColumns[type],
@@ -214,10 +233,22 @@ function renderChart(series) {
   chart = Highcharts.chart("hcContainer", {
     colors: colors,
     chart: {
+      zoomType: "x",
       type: "area",
       height: 600,
       events: {
+        drillup: function(e) {
+          e.seriesOptions.name === "Overview"
+            ? chart.setTitle({ text: "Procurement Funding" })
+            : chart.setTitle({
+                text: e.seriesOptions.path.replace(
+                  ` » ${e.seriesOptions.title}`,
+                  ``
+                )
+              });
+        },
         drilldown: function(e) {
+          chart.setTitle({ text: e.point.series.options.path });
           if (!e.seriesOptions) {
             let chart = this;
             let series = drilldownData[currentType][e.point.drilldownID];
@@ -238,7 +269,7 @@ function renderChart(series) {
       text: "Procurement Funding"
     },
     subtitle: {
-      text: ""
+      text: "Click and drag to zoom in"
     },
     credits: {
       enabled: true,
@@ -257,17 +288,54 @@ function renderChart(series) {
           radius: 3
         },
         cursor: "pointer",
-        trackByArea: true
+        trackByArea: true,
+        stickyTracking: false
       }
     },
     tooltip: {
-      valuePrefix: "$"
+      headerFormat: "<b>{point.x}</b><br>",
+      pointFormatter: function() {
+        let point =
+          this.y > 999 && this.y < 999999
+            ? Math.round((this.y / 1000) * 10) / 10
+            : this.y > 999999 && this.y < 999999999
+              ? Math.round((this.y / 1000000) * 10) / 10
+              : this.y;
+        let suffix =
+          this.y > 999 && this.y < 999999
+            ? "K"
+            : this.y > 999999 && this.y < 999999999
+              ? "M"
+              : "";
+
+        return `<span style="font-size:18px;color:${
+          this.series.color
+        }">●</span> ${this.series.options.title}: $${point}${suffix}`;
+      }
+    },
+    legend: {
+      labelFormatter: function() {
+        return this.userOptions.title;
+      },
+      title: {
+        text:
+          '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+      }
     },
     xAxis: {
       title: "Fiscal Year",
       allowDecimals: false,
       categories: years,
-      tickmarkPlacement: "on"
+      tickmarkPlacement: "on",
+      labels: {
+        rotation: -90,
+        formatter: function() {
+          return this.value
+            .toString()
+            .slice(2, 4)
+            .replace(/^/, "FY");
+        }
+      }
     },
     yAxis: {
       title: {
@@ -275,6 +343,18 @@ function renderChart(series) {
           "Total Obligational Authority in " +
           valueTypesInfo[currentType].yAxis +
           " Dollars"
+      },
+      labels: {
+        formatter: function() {
+          let suffix =
+            this.y > 999 && this.y < 999999
+              ? "K"
+              : this.y > 999999 && this.y < 999999999
+                ? "M"
+                : "B";
+
+          return `$${this.value / 1000000}${suffix}`;
+        }
       }
     },
     series: series
@@ -288,7 +368,17 @@ Highcharts.setOptions({
 });
 
 Highcharts.theme = {
-  colors: colors,
+  colors: [
+    "#365F5A",
+    "#96B586",
+    "#DDB460",
+    "#D05F4C",
+    "#83373E",
+    "#9B9B9B",
+    "#3E8E9D",
+    "#75657A",
+    "#A2786A"
+  ],
   chart: {
     backgroundColor: "#FFF",
     border: "none",
@@ -299,8 +389,7 @@ Highcharts.theme = {
   title: {
     style: {
       color: "#000",
-      fontSize: "25px",
-      fontFamily: '"expo-serif-pro",serif',
+      font: '25px "expo-serif-pro",serif',
       fontWeight: "400"
     },
     widthAdjust: -60
@@ -379,11 +468,10 @@ Highcharts.theme = {
       color: "#000",
       fontSize: "14px",
       fontFamily: "'Source Sans Pro', 'Arial', sans-serif",
-      fontWeight: "normal",
       textOverflow: null
     },
     itemHoverStyle: {
-      color: "#36605a"
+      color: "#5db6d0"
     },
     margin: 30
   },
