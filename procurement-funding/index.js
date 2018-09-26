@@ -319,7 +319,7 @@ function renderChart(series) {
       },
       title: {
         text:
-          '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click to hide)</span>'
+          '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click the fields below to hide. To dive deeper into a specific type of funding, click a point on the chart.)</span>'
       }
     },
     xAxis: {
