@@ -296,17 +296,21 @@ function renderChart(series) {
       headerFormat: "<b>{point.x}</b><br>",
       pointFormatter: function() {
         let point =
-          this.y > 999 && this.y < 999999
-            ? Math.round((this.y / 1000) * 10) / 10
-            : this.y > 999999 && this.y < 999999999
-              ? Math.round((this.y / 1000000) * 10) / 10
-              : this.y;
+          Math.abs(this.y) > 999 && Math.abs(this.y) < 999999
+            ? numberWithCommas(Math.round((this.y / 1000) * 10) / 10)
+            : Math.abs(this.y) > 999999 && Math.abs(this.y) < 999999999
+              ? numberWithCommas(Math.round((this.y / 1000000) * 10) / 10)
+              : Math.abs(this.y) > 999999999
+                ? numberWithCommas(Math.round((this.y / 1000000000) * 10) / 10)
+                : this.y;
         let suffix =
-          this.y > 999 && this.y < 999999
+          Math.abs(this.y) > 999 && Math.abs(this.y) < 999999
             ? "K"
-            : this.y > 999999 && this.y < 999999999
+            : Math.abs(this.y) > 999999 && Math.abs(this.y) < 999999999
               ? "M"
-              : "";
+              : Math.abs(this.y) > 999999999
+                ? "B"
+                : "";
 
         return `<span style="font-size:18px;color:${
           this.series.color
@@ -347,10 +351,12 @@ function renderChart(series) {
       labels: {
         formatter: function() {
           return this.axis.max > 999 && this.axis.max < 999999
-            ? `$${this.value / 1000}K`
+            ? `$${numberWithCommas(this.value / 1000)}K`
             : this.axis.max > 999999 && this.axis.max < 999999999
-              ? `$${this.value / 1000000}M`
-              : `$${this.value / 1000000000}B`;
+              ? `$${numberWithCommas(this.value / 1000000)}M`
+              : this.axis.max > 999999999
+                ? `$${numberWithCommas(this.value / 1000000000)}B`
+                : `$${this.value}`;
         }
       }
     },
@@ -502,4 +508,11 @@ function slugify(words) {
   });
   slug = slug.replace(/\s+/g, "-").toLowerCase();
   return slug;
+}
+
+function numberWithCommas(x) {
+  x = x.toString();
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x)) x = x.replace(pattern, "$1,$2");
+  return x;
 }
