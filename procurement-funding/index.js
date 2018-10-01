@@ -23,7 +23,7 @@ const valueTypesInfo = {
     yAxis: "Constant FY19"
   }
 };
-const valueTypes = ["current", "constant"];
+const valueTypes = ["constant","current"];
 const colors = [
   "#365F5A",
   "#96B586",
@@ -216,7 +216,7 @@ csv(dataCSV).then(function(rows) {
     });
   });
 
-  datasets = Object.keys(data);
+  datasets = Object.keys(data).reverse();
 
   valueTypes.forEach(function(type, index) {
     seriesData[type] = Object.keys(data[type]).map(p => {
