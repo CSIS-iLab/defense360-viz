@@ -49,7 +49,7 @@ var drilldownData = {
   constant: {}
 };
 
-let currentType = "current";
+let currentType = "constant";
 let chart;
 
 function populateSelect() {
