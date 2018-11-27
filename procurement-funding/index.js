@@ -23,7 +23,7 @@ const valueTypesInfo = {
     yAxis: "Constant FY19"
   }
 };
-const valueTypes = ["constant","current"];
+const valueTypes = ["constant", "current"];
 const colors = [
   "#365F5A",
   "#96B586",
@@ -231,6 +231,9 @@ csv(dataCSV).then(function(rows) {
 
 function renderChart(series) {
   chart = Highcharts.chart("hcContainer", {
+    exporting: {
+      enabled: true
+    },
     colors: colors,
     chart: {
       zoomType: "x",
@@ -269,7 +272,9 @@ function renderChart(series) {
       text: "Procurement Funding"
     },
     subtitle: {
-      text: "Click and drag to zoom in"
+      useHTML: true,
+      align: "center",
+      text: `<div style="text-align:center"><span style="font-size:24px;color:#f00">*</span>FY 2018 data reflects PB18 request with CR adjustment.<br><br>Click and drag to zoom in<br><br></div>`
     },
     credits: {
       enabled: true,
@@ -323,7 +328,7 @@ function renderChart(series) {
       },
       title: {
         text:
-          '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">(Click the fields below to hide. To dive deeper into a specific type of funding, click a point on the chart.)</span>'
+          '<br/><span style="font-size: 12px; color: #808080; font-weight: normal">Click the fields below to hide. To dive deeper into a specific type of funding, click a point on the chart.</span>'
       }
     },
     xAxis: {
@@ -334,10 +339,15 @@ function renderChart(series) {
       labels: {
         rotation: -90,
         formatter: function() {
-          return this.value
+          let fiscalYear = this.value
             .toString()
             .slice(2, 4)
             .replace(/^/, "FY");
+          return fiscalYear === "FY19"
+            ? `PB19`
+            : fiscalYear === "FY18"
+              ? `<span style="font-size:24px;color:#f00">*</span>${fiscalYear}`
+              : fiscalYear;
         }
       }
     },
@@ -401,7 +411,8 @@ Highcharts.theme = {
     style: {
       fontSize: "12px",
       fontFamily: '"expo-serif-pro",serif',
-      color: "#808080"
+      color: "#808080",
+      align: "center"
     }
   },
   credits: {
