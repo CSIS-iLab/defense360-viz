@@ -232,7 +232,17 @@ csv(dataCSV).then(function(rows) {
 function renderChart(series) {
   chart = Highcharts.chart("hcContainer", {
     exporting: {
-      enabled: true
+      chartOptions: {
+        subtitle: {
+          text: `<div style="text-align:center"><span style="font-size:18px;color:#f00">*</span>FY 2018 data reflects PB18 request with CR adjustment.<br><br></div>`
+        },
+
+        legend: {
+          title: {
+            text: ""
+          }
+        }
+      }
     },
     colors: colors,
     chart: {
@@ -274,7 +284,7 @@ function renderChart(series) {
     subtitle: {
       useHTML: true,
       align: "center",
-      text: `<div style="text-align:center"><span style="font-size:24px;color:#f00">*</span>FY 2018 data reflects PB18 request with CR adjustment.<br><br>Click and drag to zoom in<br><br></div>`
+      text: `<div style="text-align:center"><span style="font-size:18px;color:#f00">*</span>FY 2018 data reflects PB18 request with CR adjustment.<br><br>Click and drag to zoom in<br><br></div>`
     },
     credits: {
       enabled: true,
@@ -346,7 +356,7 @@ function renderChart(series) {
           return fiscalYear === "FY19"
             ? `PB19`
             : fiscalYear === "FY18"
-              ? `<span style="font-size:24px;color:#f00">*</span>${fiscalYear}`
+              ? `<span style="font-size:18px;color:#f00">*</span>${fiscalYear}`
               : fiscalYear;
         }
       }
