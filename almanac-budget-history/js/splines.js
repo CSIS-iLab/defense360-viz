@@ -1,8 +1,8 @@
 const SPREADSHEET_ID = '123BpzTEYtesF2LI0VA_0ial9mQx4dlek9hoM3GRjwas'
-let defense_system = window.location.search
+var defense_system = window.location.search
   .replace('?id=', '')
   .replace(/(_|%20)/g, ' ')
-let chart
+var chart
 gapi.load('client', function() {
   gapi.client
     .init({
@@ -16,10 +16,10 @@ gapi.load('client', function() {
       gapi.client.sheets.spreadsheets.values
         .get({
           spreadsheetId: SPREADSHEET_ID,
-          range: `'${defense_system}'!A:Z`
+          range: "'" + defense_system + "'!A:Z"
         })
         .then(function(sheet) {
-          let sheetData = {
+          var sheetData = {
             title: sheet.result.values[0],
             subtitle: sheet.result.values[1],
             credits: sheet.result.values[2],
@@ -29,19 +29,46 @@ gapi.load('client', function() {
                 sheet.result.values[4],
                 ...sheet.result.values
                   .slice(5)
-                  .filter(r => r[0].toLowerCase().indexOf('current') > -1)
+                  .filter(function(r) {
+                    return r[0].toLowerCase().indexOf('current') > -1
+                  })
+                  .map(function(r) {
+                    return r.map(function(v) {
+                      return isNaN(v) ? v : v * 1000000
+                    })
+                  }),
+                sheet.result.values
+                  .find(function(r) {
+                    return r[0].toLowerCase().indexOf('actual') > -1
+                  })
+                  .map(function(v) {
+                    return parseInt(v, 10) ? v * 1000000 : v
+                  })
               ],
               constant: [
                 sheet.result.values[4],
                 ...sheet.result.values
                   .slice(5)
-                  .filter(r => r[0].toLowerCase().indexOf('constant') > -1)
+                  .filter(function(r) {
+                    return r[0].toLowerCase().indexOf('constant') > -1
+                  })
+                  .map(function(r) {
+                    return r.map(function(v) {
+                      return isNaN(v) ? v : v * 1000000
+                    })
+                  }),
+                sheet.result.values
+                  .find(function(r) {
+                    return r[0].toLowerCase().indexOf('actual') > -1
+                  })
+                  .map(function(v) {
+                    return parseInt(v, 10) ? v * 1000000 : v
+                  })
               ]
             }
           }
-
           console.log(sheetData)
-          renderChart(sheetData, 'current')
+          renderChart(sheetData, 'constant')
 
           document
             .querySelector('select')
@@ -65,7 +92,11 @@ function renderChart(sheetData, type) {
     },
     data: {
       switchRowsAndColumns: true,
-      csv: sheetData.rows[type].map(r => r.join(',')).join('\n'),
+      csv: sheetData.rows[type]
+        .map(function(r) {
+          return r.join(',')
+        })
+        .join('\n'),
       complete: complete
     },
 
@@ -94,6 +125,12 @@ function renderChart(sheetData, type) {
         text: sheetData.yAxis,
         margin: 10,
         x: -15
+      },
+      labels: {
+        x: -3,
+        formatter: function() {
+          return this.value ? getReduceSigFigs(this.value) : this.value
+        }
       }
     },
     tooltip: {
@@ -110,6 +147,9 @@ function renderChart(sheetData, type) {
       layout: 'horizontal',
       itemStyle: {
         textOverflow: null
+      },
+      labelFormatter: function() {
+        return this.name.replace("President's Budget", 'PB')
       }
     },
     plotOptions: {
@@ -124,7 +164,7 @@ function renderChart(sheetData, type) {
 }
 
 function pointFormatter() {
-  let toolTipData = this.series.userOptions.tooltipData
+  var toolTipData = this.series.userOptions.tooltipData
     ? this.series.userOptions.tooltipData[this.index]
     : null
 
@@ -133,35 +173,52 @@ function pointFormatter() {
     this.series.name +
     '</strong><br/>' +
     (toolTipData
-      ? 'A: ' +
-        getReduceSigFigs(toolTipData[1][0]) +
-        '<br/>B: ' +
-        getReduceSigFigs(toolTipData[1][1]) +
+      ? toolTipData[1][0].name +
+        ': ' +
+        getReduceSigFigs(toolTipData[1][0].data) +
+        '<br/>' +
+        toolTipData[1][1].name +
+        ': ' +
+        getReduceSigFigs(toolTipData[1][1].data) +
         '<br/><br/>'
       : getReduceSigFigs(this.y))
   )
 }
 
 function complete(d) {
-  let newSeries = d.series
-    .filter(s => s.name.toLowerCase().indexOf('actual') < 0)
+  var newSeries = d.series
+    .filter(function(s) {
+      return s.name.toLowerCase().indexOf('actual') < 0
+    })
     .reduce(function(total, obj) {
-      let name = obj.name.split(' ')[1]
+      var year = obj.name.split(' ')[1]
+      var name = "President's Budget " + year
 
-      let series = total.find(s => s.name === name)
+      var series = total.find(function(s) {
+        return s.name === name
+      })
 
       if (!series) {
         total.push({
           name: name ? name : 'Actual',
-          data: obj.data.map(d => [d[0], d[1] ? 0 : undefined]),
-          tooltipData: obj.data.map(d => [d[0], []])
+          data: obj.data.map(function(d) {
+            return [d[0], d[1] ? 0 : undefined]
+          }),
+          tooltipData: obj.data.map(function(d) {
+            return [d[0], []]
+          })
         })
-        series = total.find(s => s.name === name)
+        series = total.find(function(s) {
+          return s.name === name
+        })
       }
 
-      series.data = series.data.map((d, i) => {
+      series.data = series.data.map(function(d, i) {
         if (series.tooltipData[i][1]) {
-          series.tooltipData[i][1].push(obj.data[i][1])
+          series.tooltipData[i][1].push({
+            name: obj.name.replace('PB ' + year, ''),
+            data: obj.data[i][1]
+          })
         } else {
           series.tooltipData[i][1] = []
         }
@@ -171,46 +228,31 @@ function complete(d) {
 
       return total
     }, [])
-  let actualSeries = d.series.find(
-    s => s.name.toLowerCase().indexOf('actual') > -1
-  )
+
+  var actualSeries = d.series.find(function(s) {
+    return s.name.toLowerCase().indexOf('actual') > -1
+  })
 
   newSeries.push({ ...actualSeries })
-  newSeries.forEach((s, i) => {
-    s.name = i === 8 ? s.name : 'PB ' + s.name
+  newSeries.forEach(function(s, i) {
     s.color = i === 8 ? 'black' : Highcharts.getOptions().colors[i]
     s.dashStyle = i === 8 ? 'Solid' : 'LongDash'
   })
 
   d.series = newSeries
 }
-function getReduceSigFigs(v, s = 'M') {
-  value = v * 1000
-  if (value >= 1000000000) {
-    return Math.round((value / 1000000000) * 10) / 10
-  } else if (value >= 1000000 && value < 1000000000) {
-    switch (s) {
-      case 'M':
-        return Math.round((value / 1000000) * 10) / 10
 
-      case 'B':
-        return Math.round((value / 1000000000) * 10) / 10
+function getReduceSigFigs(value) {
+  switch (true) {
+    case value >= 1000000000:
+      return '$' + Math.round((value / 1000000000) * 10) / 10 + 'B'
+    case value >= 1000000 && value < 1000000000:
+      return '$' + Math.round((value / 1000000) * 10) / 10 + 'M'
 
-      default:
-        return value
-    }
-  } else if (value < 1000000) {
-    switch (s) {
-      case 'M':
-        return Math.round((value / 1000000) * 10) / 10
+    case value < 1000000:
+      return '$' + Math.round((value / 1000000000) * 10) / 10 + 'K'
 
-      case 'K':
-        return Math.round((value / 1000) * 10) / 10
-
-      default:
-        return value
-    }
-  } else {
-    return value
+    default:
+      return '$' + value
   }
 }
