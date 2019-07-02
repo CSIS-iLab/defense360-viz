@@ -118,9 +118,15 @@ function renderChart(sheetData, type) {
         title: {
           text: sheetData.yAxis1,
           margin: 10,
-          x: -15
+          x: -15,
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
         },
         labels: {
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          },
           x: -3,
           formatter: function() {
             return this.value ? getReduceSigFigs(this.value) : this.value
@@ -136,12 +142,12 @@ function renderChart(sheetData, type) {
           x: 15,
           rotation: -90,
           style: {
-            color: Highcharts.getOptions().colors[4]
+            color: 'black'
           }
         },
         labels: {
           style: {
-            color: Highcharts.getOptions().colors[4]
+            color: 'black'
           },
           x: -3
         },
