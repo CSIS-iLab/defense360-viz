@@ -188,7 +188,7 @@ function pointFormatter() {
 function complete(d) {
   var newSeries = d.series
     .filter(function(s) {
-      return s.name.toLowerCase().indexOf('actual') < 0
+      return !specialSeries(s)
     })
     .reduce(function(total, obj) {
       var year = obj.name.split(' ')[1]
@@ -200,7 +200,7 @@ function complete(d) {
 
       if (!series) {
         total.push({
-          name: name ? name : 'Actual',
+          name: name,
           data: obj.data.map(function(d) {
             return [d[0], d[1] ? 0 : undefined]
           }),
@@ -230,16 +230,20 @@ function complete(d) {
     }, [])
 
   var actualSeries = d.series.find(function(s) {
-    return s.name.toLowerCase().indexOf('actual') > -1
+    return specialSeries(s)
   })
 
   newSeries.push({ ...actualSeries })
   newSeries.forEach(function(s, i) {
-    s.color = i === 8 ? 'black' : Highcharts.getOptions().colors[i]
-    s.dashStyle = i === 8 ? 'Solid' : 'LongDash'
+    s.color = specialSeries(s) ? 'black' : Highcharts.getOptions().colors[i]
+    s.dashStyle = specialSeries(s) ? 'Solid' : 'LongDash'
   })
 
   d.series = newSeries
+}
+
+function specialSeries(s) {
+  return s.name.toLowerCase().indexOf('actual') > -1
 }
 
 function getReduceSigFigs(value) {
