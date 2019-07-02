@@ -191,7 +191,7 @@ function pointFormatter() {
     : null
 
   return (
-    '<strong>' + this.series.name + '</strong><br/>' + getReduceSigFigs(this.y)
+    '<strong>' + this.series.name + ':</strong> ' + getReduceSigFigs(this.y)
   )
 }
 
