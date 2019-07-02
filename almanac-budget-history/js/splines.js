@@ -1,7 +1,8 @@
 const SPREADSHEET_ID = '123BpzTEYtesF2LI0VA_0ial9mQx4dlek9hoM3GRjwas'
-var defense_system = window.location.search
-  .replace('?id=', '')
+var defense_system = window.top.document.title
+  .replace(' | Defense360', '')
   .replace(/(_|%20)/g, ' ')
+
 var chart
 gapi.load('client', function() {
   gapi.client
@@ -67,7 +68,6 @@ gapi.load('client', function() {
               ]
             }
           }
-          console.log(sheetData)
           renderChart(sheetData, 'constant')
 
           document
@@ -83,7 +83,15 @@ gapi.load('client', function() {
 
 function renderChart(sheetData, type) {
   chart = Highcharts.chart('hcContainer', {
-    chart: { type: 'spline' },
+    chart: {
+      type: 'spline',
+      events: {
+        load: function() {
+          document.querySelector('.highcharts-title').innerText =
+            sheetData.title
+        }
+      }
+    },
     title: {
       text: sheetData.title
     },

@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = '18X_ICu7g2BxeVdPBFohbmdoApNFzJoY7DiTqCW934Ts'
-var defense_system = window.location.search
-  .replace('?id=', '')
+var defense_system = window.top.document.title
+  .replace(' | Defense360', '')
   .replace(/(_|%20)/g, ' ')
 var chart
 gapi.load('client', function() {
@@ -38,7 +38,7 @@ gapi.load('client', function() {
                       return isNaN(v) ? v : v * 1000000
                     })
                   }),
-                sheet.result.values.find(function(r) {
+                ...sheet.result.values.filter(function(r) {
                   return r[0].toLowerCase().indexOf('quantity') > -1
                 })
               ],
@@ -54,12 +54,13 @@ gapi.load('client', function() {
                       return isNaN(v) ? v : v * 1000000
                     })
                   }),
-                sheet.result.values.find(function(r) {
+                ...sheet.result.values.filter(function(r) {
                   return r[0].toLowerCase().indexOf('quantity') > -1
                 })
               ]
             }
           }
+
           renderChart(sheetData, 'constant')
 
           document
@@ -75,9 +76,16 @@ gapi.load('client', function() {
 
 function renderChart(sheetData, type) {
   chart = Highcharts.chart('hcContainer', {
-    chart: { type: 'spline' },
+    chart: {
+      events: {
+        load: function() {
+          document.querySelector('.highcharts-title').innerText =
+            sheetData.title
+        }
+      }
+    },
     title: {
-      text: sheetData.title
+      text: ''
     },
     subtitle: {
       text: sheetData.subtitle
@@ -229,11 +237,11 @@ function complete(d) {
       return total
     }, [])
 
-  var quantitySeries = d.series.find(function(s) {
+  var quantitySeries = d.series.filter(function(s) {
     return specialSeries(s)
   })
 
-  newSeries.push({ ...quantitySeries })
+  newSeries = [...newSeries, ...quantitySeries]
   newSeries.forEach(function(s, i) {
     s.type = specialSeries(s) ? 'spline' : 'column'
     s.yAxis = specialSeries(s) ? 1 : 0
@@ -244,11 +252,11 @@ function complete(d) {
     s.zones = specialSeries(s)
       ? [
           {
-            value: 2019,
+            value: 2020,
             dashStyle: 'Solid'
           },
           {
-            value: 2020,
+            value: 2021,
             dashStyle: 'LongDash'
           },
           {
