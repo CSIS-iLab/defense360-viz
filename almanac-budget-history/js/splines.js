@@ -184,21 +184,62 @@ function callChart(defense_system) {
       ? this.series.userOptions.tooltipData[this.index]
       : null
 
-    return (
-      '<strong>' +
-      this.series.name +
-      '</strong><br/>' +
-      (toolTipData
-        ? toolTipData[1][0].name +
-          ': ' +
-          getReduceSigFigs(toolTipData[1][0].data) +
-          '<br/>' +
-          toolTipData[1][1].name +
-          ': ' +
-          getReduceSigFigs(toolTipData[1][1].data) +
-          '<br/><br/>'
-        : getReduceSigFigs(this.y))
-    )
+    var table = '<table>'
+
+    table += '<thead>'
+    table += '<tr>'
+    table += '<th colspan="2">' + this.series.name + '</th>'
+    table += '</tr>'
+    table += '</thead>'
+    table += '<tbody>'
+
+    if (toolTipData) {
+      table += '<tr class="section section-fragility" >'
+      table +=
+        '<td style="background-color:' +
+        this.series.color +
+        '">' +
+        toolTipData[1][0].name +
+        '</td>'
+      table +=
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',.67)">' +
+        getReduceSigFigs(toolTipData[1][0].data) +
+        '</td>'
+      table += '</tr>'
+      ;('<tr class="section section-fragility" >')
+      table +=
+        '<td style="background-color:' +
+        this.series.color +
+        '">' +
+        toolTipData[1][1].name +
+        '</td>'
+      table +=
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',.67)">' +
+        getReduceSigFigs(toolTipData[1][1].data) +
+        '</td>'
+      table += '</tr>'
+    } else {
+      table += '<tr class="section section-fragility">'
+      table +=
+        '<td style="background-color:' +
+        this.series.color +
+        '">' +
+        this.series.name +
+        '</td>'
+      table +=
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',.67)">' +
+        getReduceSigFigs(this.y) +
+        '</td>'
+      table += '</tr>'
+    }
+    table += '</table>'
+    return table
   }
 
   function complete(d) {
@@ -260,6 +301,17 @@ function callChart(defense_system) {
 
   function specialSeries(s) {
     return s.name.toLowerCase().indexOf('actual') > -1
+  }
+  function hexToRgb(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    result = result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        }
+      : null
+    return result ? result.r + ',' + result.g + ',' + result.b : null
   }
 
   function getReduceSigFigs(value) {

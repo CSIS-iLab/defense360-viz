@@ -11,6 +11,65 @@
 </head>
 
     <style>
+
+    table {
+      margin: 0;
+      border-collapse: collapse;
+    }
+
+      thead {
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+th{
+
+    color: black;
+  }
+   td{
+        color:white;
+      }
+
+
+
+      tr.section-fragility {
+        color: $color-white;
+
+
+      }
+
+      tr.section-fragility td {
+        border-bottom: 6px solid white;
+      }
+
+
+
+      tr.section-outbreak td,
+      tr.section-outbreak ~ tr td {
+        border-bottom: 2px solid white;
+
+      }
+
+
+      tr.section-outbreak td:not(:last-of-type),
+      tr.section-outbreak ~ tr td:not(:last-of-type) {
+        border-bottom: 2px solid white;
+
+      }
+      td {
+        padding: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+
+
+      }
+
+      tbody td {
+        width: 50%;
+      }
+
     .select-container{
       display:block;
       border: 2px solid #e7e7e7;
