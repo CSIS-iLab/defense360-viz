@@ -244,7 +244,7 @@ function complete(d) {
   newSeries.push({ ...actualSeries })
   newSeries.forEach(function(s, i) {
     s.color = specialSeries(s) ? 'black' : Highcharts.getOptions().colors[i]
-    s.dashStyle = specialSeries(s) ? 'Solid' : 'LongDash'
+    s.dashStyle = specialSeries(s) ? 'Solid' : 'ShortDash'
   })
 
   d.series = newSeries
