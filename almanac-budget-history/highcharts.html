@@ -24,7 +24,7 @@
         padding: 0 0 6px 0;
       }
 
-      td {
+     td {
         font-weight: bold;
         padding: 6px;
         font-size: 13px;
@@ -34,13 +34,21 @@
 
       }
 
-      td:not(:last-of-type) {
+      tbody td:not(:last-of-type) {
         border-right: 2px solid white;
         color: white;
       }
 
-      td:last-of-type {
+      tbody td:last-of-type {
          color: black;
+      }
+
+      tfoot td:not(:last-of-type) {
+        border-right: 2px solid white;
+      }
+
+      tfoot td {
+         color: white;
       }
 
       .highcharts-label-box.highcharts-tooltip-box {

@@ -198,9 +198,9 @@ function callChart(defense_system) {
     if (toolTipData) {
       table += '<tr >'
       table +=
-        '<td style="background-color:' +
-        this.series.color +
-        '">' +
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',.75)">' +
         toolTipData[1][0].name +
         '</td>'
       table +=
@@ -212,9 +212,9 @@ function callChart(defense_system) {
       table += '</tr>'
       ;('<tr >')
       table +=
-        '<td style="background-color:' +
-        this.series.color +
-        '">' +
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',.75)">' +
         toolTipData[1][1].name +
         '</td>'
       table +=
@@ -224,6 +224,22 @@ function callChart(defense_system) {
         getReduceSigFigs(toolTipData[1][1].data) +
         '</td>'
       table += '</tr>'
+
+      table += '<tfoot>'
+      table += '<tr>'
+      table +=
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',1)">TOTAL</td>'
+      table +=
+        '<td style="background-color:rgba(' +
+        hexToRgb(this.series.color) +
+        ',1)">' +
+        getReduceSigFigs(toolTipData[1][0].data + toolTipData[1][1].data) +
+        '</td>'
+
+      table += '</tr>'
+      table += '</tfoot>'
     } else {
       table += '<tr>'
       table +=
@@ -238,6 +254,7 @@ function callChart(defense_system) {
         '</td>'
       table += '</tr>'
     }
+
     table += '</table>'
     return table
   }
