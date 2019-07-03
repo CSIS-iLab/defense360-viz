@@ -100,7 +100,7 @@ function callChart(defense_system) {
         }
       },
       title: {
-        text: sheetData.title
+        text: ''
       },
       subtitle: {
         text: sheetData.subtitle
