@@ -212,13 +212,13 @@ function callChart(defense_system) {
     table +=
       '<td style="background-color:rgba(' +
       hexToRgb(this.series.color) +
-      ',.825)">' +
+      ',.25)">' +
       this.series.name +
       '</td>'
     table +=
       '<td style="background-color:rgba(' +
       hexToRgb(this.series.color) +
-      ',.25)">' +
+      ',.125)">' +
       getReduceSigFigs(this.y) +
       '</td>'
     table += '</tr>'
