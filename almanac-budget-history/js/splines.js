@@ -206,7 +206,7 @@ function callChart(defense_system) {
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
-        ',.67)">' +
+        ',.25)">' +
         getReduceSigFigs(toolTipData[1][0].data) +
         '</td>'
       table += '</tr>'
@@ -220,7 +220,7 @@ function callChart(defense_system) {
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
-        ',.67)">' +
+        ',.25)">' +
         getReduceSigFigs(toolTipData[1][1].data) +
         '</td>'
       table += '</tr>'
@@ -233,7 +233,7 @@ function callChart(defense_system) {
         this.series.name +
         '</td>'
       table +=
-        '<td style="background-color:rgba(0,0,0,.67)">' +
+        '<td style="background-color:rgba(0,0,0,.25)">' +
         getReduceSigFigs(this.y) +
         '</td>'
       table += '</tr>'
