@@ -150,8 +150,7 @@ function callChart(defense_system) {
         }
       },
       tooltip: {
-        headerFormat:
-          '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Roboto\', arial, sans-serif;">{point.key}</span><br/>',
+        headerFormat: '',
 
         useHTML: true,
         shared: false,
@@ -188,13 +187,16 @@ function callChart(defense_system) {
 
     table += '<thead>'
     table += '<tr>'
+    table += '<th colspan="2">' + this.x + '</th>'
+    table += '</tr>'
+    table += '<tr>'
     table += '<th colspan="2">' + this.series.name + '</th>'
     table += '</tr>'
     table += '</thead>'
     table += '<tbody>'
 
     if (toolTipData) {
-      table += '<tr class="section section-fragility" >'
+      table += '<tr >'
       table +=
         '<td style="background-color:' +
         this.series.color +
@@ -208,7 +210,7 @@ function callChart(defense_system) {
         getReduceSigFigs(toolTipData[1][0].data) +
         '</td>'
       table += '</tr>'
-      ;('<tr class="section section-fragility" >')
+      ;('<tr >')
       table +=
         '<td style="background-color:' +
         this.series.color +
@@ -223,7 +225,7 @@ function callChart(defense_system) {
         '</td>'
       table += '</tr>'
     } else {
-      table += '<tr class="section section-fragility">'
+      table += '<tr>'
       table +=
         '<td style="background-color:' +
         this.series.color +
@@ -231,9 +233,7 @@ function callChart(defense_system) {
         this.series.name +
         '</td>'
       table +=
-        '<td style="background-color:rgba(' +
-        hexToRgb(this.series.color) +
-        ',.67)">' +
+        '<td style="background-color:rgba(0,0,0,.67)">' +
         getReduceSigFigs(this.y) +
         '</td>'
       table += '</tr>'
