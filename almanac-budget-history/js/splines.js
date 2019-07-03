@@ -210,7 +210,7 @@ function callChart(defense_system) {
         getReduceSigFigs(toolTipData[1][0].data) +
         '</td>'
       table += '</tr>'
-      ;('<tr >')
+      table += '<tr>'
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
@@ -309,7 +309,7 @@ function callChart(defense_system) {
 
     newSeries.push({ ...actualSeries })
     newSeries.forEach(function(s, i) {
-      s.color = specialSeries(s) ? 'black' : Highcharts.getOptions().colors[i]
+      s.color = specialSeries(s) ? '#000000' : Highcharts.getOptions().colors[i]
       s.dashStyle = specialSeries(s) ? 'Solid' : 'ShortDash'
     })
 
@@ -319,6 +319,7 @@ function callChart(defense_system) {
   function specialSeries(s) {
     return s.name.toLowerCase().indexOf('actual') > -1
   }
+
   function hexToRgb(hex) {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     result = result
