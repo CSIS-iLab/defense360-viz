@@ -42,7 +42,6 @@ function renderTable(sheet) {
   )
   $('#documents').DataTable({
     data: sheet.data.map(function(r) {
-      console.log(r)
       return [
         r[0],
         r[1],
