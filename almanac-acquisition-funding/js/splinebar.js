@@ -38,7 +38,7 @@ gapi.load('client', function() {
                       return isNaN(v) ? v : v * 1000000
                     })
                   }),
-                ...sheet.result.values.filter(function(r) {
+                ...sheet.result.values.slice(6).filter(function(r) {
                   return r[0].toLowerCase().indexOf('quantity') > -1
                 })
               ],
@@ -54,13 +54,12 @@ gapi.load('client', function() {
                       return isNaN(v) ? v : v * 1000000
                     })
                   }),
-                ...sheet.result.values.filter(function(r) {
+                ...sheet.result.values.slice(6).filter(function(r) {
                   return r[0].toLowerCase().indexOf('quantity') > -1
                 })
               ]
             }
           }
-
           renderChart(sheetData, 'constant')
 
           document
@@ -214,15 +213,11 @@ function complete(d) {
       var series = total.find(function(s) {
         return s.name === name
       })
-
       if (!series) {
         total.push({
-          name: name ? name : 'Quantity',
+          name: name,
           data: obj.data.map(function(d) {
             return [d[0], d[1] ? 0 : undefined]
-          }),
-          tooltipData: obj.data.map(function(d) {
-            return [d[0], []]
           })
         })
         series = total.find(function(s) {
@@ -233,7 +228,6 @@ function complete(d) {
       series.data = series.data.map(function(d, i) {
         return [d[0], (d[1] += obj.data[i][1])]
       })
-
       return total
     }, [])
 
@@ -249,22 +243,10 @@ function complete(d) {
       ? 'black'
       : Highcharts.getOptions().colors.slice(1)[i]
     s.zoneAxis = 'x'
-    s.zones = specialSeries(s)
-      ? [
-          {
-            value: 2020,
-            dashStyle: 'Solid'
-          },
-          {
-            value: 2021,
-            dashStyle: 'LongDash'
-          },
-          {
-            value: 3000,
-            dashStyle: 'LongDash'
-          }
-        ]
-      : null
+
+    var procured = s.name.toLowerCase().indexOf('procured') > -1
+    var planned = s.name.toLowerCase().indexOf('planned') > -1
+    s.dashStyle = planned ? 'ShortDash' : 'Solid'
   })
 
   d.series = newSeries
