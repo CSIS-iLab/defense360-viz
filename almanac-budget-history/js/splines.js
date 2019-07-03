@@ -1,5 +1,6 @@
 window.addEventListener('message', function(event) {
   if (event.origin.indexOf('google') > -1) return
+  console.log(event.data)
   var defense_system = event.data
     .replace(' | Defense360', '')
     .replace(/(_|%20)/g, ' ')
