@@ -200,7 +200,7 @@ function callChart(defense_system) {
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
-        ',.75)">' +
+        ',.825)">' +
         toolTipData[1][0].name +
         '</td>'
       table +=
@@ -214,7 +214,7 @@ function callChart(defense_system) {
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
-        ',.75)">' +
+        ',.825)">' +
         toolTipData[1][1].name +
         '</td>'
       table +=
