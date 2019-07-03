@@ -6,7 +6,7 @@
     <title>KC-46A Tanker | Defense360</title>
   </head>
   <body>
-    <iframe id="document-archive" width="100%" height="900" src="datatables.html" height="600" frameborder="0" onload="document.querySelector('#document-archive').contentWindow.postMessage(document.title,'*')"/>
+    <iframe id="document-archive" width="100%" height="900" src="datatables.html" height="600" frameborder="0" onload="window.addEventListener('message',function(event){document.querySelector('iframe#signals').height=event.data});document.querySelector('#document-archive').contentWindow.postMessage(document.title,'*')"/>
 
 
   </body>

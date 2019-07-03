@@ -54,7 +54,11 @@ function renderTable(sheet) {
       return { title: c }
     }),
     fixedHeader: true,
-    responsive: { details: false }
-    // order: [[1, 'desc']]
+    responsive: { details: false },
+    initComplete: function() {
+      var bodyHeight = document.body.scrollHeight + 20
+
+      window.parent.postMessage(bodyHeight, '*')
+    }
   })
 }
