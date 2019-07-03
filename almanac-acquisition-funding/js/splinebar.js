@@ -1,3 +1,8 @@
+console.log(this)
+window.addEventListener('message', function(event) {
+  console.log(event.data)
+})
+
 const SPREADSHEET_ID = '18X_ICu7g2BxeVdPBFohbmdoApNFzJoY7DiTqCW934Ts'
 var defense_system = window.top.document.title
   .replace(' | Defense360', '')
