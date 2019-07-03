@@ -172,9 +172,7 @@ function callChart(defense_system) {
       ],
 
       tooltip: {
-        headerFormat:
-          '<span style="font-size: 13px;text-align:center;margin-bottom: 5px;font-weight: bold;font-family: \'Roboto\', arial, sans-serif;">FY{point.key}</span><br/>',
-
+        headerFormat: '',
         useHTML: true,
         shared: false,
         pointFormatter: pointFormatter
@@ -202,13 +200,32 @@ function callChart(defense_system) {
   }
 
   function pointFormatter() {
-    var toolTipData = this.series.userOptions.tooltipData
-      ? this.series.userOptions.tooltipData[this.index]
-      : null
+    var table = '<table>'
 
-    return (
-      '<strong>' + this.series.name + ':</strong> ' + getReduceSigFigs(this.y)
-    )
+    table += '<thead>'
+    table += '<tr>'
+    table += '<th colspan="2">FY' + this.x + '</th>'
+    table += '</tr>'
+    table += '</thead>'
+    table += '<tbody>'
+    table += '<tr>'
+    table +=
+      '<td style="background-color:rgba(' +
+      hexToRgb(this.series.color) +
+      ',.825)">' +
+      this.series.name +
+      '</td>'
+    table +=
+      '<td style="background-color:rgba(' +
+      hexToRgb(this.series.color) +
+      ',.25)">' +
+      getReduceSigFigs(this.y) +
+      '</td>'
+    table += '</tr>'
+    table += '</tbody>'
+    table += '</table>'
+
+    return table
   }
 
   function complete(d) {
@@ -249,7 +266,7 @@ function callChart(defense_system) {
       s.type = specialSeries(s) ? 'spline' : 'column'
       s.yAxis = specialSeries(s) ? 1 : 0
       s.color = specialSeries(s)
-        ? 'black'
+        ? '#000000'
         : Highcharts.getOptions().colors.slice(1)[i]
       s.zoneAxis = 'x'
 
@@ -263,6 +280,18 @@ function callChart(defense_system) {
 
   function specialSeries(s) {
     return s.name.toLowerCase().indexOf('quantity') > -1
+  }
+
+  function hexToRgb(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    result = result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        }
+      : null
+    return result ? result.r + ',' + result.g + ',' + result.b : null
   }
 
   function getReduceSigFigs(value) {

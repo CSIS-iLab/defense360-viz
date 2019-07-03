@@ -10,6 +10,54 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
 
     <style>
+
+      table {
+        margin: 0;
+        border-collapse: collapse;
+      }
+
+      th {
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        color: black;
+        padding: 0 0 6px 0;
+      }
+
+     td {
+        font-weight: bold;
+        padding: 6px;
+        font-size: 13px;
+        white-space: nowrap;
+        width: 50%;
+        border-bottom: 4px solid white;
+
+      }
+
+      tbody td:first-of-type {
+        border-right: 2px solid white;
+        color: white;
+        letter-spacing: .75px;
+      }
+
+      tbody td:last-of-type {
+         color: black;
+      }
+
+      tfoot td:first-of-type {
+        border-right: 2px solid white;
+      }
+
+      tfoot td {
+         color: white;
+      }
+
+      .highcharts-label-box.highcharts-tooltip-box {
+          fill: white;
+          stroke: $color-black;
+      }
+
     .select-container{
       display:block;
       border: 2px solid #e7e7e7;
