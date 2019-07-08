@@ -15,7 +15,7 @@ function callChart(defense_system) {
   gapi.load('client', function() {
     gapi.client
       .init({
-        apiKey: 'AIzaSyA1ol27C1FVv-F6940xNXY-VImb5ZCE3JE',
+        apiKey: 'AIzaSyBukM0ddC8qPCIJvhE3ZXyDMnXRELLTb8k',
         scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
         discoveryDocs: [
           'https://sheets.googleapis.com/$discovery/rest?version=v4'
