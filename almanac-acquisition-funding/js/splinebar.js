@@ -90,7 +90,8 @@ function callChart(defense_system) {
             document.querySelector('.highcharts-title').innerText =
               sheetData.title
 
-            document.querySelector('.highcharts-root').clientHeight + 150
+            var bodyHeight =
+              document.querySelector('.highcharts-root').clientHeight + 150
 
             window.parent.postMessage(bodyHeight, '*')
           }
