@@ -89,6 +89,9 @@ function callChart(defense_system) {
           load: function() {
             document.querySelector('.highcharts-title').innerText =
               sheetData.title
+            var bodyHeight = document.body.scrollHeight + 20
+
+            window.parent.postMessage(bodyHeight, '*')
           }
         }
       },
