@@ -1,12 +1,16 @@
 window.addEventListener('message', function(event) {
+  // get defense system name from page title via postMessage api in onload event on iframe
   if (event.origin.indexOf('google') > -1) return
-  console.log(event.data)
   var defense_system = event.data
     .replace(' | Defense360', '')
     .replace(/(_|%20)/g, ' ')
 
   callChart(defense_system)
 })
+
+function convertNumType(v) {
+  return parseInt(v, 10) ? v * 1000000 : v
+}
 
 function callChart(defense_system) {
   const SPREADSHEET_ID = '18X_ICu7g2BxeVdPBFohbmdoApNFzJoY7DiTqCW934Ts'
@@ -44,7 +48,7 @@ function callChart(defense_system) {
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return isNaN(v) ? v : v * 1000000
+                        return convertNumType(v)
                       })
                     }),
                   ...sheet.result.values.slice(6).filter(function(r) {
@@ -60,7 +64,7 @@ function callChart(defense_system) {
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return isNaN(v) ? v : v * 1000000
+                        return convertNumType(v)
                       })
                     }),
                   ...sheet.result.values.slice(6).filter(function(r) {

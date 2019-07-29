@@ -1,4 +1,5 @@
 window.addEventListener('message', function(event) {
+  // get defense system name from page title via postMessage api in onload event on iframe
   if (event.origin.indexOf('google') > -1) return
   console.log(event.data)
   var defense_system = event.data
@@ -7,6 +8,10 @@ window.addEventListener('message', function(event) {
 
   callChart(defense_system)
 })
+
+function convertNumType(v) {
+  return parseInt(v, 10) ? v * 1000000 : v
+}
 
 function callChart(defense_system) {
   const SPREADSHEET_ID = '123BpzTEYtesF2LI0VA_0ial9mQx4dlek9hoM3GRjwas'
@@ -43,7 +48,7 @@ function callChart(defense_system) {
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return isNaN(v) ? v : v * 1000000
+                        return convertNumType(v)
                       })
                     }),
                   sheet.result.values
@@ -51,7 +56,7 @@ function callChart(defense_system) {
                       return r[0].toLowerCase().indexOf('actual') > -1
                     })
                     .map(function(v) {
-                      return parseInt(v, 10) ? v * 1000000 : v
+                      return convertNumType(v)
                     })
                 ],
                 constant: [
@@ -63,7 +68,7 @@ function callChart(defense_system) {
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return isNaN(v) ? v : v * 1000000
+                        return convertNumType(v)
                       })
                     }),
                   sheet.result.values
@@ -71,7 +76,7 @@ function callChart(defense_system) {
                       return r[0].toLowerCase().indexOf('actual') > -1
                     })
                     .map(function(v) {
-                      return parseInt(v, 10) ? v * 1000000 : v
+                      return convertNumType(v)
                     })
                 ]
               }

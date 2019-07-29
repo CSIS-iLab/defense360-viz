@@ -1,6 +1,6 @@
 window.addEventListener('message', function(event) {
+  // get defense system name from page title via postMessage api in onload event on iframe
   if (event.origin.indexOf('google') > -1) return
-  console.log(event.data)
   var defense_system = event.data
     .replace(' | Defense360', '')
     .replace(/(_|%20)/g, ' ')
