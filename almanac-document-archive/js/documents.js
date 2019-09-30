@@ -1,6 +1,10 @@
 window.addEventListener("message", function(event) {
   // get defense system name from page title via postMessage api in onload event on iframe
-  if (event.origin.indexOf("google") > -1) return;
+  if (
+    event.origin.indexOf("google") > -1 ||
+    event.data.indexOf("document-archive") > -1
+  )
+    return;
   callChart(event.data);
 });
 

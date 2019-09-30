@@ -11,7 +11,6 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600"
       rel="stylesheet"
     />
-
     <style>
       table {
         margin: 0;
@@ -23,7 +22,7 @@
         font-size: 16px;
         text-align: center;
         text-transform: uppercase;
-        color: black;
+        color: #000;
         padding: 0 0 6px 0;
       }
 
@@ -33,29 +32,29 @@
         font-size: 13px;
         white-space: nowrap;
         width: 50%;
-        border-bottom: 4px solid white;
+        border-bottom: 4px solid #fff;
       }
 
       tbody td:first-of-type {
-        border-right: 2px solid white;
+        border-right: 2px solid #fff;
         letter-spacing: 0.75px;
       }
 
       tbody td {
-        color: black;
+        color: #000;
       }
 
       tfoot td:first-of-type {
-        border-right: 2px solid white;
+        border-right: 2px solid #fff;
       }
 
       tfoot td {
-        color: black;
+        color: #000;
       }
 
       .highcharts-label-box.highcharts-tooltip-box {
-        fill: white;
-        stroke: $color-black;
+        fill: #fff;
+        stroke: #000;
       }
 
       .select-container {
@@ -77,10 +76,11 @@
       }
 
       .highcharts-title {
-        text-align: center;
         color: #000;
-        font-size: 25px;
-        font-weight: 400;
+        font-family: "source-sans-pro", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
       }
     </style>
   </head>
@@ -89,8 +89,8 @@
 
     <div class="select-container">
       <select>
+        <option value="Constant" selected>Constant</option>
         <option value="Current">Current</option>
-        <option selected value="Constant">Constant</option>
       </select>
     </div>
 
@@ -101,9 +101,8 @@
       type="text/javascript"
     ></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/6.0.7/modules/data.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
-    <!-- Include iFrame Resizer -->
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://csis-ilab.github.io/defense360-viz/globals/iframeSizer.contentWindow.min.js"></script>
     <!-- Include Defense360 Highcharts Theme -->
     <script src="https://csis-ilab.github.io/defense360-viz/globals/defense360-highcharts-theme.js"></script>

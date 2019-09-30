@@ -7,7 +7,7 @@
   </head>
   <body>
 
-    <!-- Iframe includes onload attribute in order to employ the postMessage api and send the page title to the project javascript file. The project javascript (attached in datatables.html) uses the Google API to fetch a sheet in a Google Workbook. The page title must match a sheet in the workbook. The iframe height is also set onload based on the body height of datables.html once the table is loaded. -->
+    <!-- Iframe includes onload attribute in order to employ the postMessage api and send the page title to the project javascript file. The project javascript (attached in datatables.html) uses the Google API to fetch a sheet in a Google Workbook. The page title must match a sheet in the workbook. -->
     <iframe id="document-archive" width="100%" height="450" class="js-iframeResizeEnabled" src="datatables.html" frameborder="0" onload="document.querySelector('#document-archive').contentWindow.postMessage(document.title,'*')"></iframe>
   </body>
 </html>

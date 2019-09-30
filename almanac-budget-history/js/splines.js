@@ -1,29 +1,28 @@
-window.addEventListener('message', function(event) {
+window.addEventListener("message", function(event) {
   // get defense system name from page title via postMessage api in onload event on iframe
-  if (event.origin.indexOf('google') > -1) return
-  console.log(event.data)
-  var defense_system = event.data
-    .replace(' | Defense360', '')
-    .replace(/(_|%20)/g, ' ')
-
-  callChart(defense_system)
-})
+  if (
+    event.origin.indexOf("google") > -1 ||
+    event.data.indexOf("budget-history") > -1
+  )
+    return;
+  callChart(event.data);
+});
 
 function convertNumType(v) {
-  return parseInt(v, 10) ? v * 1000000 : v
+  return parseInt(v, 10) ? v * 1000000 : v;
 }
 
 function callChart(defense_system) {
-  const SPREADSHEET_ID = '123BpzTEYtesF2LI0VA_0ial9mQx4dlek9hoM3GRjwas'
+  const SPREADSHEET_ID = "123BpzTEYtesF2LI0VA_0ial9mQx4dlek9hoM3GRjwas";
 
-  var chart
-  gapi.load('client', function() {
+  var chart;
+  gapi.load("client", function() {
     gapi.client
       .init({
-        apiKey: 'AIzaSyBukM0ddC8qPCIJvhE3ZXyDMnXRELLTb8k',
-        scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+        apiKey: "AIzaSyBukM0ddC8qPCIJvhE3ZXyDMnXRELLTb8k",
+        scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
         discoveryDocs: [
-          'https://sheets.googleapis.com/$discovery/rest?version=v4'
+          "https://sheets.googleapis.com/$discovery/rest?version=v4"
         ]
       })
       .then(function() {
@@ -44,19 +43,19 @@ function callChart(defense_system) {
                   ...sheet.result.values
                     .slice(5)
                     .filter(function(r) {
-                      return r[0].toLowerCase().indexOf('current') > -1
+                      return r[0].toLowerCase().indexOf("current") > -1;
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return convertNumType(v)
-                      })
+                        return convertNumType(v);
+                      });
                     }),
                   sheet.result.values
                     .find(function(r) {
-                      return r[0].toLowerCase().indexOf('actual') > -1
+                      return r[0].toLowerCase().indexOf("actual") > -1;
                     })
                     .map(function(v) {
-                      return convertNumType(v)
+                      return convertNumType(v);
                     })
                 ],
                 constant: [
@@ -64,55 +63,49 @@ function callChart(defense_system) {
                   ...sheet.result.values
                     .slice(5)
                     .filter(function(r) {
-                      return r[0].toLowerCase().indexOf('constant') > -1
+                      return r[0].toLowerCase().indexOf("constant") > -1;
                     })
                     .map(function(r) {
                       return r.map(function(v) {
-                        return convertNumType(v)
-                      })
+                        return convertNumType(v);
+                      });
                     }),
                   sheet.result.values
                     .find(function(r) {
-                      return r[0].toLowerCase().indexOf('actual') > -1
+                      return r[0].toLowerCase().indexOf("actual") > -1;
                     })
                     .map(function(v) {
-                      return convertNumType(v)
+                      return convertNumType(v);
                     })
                 ]
               }
-            }
-            renderChart(sheetData, 'constant')
+            };
+            renderChart(sheetData, "constant");
 
             document
-              .querySelector('select')
-              .addEventListener('change', function() {
-                currentType = this.value.toLowerCase()
-                chart.destroy()
-                renderChart(sheetData, currentType)
-              })
-          })
-      })
-  })
+              .querySelector("select")
+              .addEventListener("change", function() {
+                currentType = this.value.toLowerCase();
+                chart.destroy();
+                renderChart(sheetData, currentType);
+              });
+          });
+      });
+  });
 
   function renderChart(sheetData, type) {
-    chart = Highcharts.chart('hcContainer', {
+    chart = Highcharts.chart("hcContainer", {
       chart: {
-        type: 'spline',
+        type: "spline",
         events: {
           load: function() {
-            document.querySelector('.highcharts-title').innerText =
-              sheetData.title
-          },
-          render: function() {
-            var bodyHeight =
-              document.querySelector('.highcharts-root').clientHeight + 150
-
-            window.parent.postMessage(bodyHeight, '*')
+            document.querySelector(".highcharts-title").innerText =
+              sheetData.title;
           }
         }
       },
       title: {
-        text: ''
+        text: ""
       },
       subtitle: {
         text: sheetData.subtitle
@@ -121,9 +114,9 @@ function callChart(defense_system) {
         switchRowsAndColumns: true,
         csv: sheetData.rows[type]
           .map(function(r) {
-            return r.join(',')
+            return r.join(",");
           })
-          .join('\n'),
+          .join("\n"),
         complete: complete
       },
 
@@ -133,14 +126,14 @@ function callChart(defense_system) {
       },
       xAxis: {
         title: {
-          text: 'Year'
+          text: "Year"
         },
         labels: {
           rotation: -90,
           formatter: function() {
-            var yearStr = this.value.toString()
-            var twoDigitsYear = yearStr.slice(2)
-            return 'FY' + twoDigitsYear
+            var yearStr = this.value.toString();
+            var twoDigitsYear = yearStr.slice(2);
+            return "FY" + twoDigitsYear;
           }
         },
         tickInterval: 1,
@@ -156,207 +149,209 @@ function callChart(defense_system) {
         labels: {
           x: -3,
           formatter: function() {
-            return this.value ? getReduceSigFigs(this.value) : this.value
+            return this.value ? getReduceSigFigs(this.value) : this.value;
           }
         }
       },
       tooltip: {
-        headerFormat: '',
+        headerFormat: "",
 
         useHTML: true,
         shared: false,
         pointFormatter: pointFormatter
       },
       legend: {
-        align: 'center',
-        verticalAlign: 'bottom',
-        layout: 'horizontal',
+        align: "center",
+        verticalAlign: "bottom",
+        layout: "horizontal",
         itemStyle: {
           textOverflow: null
         },
         labelFormatter: function() {
-          return this.name.replace("President's Budget", 'PB')
+          return this.name.replace("President's Budget", "PB");
         }
       },
       plotOptions: {
         spline: {
           marker: {
             enabled: false,
-            symbol: 'circle'
+            symbol: "circle"
           }
         }
       }
-    })
+    });
   }
 
   function pointFormatter() {
     var toolTipData = this.series.userOptions.tooltipData
       ? this.series.userOptions.tooltipData[this.index]
-      : null
+      : null;
 
-    var table = '<table>'
+    var table = "<table>";
 
-    table += '<thead>'
-    table += '<tr>'
-    table += '<th colspan="2">' + this.x + '</th>'
-    table += '</tr>'
-    table += '<tr>'
-    table += '<th colspan="2">' + this.series.name + '</th>'
-    table += '</tr>'
-    table += '</thead>'
-    table += '<tbody>'
+    table += "<thead>";
+    table += "<tr>";
+    table += '<th colspan="2">' + this.x + "</th>";
+    table += "</tr>";
+    table += "<tr>";
+    table += '<th colspan="2">' + this.series.name + "</th>";
+    table += "</tr>";
+    table += "</thead>";
+    table += "<tbody>";
 
     if (toolTipData) {
-      table += '<tr >'
+      table += "<tr >";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.25)">' +
         toolTipData[1][0].name +
-        '</td>'
+        "</td>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.125)">' +
         getReduceSigFigs(toolTipData[1][0].data) +
-        '</td>'
-      table += '</tr>'
-      table += '<tr>'
+        "</td>";
+      table += "</tr>";
+      table += "<tr>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.25)">' +
         toolTipData[1][1].name +
-        '</td>'
+        "</td>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.125)">' +
         getReduceSigFigs(toolTipData[1][1].data) +
-        '</td>'
-      table += '</tr>'
+        "</td>";
+      table += "</tr>";
 
-      table += '<tfoot>'
-      table += '<tr>'
+      table += "<tfoot>";
+      table += "<tr>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
-        ',1)">TOTAL</td>'
+        ',1)">TOTAL</td>';
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',1)">' +
         getReduceSigFigs(toolTipData[1][0].data + toolTipData[1][1].data) +
-        '</td>'
+        "</td>";
 
-      table += '</tr>'
-      table += '</tfoot>'
+      table += "</tr>";
+      table += "</tfoot>";
     } else {
-      table += '<tr>'
+      table += "<tr>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.25)">' +
         this.series.name +
-        '</td>'
+        "</td>";
       table +=
         '<td style="background-color:rgba(' +
         hexToRgb(this.series.color) +
         ',.125)">' +
         getReduceSigFigs(this.y) +
-        '</td>'
-      table += '</tr>'
+        "</td>";
+      table += "</tr>";
     }
 
-    table += '</table>'
-    return table
+    table += "</table>";
+    return table;
   }
 
   function complete(d) {
     var newSeries = d.series
       .filter(function(s) {
-        return !specialSeries(s)
+        return !specialSeries(s);
       })
       .reduce(function(total, obj) {
-        var year = obj.name.split(' ')[1]
-        var name = "President's Budget " + year
+        var year = obj.name.split(" ")[1];
+        var name = "President's Budget " + year;
 
         var series = total.find(function(s) {
-          return s.name === name
-        })
+          return s.name === name;
+        });
 
         if (!series) {
           total.push({
             name: name,
             data: obj.data.map(function(d) {
-              return [d[0], d[1] ? 0 : undefined]
+              return [d[0], d[1] ? 0 : undefined];
             }),
             tooltipData: obj.data.map(function(d) {
-              return [d[0], []]
+              return [d[0], []];
             })
-          })
+          });
           series = total.find(function(s) {
-            return s.name === name
-          })
+            return s.name === name;
+          });
         }
 
         series.data = series.data.map(function(d, i) {
           if (series.tooltipData[i][1]) {
             series.tooltipData[i][1].push({
-              name: obj.name.replace('PB ' + year, ''),
+              name: obj.name.replace("PB " + year, ""),
               data: obj.data[i][1]
-            })
+            });
           } else {
-            series.tooltipData[i][1] = []
+            series.tooltipData[i][1] = [];
           }
 
-          return [d[0], (d[1] += obj.data[i][1])]
-        })
+          return [d[0], (d[1] += obj.data[i][1])];
+        });
 
-        return total
-      }, [])
+        return total;
+      }, []);
 
     var actualSeries = d.series.find(function(s) {
-      return specialSeries(s)
-    })
+      return specialSeries(s);
+    });
 
-    newSeries.push({ ...actualSeries })
+    newSeries.push({ ...actualSeries });
     newSeries.forEach(function(s, i) {
-      s.color = specialSeries(s) ? '#000000' : Highcharts.getOptions().colors[i]
-      s.dashStyle = specialSeries(s) ? 'Solid' : 'ShortDash'
-    })
+      s.color = specialSeries(s)
+        ? "#000000"
+        : Highcharts.getOptions().colors[i];
+      s.dashStyle = specialSeries(s) ? "Solid" : "ShortDash";
+    });
 
-    d.series = newSeries
+    d.series = newSeries;
   }
 
   function specialSeries(s) {
-    return s.name.toLowerCase().indexOf('actual') > -1
+    return s.name.toLowerCase().indexOf("actual") > -1;
   }
 
   function hexToRgb(hex) {
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     result = result
       ? {
           r: parseInt(result[1], 16),
           g: parseInt(result[2], 16),
           b: parseInt(result[3], 16)
         }
-      : null
-    return result ? result.r + ',' + result.g + ',' + result.b : null
+      : null;
+    return result ? result.r + "," + result.g + "," + result.b : null;
   }
 
   function getReduceSigFigs(value) {
     switch (true) {
       case value >= 1000000000:
-        return '$' + Math.round((value / 1000000000) * 10) / 10 + 'B'
+        return "$" + Math.round((value / 1000000000) * 10) / 10 + "B";
       case value >= 1000000 && value < 1000000000:
-        return '$' + Math.round((value / 1000000) * 10) / 10 + 'M'
+        return "$" + Math.round((value / 1000000) * 10) / 10 + "M";
 
       case value < 1000000:
-        return '$' + Math.round((value / 1000000000) * 10) / 10 + 'K'
+        return "$" + Math.round((value / 1000000000) * 10) / 10 + "K";
 
       default:
-        return '$' + value
+        return "$" + value;
     }
   }
 }

@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>KC-46A Tanker | Defense360</title>
+    <title>KC-46A Tanker</title>
   </head>
   <body>
 
-    <!-- Iframe includes onload attribute in order to employ the postMessage api and send the page title to the project javascript file. The project javascript (attached in highcharts.html) uses the Google API to fetch a sheet in a Google Workbook. The page title must match a sheet in the workbook. The iframe height is also set onload based on the body height of highcharts.html once the chart is rendered. -->
-    <iframe id="acquisition-funding" width="100%"src="highcharts.html" frameborder="0" onload="window.addEventListener('message',function(event){document.querySelector('#acquisition-funding').height=event.data});document.querySelector('#acquisition-funding').contentWindow.postMessage(document.title,'*')"/>
+    <!-- Iframe includes onload attribute in order to employ the postMessage api and send the page title to the project javascript file. The project javascript (attached in highcharts.html) uses the Google API to fetch a sheet in a Google Workbook. The page title must match a sheet in the workbook. -->
+    <iframe id="acquisition-funding" width="100%"src="highcharts.html" frameborder="0" onload="document.querySelector('#acquisition-funding').contentWindow.postMessage(document.title,'*')"/>
 
 
   </body>
