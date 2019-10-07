@@ -146,12 +146,12 @@ function callChart(defense_system) {
             margin: 10,
             x: -15,
             style: {
-              color: Highcharts.getOptions().colors[1]
+              color: "black"
             }
           },
           labels: {
             style: {
-              color: Highcharts.getOptions().colors[1]
+              color: "black"
             },
             x: -3,
             formatter: function() {
