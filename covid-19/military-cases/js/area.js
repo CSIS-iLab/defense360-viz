@@ -4,7 +4,8 @@ $(function () {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 2
+      googleSpreadsheetWorksheet: 2,
+      dateFormat: 'mm/dd/YYYY'
     },
     // General Chart Options
     chart: {
@@ -12,7 +13,7 @@ $(function () {
       type: 'area'
     },
     // Colors
-    colors: ['#96B586', '#365F5A', '#83373E', '#3E8E9D', '#D05F4C'],
+    colors: ['#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C'],
     // Chart Title and Subtitle
     title: {
       text: "Active Military Cases of COVID-19"
@@ -32,25 +33,26 @@ $(function () {
       verticalAlign: 'bottom',
       layout: 'horizontal'
     },
+    // xAxis
+    xAxis: {
+      dateTimeLabelFormats: {
+        day: '%e-%b'
+      }
+    },
     // Y Axis
     yAxis: {
       title: {
         text: "Number of Cases"
       },
-      reversedStacks: false
     },
     // Tooltip
     tooltip: {
       useHTML: true,
       formatter: function () {
-        // Convert unix timestamp to javascript date
         var dateObj = new Date(this.x);
-        // Remove time portion of date
-        var date = dateObj.toDateString();
-        // Convert date to array
-        var dateArray = date.split(" ");
-        // Create variable showing month and year
-        var formattedDate = dateArray[1] + " " + dateArray[2] + ", " + dateArray[3];
+        const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
+        var formattedDate = `${mo} ${da}, ${ye}`
 
         let total = 0
         let lines = this.points.map((point, i) => {

@@ -32,6 +32,12 @@ $(function () {
       verticalAlign: 'bottom',
       layout: 'horizontal'
     },
+    // xAxis
+    xAxis: {
+      dateTimeLabelFormats: {
+        day: '%e-%b'
+      }
+    },
     // Y Axis
     yAxis: {
       title: {
@@ -42,14 +48,10 @@ $(function () {
     tooltip: {
       useHTML: true,
       formatter: function () {
-        // Convert unix timestamp to javascript date
         var dateObj = new Date(this.x);
-        // Remove time portion of date
-        var date = dateObj.toDateString();
-        // Convert date to array
-        var dateArray = date.split(" ");
-        // Create variable showing month and year
-        var formattedDate = dateArray[1] + " " + dateArray[2] + ", " + dateArray[3];
+        const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
+        var formattedDate = `${mo} ${da}, ${ye}`
 
         let total = 0
         let lines = this.points.map((point, i) => {
@@ -71,6 +73,41 @@ $(function () {
         },
         lineWidth: 3
       }
-    }
+    },
+    annotations: [{
+      labels: [{
+        useHTML: true,
+        point: {
+          x: 110,
+          y: 55
+        },
+        style: {
+          fontSize: '13px'
+        },
+        shape: 'rect',
+        overflow: 'none',
+        formatter: function () {
+          console.log(this.series.chart.series)
+          let total = 0
+          let s = this.series.chart.series
+          s.forEach((serie, i) => {
+            console.log(serie)
+            total += serie.points[serie.points.length - 1].y
+          })
+          let secDate = s[0].points[s[0].points.length - 1].x
+          var dateObj = new Date(secDate);
+          const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })
+          const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
+          var formattedDate = `${mo}/${da}/${ye}`
+          return 'Total Cases as of ' + formattedDate + ': <b>' + total + '</b>'
+        }
+      }],
+      labelOptions: {
+        borderRadius: 1,
+        backgroundColor: '#f5f5f5',
+        borderWidth: 1,
+        borderColor: '#AAA'
+      }
+    }]
   });
 });
