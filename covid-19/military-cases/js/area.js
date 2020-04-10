@@ -4,18 +4,18 @@ $(function () {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 3
+      googleSpreadsheetWorksheet: 2
     },
     // General Chart Options
     chart: {
       zoomType: 'x',
-      type: 'spline'
+      type: 'area'
     },
     // Colors
-    colors: ['#75657A', '#3E8E9D', '#DDB460'],
+    colors: ['#96B586', '#365F5A', '#83373E', '#3E8E9D', '#D05F4C'],
     // Chart Title and Subtitle
     title: {
-      text: "Total DoD Cases of COVID-19"
+      text: "Active Military Cases of COVID-19"
     },
     subtitle: {
       text: "Click and drag to zoom in"
@@ -36,7 +36,8 @@ $(function () {
     yAxis: {
       title: {
         text: "Number of Cases"
-      }
+      },
+      reversedStacks: false
     },
     // Tooltip
     tooltip: {
@@ -56,19 +57,18 @@ $(function () {
           total += point.y
           return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + point.y + '</b></br>'
         })
-        return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total DoD Cases: <b>' + total + '</b>'
+        return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total Active Cases: <b>' + total + '</b>'
       },
-      shared: true
+      shared: true,
     },
     // Additional Plot Options
     plotOptions:
     {
-      spline: {
+      area: {
         marker: {
           enabled: false,
-          symbol: "circle",
-          radius: 3
         },
+        stacking: 'normal',
         lineWidth: 3
       }
     }

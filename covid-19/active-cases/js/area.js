@@ -4,7 +4,7 @@ $(function () {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 2
+      googleSpreadsheetWorksheet: 1
     },
     // General Chart Options
     chart: {
