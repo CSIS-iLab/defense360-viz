@@ -15,7 +15,7 @@ $(function () {
     colors: ['#365F5A', '#83373E', '#D05F4C', '#96B586'],
     // Chart Title and Subtitle
     title: {
-      text: "Active DoD Cases of COVID-19"
+      text: "Active DoD Cases of Covid-19"
     },
     subtitle: {
       text: "Click and drag to zoom in"
@@ -24,7 +24,7 @@ $(function () {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      text: "CSIS Defense360 | Source: DoD Covid-19 Updates"
     },
     // Chart Legend
     legend: {
@@ -43,7 +43,12 @@ $(function () {
       title: {
         text: "Number of Cases"
       },
-      reversedStacks: false
+      reversedStacks: false,
+      labels: {
+        formatter: function () {
+          return Highcharts.numberFormat(this.value, 0, '.', ',')
+        }
+      }
     },
     // Tooltip
     tooltip: {

@@ -20,7 +20,7 @@ $(function () {
     colors: ['#3E8E9D'],
     // Chart Title and Subtitle
     title: {
-      text: "National Guard Activations"
+      text: "National Guard Activiations in Response to Covid-19"
     },
     subtitle: {
       text: "Click and drag to zoom in"
@@ -29,7 +29,7 @@ $(function () {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: NAME"
+      text: "CSIS Defense360 | Source: DoD Covid-19 Updates"
     },
     // Chart Legend
     legend: {
@@ -45,6 +45,11 @@ $(function () {
     yAxis: {
       title: {
         text: "Number of Activations"
+      },
+      labels: {
+        formatter: function () {
+          return Highcharts.numberFormat(this.value, 0, '.', ',')
+        }
       }
     },
     // Tooltip
