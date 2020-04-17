@@ -40,7 +40,8 @@ $(function () {
     xAxis: {
       type: 'datetime',
       dateTimeLabelFormats: {
-        day: '%e-%b'
+        day: '%e-%b',
+        week: '%e-%b'
       }
     },
     // Y Axis
