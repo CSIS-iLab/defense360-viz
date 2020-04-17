@@ -20,7 +20,7 @@ $(function () {
     colors: ['#3E8E9D'],
     // Chart Title and Subtitle
     title: {
-      text: "National Guard Activiations in Response to Covid-19"
+      text: "National Guard Activations in Response to Covid-19"
     },
     subtitle: {
       text: "Click and drag to zoom in"
