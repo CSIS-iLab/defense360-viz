@@ -37,6 +37,7 @@ $(function () {
     },
     // xAxis
     xAxis: {
+      type: 'datetime',
       dateTimeLabelFormats: {
         day: '%e-%b'
       }
