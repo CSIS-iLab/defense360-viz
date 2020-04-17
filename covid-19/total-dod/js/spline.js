@@ -7,7 +7,8 @@ Highcharts.chart("hcContainer", {
   // Load Data in from Google Sheets
   data: {
     googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-    googleSpreadsheetWorksheet: 3
+    googleSpreadsheetWorksheet: 3,
+    dateFormat: 'mm/dd/YYYY'
   },
   // General Chart Options
   chart: {
