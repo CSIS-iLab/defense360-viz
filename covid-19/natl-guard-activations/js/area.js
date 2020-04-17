@@ -55,25 +55,6 @@ $(function () {
     // Tooltip
     tooltip: {
       xDateFormat: '%b %e, %Y'
-      // useHTML: true,
-      // formatter: function () {
-      //   // Convert unix timestamp to javascript date
-      //   var dateObj = new Date(this.x);
-      //   // Remove time portion of date
-      //   var date = dateObj.toDateString();
-      //   // Convert date to array
-      //   var dateArray = date.split(" ");
-      //   // Create variable showing month and year
-      //   var formattedDate = dateArray[1] + " " + dateArray[2] + ", " + dateArray[3];
-
-      //   let total = 0
-      //   let lines = this.points.map((point, i) => {
-      //     total += point.y
-      //     return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>{point.y:,.0f}</b></br>'
-      //   })
-      //   return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total Active Cases: <b>' + total + '</b>'
-      // },
-      // shared: true,
     },
     // Additional Plot Options
     plotOptions:

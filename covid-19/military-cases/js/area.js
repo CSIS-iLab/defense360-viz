@@ -54,7 +54,8 @@ $(function () {
     tooltip: {
       useHTML: true,
       formatter: function () {
-        var dateObj = new Date(this.x);
+        var gmtDate = new Date(this.x)
+        let dateObj = new Date(gmtDate.getTime() - gmtDate.getTimezoneOffset() * -60000)
         const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
         const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
         var formattedDate = `${mo} ${da}, ${ye}`

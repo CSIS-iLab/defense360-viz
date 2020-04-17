@@ -54,20 +54,6 @@ Highcharts.chart("hcContainer", {
   },
   // Tooltip
   tooltip: {
-    // useHTML: true,
-    // formatter: function () {
-    //   var dateObj = new Date(this.x);
-    //   const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-    //   const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
-    //   var formattedDate = `${mo} ${da}, ${ye}`
-
-    //   let total = 0
-    //   let lines = this.points.map((point, i) => {
-    //     total += point.y
-    //     return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + point.y + '</b></br>'
-    //   })
-    //   return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total DoD Cases: <b>' + total + '</b>'
-    // },
     shared: true,
     xDateFormat: '%b %e, %Y'
   },
