@@ -37,6 +37,7 @@ Highcharts.chart("hcContainer", {
   },
   // xAxis
   xAxis: {
+    type: 'datetime',
     dateTimeLabelFormats: {
       day: '%e-%b'
     }
@@ -90,10 +91,11 @@ Highcharts.chart("hcContainer", {
         //   total += serie.points[serie.points.length - 1].y
         // })
         let secDate = s[0].points[s[0].points.length - 1].x
-        var dateObj = new Date(secDate);
+        let gmtDate = new Date(secDate)
+        let dateObj = new Date(gmtDate.getTime() - gmtDate.getTimezoneOffset() * -60000)
         const dtf = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })
         const [{ value: mo }, , { value: da }, , { value: ye }] = dtf.formatToParts(dateObj)
-        var formattedDate = `${mo}/${da}/${ye}`
+        let formattedDate = `${mo}/${da}/${ye}`
         return 'Total Cases as of ' + formattedDate + ': <b>' + Highcharts.numberFormat(total, 0, '.', ',') + '</b>'
       }
     }],
