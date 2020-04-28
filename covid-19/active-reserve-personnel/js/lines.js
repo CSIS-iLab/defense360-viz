@@ -12,7 +12,7 @@ $(function() {
     },
     // Chart Title and Subtitle
     title: {
-      text: "Interactive Title"
+      text: "Active and Reserve Personnel in COVID-19 Response"
     },
     subtitle: {
       text: "Click and drag to zoom in"
