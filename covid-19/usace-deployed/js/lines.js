@@ -50,13 +50,15 @@ $(function() {
         formatter: function() {
             return Highcharts.numberFormat(this.value, 0, '.', ',');
         }
-      }
+      },
+      tickInterval: 500
     },
     xAxis: {
       dateTimeLabelFormats: {
         day: '%b %e',
         week: '%b %e'
-      }
+      },
+      tickInterval: 1
     },
     // Tooltip
     tooltip: {
