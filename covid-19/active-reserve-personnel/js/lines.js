@@ -36,7 +36,6 @@ $(function() {
       }
     },
     // Tooltip
-    
     tooltip: {
         shared: true,
         useHTML: true,
