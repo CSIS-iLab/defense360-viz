@@ -35,6 +35,11 @@ $(function() {
         text: "Number of Personnel"
       }
     },
+    xAxis: {
+      dateTimeLabelFormats: {
+        day: '%b %e'
+      }
+    },
     // Tooltip
     tooltip: {
         shared: true,
