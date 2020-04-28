@@ -32,7 +32,7 @@ $(function() {
     // Y Axis
     yAxis: {
       title: {
-        text: "Y Axis Title"
+        text: "Number of Personnel"
       }
     },
     // Tooltip
