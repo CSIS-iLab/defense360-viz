@@ -1,3 +1,9 @@
+Highcharts.setOptions({
+  lang: {
+      numericSymbols: null 
+  }
+});
+
 $(function() {
   $('#hcContainer').highcharts({
     // Load Data in from Google Sheets
