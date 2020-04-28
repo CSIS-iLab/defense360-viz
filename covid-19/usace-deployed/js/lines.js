@@ -24,7 +24,7 @@ $(function() {
     ],
     // Chart Title and Subtitle
     title: {
-      text: "Active and Reserve Personnel in COVID-19 Response"
+      text: "Army Corps of Engineers Personnel Deployed"
     },
     subtitle: {
       text: "Click and drag to zoom in"
