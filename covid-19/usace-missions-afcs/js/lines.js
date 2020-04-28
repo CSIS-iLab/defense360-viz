@@ -22,7 +22,7 @@ $(function() {
     ],
     // Chart Title and Subtitle
     title: {
-      text: "Army Corps of Engineers Personnel Deployed"
+      text: "Army Corps of Engineers Missions and AFCs"
     },
     subtitle: {
       text: "Click and drag to zoom in"
