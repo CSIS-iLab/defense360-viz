@@ -9,7 +9,7 @@ $(function() {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1OzJwZ8wTlflcKsb_yKfmGchhkAzUkQ-fexGwY-c-sAk',
-      googleSpreadsheetWorksheet: 2
+      googleSpreadsheetWorksheet: 3
     },
     // General Chart Options
     chart: {
@@ -49,8 +49,7 @@ $(function() {
         formatter: function() {
             return Highcharts.numberFormat(this.value, 0, '.', ',');
         }
-      },
-      tickInterval: 500
+      }
     },
     xAxis: {
       dateTimeLabelFormats: {
