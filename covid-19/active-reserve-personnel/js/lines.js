@@ -16,6 +16,12 @@ $(function() {
       zoomType: 'x',
       type: 'line'
     },
+    // Colors
+    colors: [
+      '#83373E',
+      '#365F5A'
+      
+    ],
     // Chart Title and Subtitle
     title: {
       text: "Active and Reserve Personnel in COVID-19 Response"
