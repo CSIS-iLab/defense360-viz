@@ -55,8 +55,7 @@ $(function() {
       dateTimeLabelFormats: {
         day: '%b %e',
         week: '%b %e'
-      },
-      tickInterval: 1
+      }
     },
     // Tooltip
     tooltip: {
