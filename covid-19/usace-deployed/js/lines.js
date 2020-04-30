@@ -42,7 +42,7 @@ $(function() {
     // Y Axis
     yAxis: {
       title: {
-        text: "Number of Personnel"
+        text: "Number of Missions and AFC Contracts"
       },
       labels: {
         formatter: function() {
