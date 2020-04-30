@@ -23,7 +23,7 @@ $(function() {
     ],
     // Chart Title and Subtitle
     title: {
-      text: "Army Corps of Engineers Missions and AFCs"
+      text: "Army Corps of Engineers: <br> Mission and Alternative Care Facilities"
     },
     subtitle: {
       text: "Click and drag to zoom in"
