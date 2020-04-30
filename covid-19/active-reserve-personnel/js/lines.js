@@ -49,8 +49,8 @@ $(function() {
     },
     xAxis: {
       dateTimeLabelFormats: {
-        day: '%b %e',
-        week: '%b %e'
+        day: '%e-%b',
+        week: '%e-%b'
       }
     },
     // Tooltip
