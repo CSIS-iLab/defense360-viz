@@ -62,7 +62,7 @@ $(function() {
     tooltip: {
         shared: true,
         useHTML: true,
-        xDateFormat: '%B %e'
+        xDateFormat: '%b %e, %Y'
     },    
     // Additional Plot Options
     plotOptions:
