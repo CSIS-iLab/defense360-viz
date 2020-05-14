@@ -18,7 +18,7 @@ $(function() {
     },
     // Colors
     colors: [
-      '#365F5A',
+      '#3E8E9D',
       '#83373E',
       '#D05F4C'      
     ],

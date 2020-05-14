@@ -19,7 +19,7 @@ $(function() {
     // Colors
     colors: [
       '#83373E',
-      '#365F5A'
+      '#3E8E9D'
       
     ],
     // Chart Title and Subtitle
