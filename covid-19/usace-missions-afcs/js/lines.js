@@ -32,7 +32,7 @@ $(function() {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: Department of Defense"
+      text: "CSIS Defense360 | Source: DoD Covid-19 Updates"
     },
     // Chart Legend
     legend: {
