@@ -65,9 +65,9 @@ $(function () {
         let total = 0
         let lines = this.points.map((point, i) => {
           total += point.y
-          return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + point.y + '</b></br>'
+          return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + Highcharts.numberFormat(point.y,0, '.', ',') + '</b></br>'
         })
-        return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total Active Cases: <b>' + total + '</b>'
+        return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total Active Cases: <b>' + Highcharts.numberFormat(total,0, '.', ',')  + '</b>'
       },
       shared: true,
     },
