@@ -1,10 +1,3 @@
-$(function () {
-  Highcharts.setOptions({
-    lang: {
-      thousandsSep: ','
-    }
-  })
-
   $(function () {
     $('#hcContainer').highcharts({
       // Load Data in from Google Sheets
@@ -91,4 +84,3 @@ $(function () {
       }
     });
   });
-});
