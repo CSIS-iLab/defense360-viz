@@ -39,7 +39,18 @@ $(function () {
       dateTimeLabelFormats: {
         day: '%e-%b',
         week: '%e-%b'
-      }
+      },
+      labels: {
+        style: {
+            textOverflow: 'none'
+        }
+      },
+      units: [
+        [
+          'day', 
+          [1,2,3,5,7,10]
+        ]
+      ] 
     },
     // Y Axis
     yAxis: {
