@@ -52,10 +52,22 @@ $(function() {
       tickInterval: 500
     },
     xAxis: {
+      type: 'datetime',
       dateTimeLabelFormats: {
         day: '%e-%b',
         week: '%e-%b'
-      }
+      },
+      labels: {
+        style: {
+            textOverflow: 'none'
+        }
+      },
+      units: [
+        [
+          'day', 
+          [1,2,3,5,7,10]
+        ]
+      ] 
     },
     // Tooltip
     tooltip: {
