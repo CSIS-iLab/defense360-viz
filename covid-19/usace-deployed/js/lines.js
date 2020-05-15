@@ -31,7 +31,7 @@ $(function() {
     credits: {
       enabled: true,
       href: false,
-      text: "CSIS Defense360 | Source: Department of Defense"
+      text: "CSIS Defense360 | Source: DoD Covid-19 Updates"
     },
     // Chart Legend
     legend: {
@@ -52,16 +52,28 @@ $(function() {
       tickInterval: 500
     },
     xAxis: {
+      type: 'datetime',
       dateTimeLabelFormats: {
         day: '%e-%b',
         week: '%e-%b'
-      }
+      },
+      labels: {
+        style: {
+            textOverflow: 'none'
+        }
+      },
+      units: [
+        [
+          'day', 
+          [1,2,3,5,7,10]
+        ]
+      ] 
     },
     // Tooltip
     tooltip: {
         shared: true,
         useHTML: true,
-        xDateFormat: '%B %e'
+        xDateFormat: '%b %e, %Y'
     },    
     // Additional Plot Options
     plotOptions:

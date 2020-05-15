@@ -13,7 +13,7 @@ $(function () {
       type: 'area'
     },
     // Colors
-    colors: ['#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C'],
+    colors: ['#75657A', '#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C'],
     // Chart Title and Subtitle
     title: {
       text: "Active Military Cases of Covid-19"
@@ -39,7 +39,18 @@ $(function () {
       dateTimeLabelFormats: {
         day: '%e-%b',
         week: '%e-%b'
-      }
+      },
+      labels: {
+        style: {
+            textOverflow: 'none'
+        }
+      },
+      units: [
+        [
+          'day', 
+          [1,2,3,5,7,10]
+        ]
+      ] 
     },
     // Y Axis
     yAxis: {
@@ -65,9 +76,9 @@ $(function () {
         let total = 0
         let lines = this.points.map((point, i) => {
           total += point.y
-          return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + point.y + '</b></br>'
+          return '<span style="color:' + point.color + '">● </span>' + point.series.name + ': <b>' + Highcharts.numberFormat(point.y,0, '.', ',') + '</b></br>'
         })
-        return '<b>' + formattedDate + '</b></br>' + lines.toString().replace(/,/g, " ") + 'Total Active Cases: <b>' + total + '</b>'
+        return '<b>' + formattedDate + '</b></br>' + lines.join("") + 'Total Active Cases: <b>' + Highcharts.numberFormat(total,0, '.', ',')  + '</b>'
       },
       shared: true,
     },
