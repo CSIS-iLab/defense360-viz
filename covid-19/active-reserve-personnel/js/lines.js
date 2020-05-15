@@ -48,10 +48,22 @@ $(function() {
       }
     },
     xAxis: {
+      type: 'datetime',
       dateTimeLabelFormats: {
         day: '%e-%b',
         week: '%e-%b'
-      }
+      }, 
+      labels: {
+        style: {
+            textOverflow: 'none'
+        }
+      },
+      units: [
+        [
+          'day', 
+          [1,2,3]
+        ]
+      ] 
     },
     // Tooltip
     tooltip: {
@@ -60,9 +72,8 @@ $(function() {
         xDateFormat: '%b %e, %Y'
     },    
     // Additional Plot Options
-    plotOptions:
-    {
-      line: {
+    plotOptions:{
+        line: {
         marker: {
           enabled: false,
           symbol: "circle",
