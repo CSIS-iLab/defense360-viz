@@ -8,13 +8,7 @@ Highcharts.chart('hcContainer', {
   },
   chart: {
     type: 'column',
-    events: {
-      render() {
-        const chart = this;
-        const series = chart.series;
-        console.log(series);
-      }
-    }
+    zoomType: 'xy'
   },
   colors: ['#D05F4C', '#96B586'],
   title: {
