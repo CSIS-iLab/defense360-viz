@@ -16,6 +16,7 @@ Highcharts.chart('hcContainer', {
       }
     }
   },
+  colors: ['#D05F4C', '#96B586'],
   title: {
     text: 'DoD New Cases of Covid-19'
   },
