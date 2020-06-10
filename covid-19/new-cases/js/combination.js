@@ -38,22 +38,11 @@ Highcharts.chart('hcContainer', {
     }
   },
   xAxis: {
-    type: 'datetime',
-    dateTimeLabelFormats: {
-      day: '%e-%b',
-      week: '%e-%b'
-    }, 
-    labels: {
-      style: {
-          textOverflow: 'none'
+      type: 'datetime',
+      dateTimeLabelFormats: {
+        day: '%e-%b',
+        week: '%e-%b'
       }
-    },
-    units: [
-      [
-        'day', 
-        [1,2,3,5,7]
-      ]
-    ] 
   },
   tooltip: {
     shared: true,
