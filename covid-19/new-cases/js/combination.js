@@ -68,6 +68,19 @@ Highcharts.chart('hcContainer', {
   }, {
     type: 'column'
   }, {
-    type: 'line'
-  }]
+    type: 'line',
+    label: {
+      enabled: false
+    }
+  }],
+  plotOptions:{
+    line: {
+      marker: {
+        enabled: false,
+        symbol: "circle",
+        radius: 3
+      },
+      lineWidth: 3
+    }
+  }
 });
