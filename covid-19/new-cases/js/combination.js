@@ -10,7 +10,7 @@ Highcharts.chart('hcContainer', {
     type: 'column',
     zoomType: 'xy'
   },
-  colors: ['#D05F4C', '#96B586'],
+  colors: ['#D05F4C', '#365F5A'],
   title: {
     text: 'DoD New Cases of Covid-19'
   },
