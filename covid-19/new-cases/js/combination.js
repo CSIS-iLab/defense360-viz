@@ -12,7 +12,7 @@ Highcharts.chart('hcContainer', {
   },
   colors: ['#D05F4C', '#365F5A'],
   title: {
-    text: 'DoD New Cases of Covid-19'
+    text: 'New DoD New Cases of Covid-19'
   },
   subtitle: {
     text: "Click and drag to zoom in"
