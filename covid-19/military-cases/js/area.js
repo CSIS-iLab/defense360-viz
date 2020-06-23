@@ -13,7 +13,7 @@ $(function () {
       type: 'area'
     },
     // Colors
-    colors: ['#75657A', '#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C'],
+    colors: ['#75657A', '#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C', '#DDB460'],
     // Chart Title and Subtitle
     title: {
       text: "Active Military Cases of Covid-19"
