@@ -15,7 +15,7 @@
       colors: ['#365F5A', '#83373E', '#D05F4C', '#96B586'],
       // Chart Title and Subtitle
       title: {
-        text: "Active DoD Cases of Covid-19"
+        text: "Cumulative Covid-19 Cases Across DoD"
       },
       subtitle: {
         text: "Click and drag to zoom in"
