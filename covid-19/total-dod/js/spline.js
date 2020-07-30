@@ -85,10 +85,8 @@ Highcharts.chart("hcContainer", {
       shape: 'rect',
       overflow: 'none',
       formatter: function () {
-        console.log(this.series.chart.series)
-        
         let s = this.series.chart.series
-        let total = s[2].points[s[2].points.length - 1].y
+        let total = s[0].points[s[0].points.length - 1].y
        
         let secDate = s[0].points[s[0].points.length - 1].x
         let gmtDate = new Date(secDate)

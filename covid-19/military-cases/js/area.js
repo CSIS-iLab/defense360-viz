@@ -16,7 +16,7 @@ $(function () {
     colors: ['#75657A', '#96B586', '#3E8E9D', '#365F5A', '#83373E', '#D05F4C', '#DDB460'],
     // Chart Title and Subtitle
     title: {
-      text: "Cumulative Military Cases of Covdi-19 by Service"
+      text: "Cumulative Military Cases of Covid-19 by Service"
     },
     subtitle: {
       text: "Click and drag to zoom in"
