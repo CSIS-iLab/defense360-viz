@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Federal Budget Data</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/lines.css" />
+    <!-- Include Project Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Highcharts chart container -->
+    <main id="outerContainer">
+      <header>
+        <h1>U.S. Federal Budget by Function and Agency</h1>
+        <div id="inputContainer">
+          <div class="dropdown">
+            <label for="dataset" class="filter-label">Select dataset</label>
+            <select id="dataset" name="dataset"></select>
+          </div>
+        </div>
+      </header>
+      <div id="hcContainer"></div>
+      <div id="legend">
+        <div id="checkboxes" class="checkboxes"></div>
+        <div id="buttons">
+          <button id="submit">Submit</button>
+          <button id="select-all">Select All</button>
+          <button id="unselect-all">Unselect All</button>
+        </div>
+      </div>
+      <footer>CSIS Defense 360 | Source: OMB</footer>
+    </main>
+
+    <!-- Include jQuery & Highcharts Libraries; Adjust per project -->
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
+    ></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/6.0.7/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <!-- Include iFrame Resizer -->
+    <!--<script src="https://csis-ilab.github.io/defense360-viz/globals/iframeSizer.contentWindow.min.js"></script>-->
+    <!-- Include Defense360 Highcharts Theme -->
+    <script src="https://csis-ilab.github.io/defense360-viz/globals/defense360-highcharts-theme.js"></script>
+    <!-- <script src="../../globals/defense360-highcharts-theme.js"></script> -->
+    <!-- Include Project Specific Javascript Files -->
+    <script src="js/lines.js"></script>
+  </body>
+</html>
