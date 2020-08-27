@@ -173,17 +173,31 @@ input[type='checkbox']:focus + label::before {
 button {
   margin: 1 .5rem 1 .5rem;
   padding: .3rem .5rem;
-  background-color: #36605a;
-  color: #f1f1f1;
   text-transform: uppercase;
   font-family: 'Source Sans Pro';
   border: 0;
   transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 
-button:hover {
+#submit {
+  background-color: #36605a;
+  color: #f1f1f1;
+}
+
+#submit:hover {
   color: #fff;
   background-color: #243f3b;
+}
+
+.selectButtons {
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #e7e7e7;
+}
+
+.selectButtons:hover {
+  color: #fff;
+  background-color: #9B9B9B;
 }
 
 footer {
