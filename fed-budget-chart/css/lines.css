@@ -105,7 +105,8 @@ h1 {
 }
 
 #legend {
-  display: none;
+  position: relative;
+  display: block;
 }
 
 @media screen and (min-width: 48em) {
@@ -205,4 +206,5 @@ footer {
   font-size: 10px;
   font-family: "Source Sans Pro", Arial, sans-serif;
   text-align: right;
+  margin-right: 1rem;
 }
