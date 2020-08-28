@@ -83,18 +83,25 @@ function renderChart(data) {
   let firstObject = data.values[0]
   let coordinates = firstObject.data
   let currentYear = coordinates.slice(-5)[0][0]
-  let xAxisMax = currentYear + 5
+  let xAxisMax = currentYear + 4
 
   /*---Chart options---*/
   Highcharts.chart("hcContainer", {
       exporting: {
         chartOptions: {
-        credits: {
-          enabled: true
+          credits: {
+            enabled: true
+          },
         }
-      }
+      },
+      navigation: {
+        buttonOptions: {
+            align: 'right',
+            x: -120
+        }
       },
       chart: {
+        marginRight: 115,
         type: "line",
         zoomType: "xy",
         height: 400,

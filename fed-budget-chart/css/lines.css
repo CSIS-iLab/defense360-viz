@@ -24,7 +24,7 @@ p + p {
   margin: 0 auto;
 }
 
-.highcharts-background {
+.highcharts-root {
   max-width: 1600px;
 }
 
