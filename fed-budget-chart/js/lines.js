@@ -101,7 +101,7 @@ function renderChart(data) {
         }
       },
       chart: {
-        marginRight: 115,
+        marginRight: 95,
         type: "line",
         zoomType: "xy",
         height: 400,
