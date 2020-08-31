@@ -246,7 +246,7 @@ function setUpCheckboxes(chart) {
     let isChecked = series[i].visible ? 'checked' : ""
     checkboxesHTML += `
     <div class="checkbox__wrapper" style="--color: ${series[i].color}">
-      <input type="checkbox" name="series" id="${i}" value="${i}" ${isChecked} style="--color: ${series[i].color}" />
+      <input type="checkbox" name="series" id="${i}" value="${i}" ${isChecked}/>
       <label for="${i}" class="checkbox-label">${series[i].name}</label>
     </div>`      
   }

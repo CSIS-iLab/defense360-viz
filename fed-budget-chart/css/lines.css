@@ -20,7 +20,7 @@ p + p {
   grid-gap: .5rem;
   grid-template-columns: 1fr;
   align-items: start;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -81,7 +81,6 @@ h1 {
   background-color: #fff;
   border: 2px solid #e7e7e7;
   border-radius: 0;
-  /*box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.05);*/
 }
 
 @media screen and (min-width: 48em) {
@@ -118,7 +117,6 @@ h1 {
     height: 341px;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 14px;
-    /*border: solid red 1px;*/
   }
 }
 
@@ -178,10 +176,12 @@ button {
   font-family: 'Source Sans Pro';
   border: 0;
   transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 #submit {
   background-color: #36605a;
+  border: 2px solid #36605a;
   color: #f1f1f1;
 }
 
@@ -197,8 +197,10 @@ button {
 }
 
 .selectButtons:hover {
-  color: #fff;
-  background-color: #9B9B9B;
+  color: transparent;
+  background-color: transparent;
+  color: #243f3b;
+  border-color: #243f3b;
 }
 
 footer {
