@@ -101,16 +101,10 @@ function renderChart(data) {
         }
       },
       chart: {
-        marginRight: 95,
+        width: 800,
         type: "line",
         zoomType: "xy",
         height: 400,
-        resetZoomButton: {
-          position: {
-            align: 'left',
-            x: 10
-          }
-        }
       },
       title: {
         text: null,
@@ -144,7 +138,10 @@ function renderChart(data) {
         max: xAxisMax,
         maxPadding: 0,
         labels: {
-          format: 'FY {value}'
+          format: 'FY {value}',
+          style: {
+            fontSize: '11px'
+          }
         },
         title: {
           text: "<b>Fiscal Year</b>",

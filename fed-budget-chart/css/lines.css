@@ -24,10 +24,6 @@ p + p {
   margin: 0 auto;
 }
 
-.highcharts-root {
-  max-width: 1200px;
-}
-
 @media screen and (min-width: 48em) {
   #outerContainer {
     grid-template-columns: 2fr auto;
@@ -112,8 +108,8 @@ h1 {
   #legend {
     position: relative;
     display: block;
-    max-width: 400px;
-    padding: 16px;
+    width: 400px;
+    padding-top: 16px;
     height: 341px;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 14px;
