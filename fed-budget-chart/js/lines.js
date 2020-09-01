@@ -195,7 +195,11 @@ function setUpDropdown(values) {
   let optionsHTML = "";
 
   values.forEach((element) => {
-    optionsHTML += `<option value="${element.name}">${element.name}</option>`;
+    if (`${element.name}` == "Discretionary Budget Authority by Agency") {
+      optionsHTML += `<option value="${element.name}" selected>${element.name}</option>`
+    } else {
+      optionsHTML += `<option value="${element.name}">${element.name}</option>`;
+    }
   });
 
   select.innerHTML = optionsHTML;
