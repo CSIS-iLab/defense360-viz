@@ -91,6 +91,10 @@ h1 {
   }
 }
 
+.highcharts-background {
+  max-width: 800px;
+}
+
 .highcharts-axis-labels.highcharts-yaxis-labels {
   font-weight: bold;
 }

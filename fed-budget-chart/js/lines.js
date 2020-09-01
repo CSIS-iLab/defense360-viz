@@ -95,7 +95,7 @@ function renderChart(data) {
         }
       },
       chart: {
-        width: 800,
+        /*width: 800,*/
         type: "line",
         zoomType: "xy",
         height: 400,
