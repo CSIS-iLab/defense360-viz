@@ -94,12 +94,6 @@ function renderChart(data) {
           },
         }
       },
-      navigation: {
-        buttonOptions: {
-            align: 'right',
-            x: -120
-        }
-      },
       chart: {
         width: 800,
         type: "line",
