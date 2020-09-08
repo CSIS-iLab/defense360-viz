@@ -95,14 +95,6 @@ h1 {
   max-width: 800px;
 }
 
-.highcharts-axis-labels.highcharts-yaxis-labels {
-  font-weight: bold;
-}
-
-.highcharts-axis-labels.highcharts-xaxis-labels {
-  font-weight: bold;
-}
-
 #legend {
   position: relative;
   display: block;

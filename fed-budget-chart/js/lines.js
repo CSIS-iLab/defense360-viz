@@ -111,7 +111,11 @@ function renderChart(data) {
         title: {
           /* Use currentYear, defined above, to update */
           useHTML: true,
-          text: `<b>Budget Authority in FY ${currentYear} Dollars</b>`
+          text: `<b>Budget Authority in FY ${currentYear} Dollars</b>`,
+          style: {
+            fontFamily: "'Source Sans Pro', sans serif",
+            fontSize: '14px'
+          }
         },
         labels: {
           formatter: function () {
@@ -125,6 +129,10 @@ function renderChart(data) {
             } else {
               return '$' + this.value;
             }
+          },
+          style: {
+            fontSize: '12px',
+            fontFamily: "'Source Sans Pro', sans serif"
           }
         }
       },
@@ -134,12 +142,17 @@ function renderChart(data) {
         labels: {
           format: 'FY {value}',
           style: {
-            fontSize: '11px'
+            fontSize: '12px',
+            fontFamily: "'Source Sans Pro', sans serif"
           }
         },
         title: {
           text: "<b>Fiscal Year</b>",
-          margin: 10
+          margin: 10,
+          style: {
+            fontFamily: "'Source Sans Pro', sans serif",
+            fontSize: '14px'
+          }
         },
       },
       legend: {
