@@ -15,13 +15,12 @@ Highcharts.data({
   switchRowsAndColumns: true,
   parsed: function parsed(columns) {
     yearArray = columns[0];
-    /* Note, currently, no data for year 1976 - data starts at 1977 */
     columns.shift();
 
     /*
       Iterate over each column, starting at the first one.
       Because of .shift() the first column contains values for
-      out dataset, not the years.
+      our dataset, not the years.
     */
 
     for (let index = 0; index < columns.length; index++) {
@@ -30,13 +29,13 @@ Highcharts.data({
       let name = row[1];
       let values = [];
 
-      /* rows 3 - 52 contain budget data, from 1976 - 2025 */
+      /* rows 2 - 52 on the spreadsheet contain budget data, from 1976 - 2025 */
 
       /*
         Take the year and the data in that row and
         feed them in to be used as [x,y] values
       */
-      for (let i = 3; i < 52; i++) {
+      for (let i = 2; i < 52; i++) {
         values.push([yearArray[i], row[i]]);
       }
 
@@ -67,7 +66,7 @@ Highcharts.data({
     }
     datasets = Object.values(allData);
     setUpDropdown(datasets);
-    renderChart(datasets[1]);
+    renderChart(datasets[0]);
   },
 });
 
@@ -208,11 +207,7 @@ function setUpDropdown(values) {
   let optionsHTML = "";
 
   values.forEach((element) => {
-    if (`${element.name}` == "Discretionary Budget Authority by Agency") {
-      optionsHTML += `<option value="${element.name}" selected>${element.name}</option>`
-    } else {
-      optionsHTML += `<option value="${element.name}">${element.name}</option>`;
-    }
+    optionsHTML += `<option value="${element.name}">${element.name}</option>`;
   });
 
   select.innerHTML = optionsHTML;
