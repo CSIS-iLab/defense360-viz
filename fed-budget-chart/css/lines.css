@@ -104,7 +104,7 @@ h1 {
     position: relative;
     display: block;
     width: 400px;
-    padding-top: 16px;
+    padding-top: 10px;
     height: 341px;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 14px;
@@ -112,7 +112,7 @@ h1 {
 }
 
 .checkboxes {
-  max-height: 300px;
+  max-height: 380px;
   overflow: scroll;
   overflow-x: hidden;
   margin-bottom: 1rem;
