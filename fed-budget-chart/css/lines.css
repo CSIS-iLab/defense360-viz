@@ -81,9 +81,8 @@ h1 {
 
 @media screen and (min-width: 48em) {
   footer {
-    grid-row: 3;
+    grid-row: 5;
     grid-column: 2;
-    align-self: center;
   }
 
   #hcContainer {
@@ -193,6 +192,16 @@ button {
   background-color: transparent;
   color: #243f3b;
   border-color: #243f3b;
+}
+
+#caption {
+  grid-row: 4;
+  grid-column: 1;
+  color: #999;
+  text-align: justify;
+  font-size: 10px;
+  margin-left: 5rem;
+  margin-right: .5rem;
 }
 
 footer {
