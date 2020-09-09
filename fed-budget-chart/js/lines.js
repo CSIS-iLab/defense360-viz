@@ -91,6 +91,13 @@ function renderChart(data) {
           credits: {
             enabled: true
           },
+          legend: {
+            enabled: true,
+            itemStyle: {
+              fontSize: '8px',
+              fontWeight: 'normal'
+            }
+          }
         }
       },
       chart: {
@@ -110,9 +117,10 @@ function renderChart(data) {
         title: {
           /* Use currentYear, defined above, to update */
           useHTML: true,
-          text: `<b>Budget Authority in FY ${currentYear} Dollars</b>`,
+          text: `Budget Authority in FY ${currentYear} Dollars`,
           style: {
             fontFamily: "'Source Sans Pro', sans serif",
+            fontWeight: 'bold',
             fontSize: '14px'
           }
         },
@@ -146,19 +154,17 @@ function renderChart(data) {
           }
         },
         title: {
-          text: "<b>Fiscal Year</b>",
+          text: "Fiscal Year",
           margin: 10,
           style: {
             fontFamily: "'Source Sans Pro', sans serif",
-            fontSize: '14px'
+            fontSize: '14px',
+            fontWeight: 'bold'
           }
         },
       },
       legend: {
         enabled: false,
-        align: 'right',
-        verticalAlign: 'middle',
-        width: '20%'
       },
       tooltip: {
         outside: true,
