@@ -3,10 +3,9 @@ let datasets = [];
 
 Highcharts.setOptions({
   lang: {
-    numericSymbols: ["k", "M", "B", "T", "P", "E"]
-  }
-})
-
+    numericSymbols: ["k", "M", "B", "T", "P", "E"],
+  },
+});
 
 Highcharts.data({
   // Load Data in from Google Sheets
@@ -72,33 +71,34 @@ Highcharts.data({
 
 // If using the default Highcharts legend, this will
 // change the line symbol to a circle that's colored
-// according to the series color. 
+// according to the series color.
 Highcharts.seriesTypes.line.prototype.drawLegendSymbol =
   Highcharts.seriesTypes.area.prototype.drawLegendSymbol;
 
 function renderChart(data) {
-
   /* So yAxis title updates each year */
-  let firstObject = data.values[0]
-  let coordinates = firstObject.data
-  let currentYear = coordinates.slice(-5)[0][0]
-  let xAxisMax = currentYear + 4
+  let firstObject = data.values[0];
+  let coordinates = firstObject.data;
+  let currentYear = coordinates.slice(-5)[0][0];
+  let xAxisMax = currentYear + 4;
 
   /*---Chart options---*/
-  Highcharts.chart("hcContainer", {
+  Highcharts.chart(
+    "hcContainer",
+    {
       exporting: {
         chartOptions: {
           credits: {
-            enabled: true
+            enabled: true,
           },
           legend: {
             enabled: true,
             itemStyle: {
-              fontSize: '8px',
-              fontWeight: 'normal'
-            }
-          }
-        }
+              fontSize: "8px",
+              fontWeight: "normal",
+            },
+          },
+        },
       },
       chart: {
         /*width: 800,*/
@@ -111,7 +111,7 @@ function renderChart(data) {
       },
       credits: {
         enabled: false,
-        text: 'CSIS Defense 360 | Source: OMB'
+        text: "CSIS Defense 360 | Source: OMB",
       },
       yAxis: {
         title: {
@@ -120,47 +120,46 @@ function renderChart(data) {
           text: `Budget Authority in FY ${currentYear} Dollars`,
           style: {
             fontFamily: "'Source Sans Pro', sans serif",
-            fontWeight: 'bold',
-            fontSize: '14px'
-          }
+            fontWeight: "bold",
+            fontSize: "14px",
+          },
         },
         labels: {
           formatter: function () {
-
             if (this.value >= 1000000) {
-              return '$' + (this.value / 1000000) + 'T';
+              return "$" + this.value / 1000000 + "T";
             } else if (this.value >= 1000) {
-              return '$' + (this.value / 1000) + 'B';
+              return "$" + this.value / 1000 + "B";
             } else if (this.value < -1000) {
-              return '-$' + Math.abs((this.value / 1000)) + 'B'
+              return "-$" + Math.abs(this.value / 1000) + "B";
             } else {
-              return '$' + this.value;
+              return "$" + this.value;
             }
           },
           style: {
-            fontSize: '12px',
-            fontFamily: "'Source Sans Pro', sans serif"
-          }
-        }
+            fontSize: "12px",
+            fontFamily: "'Source Sans Pro', sans serif",
+          },
+        },
       },
       xAxis: {
         max: xAxisMax,
         maxPadding: 0,
         labels: {
-          format: 'FY {value}',
+          format: "FY {value}",
           style: {
-            fontSize: '12px',
-            fontFamily: "'Source Sans Pro', sans serif"
-          }
+            fontSize: "12px",
+            fontFamily: "'Source Sans Pro', sans serif",
+          },
         },
         title: {
           text: "Fiscal Year",
           margin: 10,
           style: {
             fontFamily: "'Source Sans Pro', sans serif",
-            fontSize: '14px',
-            fontWeight: 'bold'
-          }
+            fontSize: "14px",
+            fontWeight: "bold",
+          },
         },
       },
       legend: {
@@ -171,23 +170,40 @@ function renderChart(data) {
         useHTML: true,
         shared: false,
         valueDecimals: 3,
-        headerFormat: '<span style="font-size: 14px"><b>FY {point.key}</b></span><br/>',
+        headerFormat:
+          '<span style="font-size: 14px"><b>FY {point.key}</b></span><br/>',
         pointFormatter: function () {
-          var result = this.y
+          var result = this.y;
           if (result > 999999.99) {
-            result = (result / 1000000).toFixed(2) + " Trillion"
+            result = (result / 1000000).toFixed(2) + " Trillion";
           } else if (result > 999.99) {
-            result = (result / 1000).toFixed(2) + " Billion"
+            result = (result / 1000).toFixed(2) + " Billion";
           } else if (result > 0) {
-            result = result.toFixed(2) + " Million"
+            result = result.toFixed(2) + " Million";
           } else if (result < 0) {
-            result = Math.abs((result / 1000)).toFixed(2) + " Billion"
-            return '<span style="color:' + this.color + '">\u25CF</span> ' + this.series.name + ': <b>-$' + result + '</b><br/>'
+            result = Math.abs(result / 1000).toFixed(2) + " Billion";
+            return (
+              '<span style="color:' +
+              this.color +
+              '">\u25CF</span> ' +
+              this.series.name +
+              ": <b>-$" +
+              result +
+              "</b><br/>"
+            );
           }
-          return '<span style="color:' + this.color + '">\u25CF</span> ' + this.series.name + ': <b>$' + result + '</b><br/>'
+          return (
+            '<span style="color:' +
+            this.color +
+            '">\u25CF</span> ' +
+            this.series.name +
+            ": <b>$" +
+            result +
+            "</b><br/>"
+          );
         },
         style: {
-          whitespace: 'normal'
+          whitespace: "normal",
         },
       },
       plotOptions: {
@@ -201,11 +217,12 @@ function renderChart(data) {
         },
       },
       series: data.values,
-      },
-      function (chart) {
-        setUpButtons(chart)
-        setUpCheckboxes(chart)
-      });
+    },
+    function (chart) {
+      setUpButtons(chart);
+      setUpCheckboxes(chart);
+    }
+  );
 }
 
 function setUpDropdown(values) {
@@ -226,56 +243,66 @@ function setUpDropdown(values) {
 }
 
 function setUpButtons(chart) {
-  let series = chart.series
+  let series = chart.series;
 
   const selectAll = document.getElementById("select-all");
   const unselectAll = document.getElementById("unselect-all");
 
   selectAll.addEventListener("click", function () {
+    if (series[0] === undefined) {
+      return;
+    }
     for (let i = 0; i < series.length; i++) {
       series[i].setVisible(true, true);
-      setUpCheckboxes(chart)
+      setUpCheckboxes(chart);
     }
-  })
+  });
 
   unselectAll.addEventListener("click", function () {
-    for (let i = 0; i < series.length; i++) {
-      series[i].setVisible(false, false)
-      setUpCheckboxes(chart)
+    if (series[0] === undefined) {
+      return;
     }
-  })
+    for (let i = 0; i < series.length; i++) {
+      series[i].setVisible(false, false);
+      setUpCheckboxes(chart);
+    }
+  });
 }
 
 function setUpCheckboxes(chart) {
-  const checkboxes = document.getElementById("checkboxes")
-  let series = chart.series
-  let checkboxesHTML = ""
+  const checkboxes = document.getElementById("checkboxes");
+  let series = chart.series;
+  let checkboxesHTML = "";
 
   for (let i = 0; i < series.length; i++) {
-    let isChecked = series[i].visible ? 'checked' : ""
+    let isChecked = series[i].visible ? "checked" : "";
     checkboxesHTML += `
     <div class="checkbox__wrapper" style="--color: ${series[i].color}">
       <input type="checkbox" name="series" id="${i}" value="${i}" ${isChecked}/>
       <label for="${i}" class="checkbox-label">${series[i].name}</label>
-    </div>`      
+    </div>`;
   }
-  
+
   checkboxes.innerHTML = checkboxesHTML;
 
   /*---------Submit Button-------- */
-  const submitButton = document.getElementById("submit")
+  const submitButton = document.getElementById("submit");
 
   submitButton.addEventListener("click", function () {
-    const checkedBoxes = Array.from(document.querySelectorAll('input[name=series]:checked'))
-      .map(input => +input.value);
+    if (series[0] === undefined) {
+      return;
+    }
+    const checkedBoxes = Array.from(
+      document.querySelectorAll("input[name=series]:checked")
+    ).map((input) => +input.value);
 
     for (let i = 0; i < series.length; i++) {
       if (checkedBoxes.includes(i)) {
-        series[i].visible = true
+        series[i].visible = true;
       } else {
-        series[i].setVisible(false, false)
+        series[i].setVisible(false, false);
       }
     }
-    chart.redraw()
-  })
+    chart.redraw();
+  });
 }
