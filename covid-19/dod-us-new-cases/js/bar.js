@@ -87,14 +87,11 @@ Highcharts.chart("hcContainer", {
     shared: true,
     xDateFormat: '%b %e, %Y'
   },
-  // X Axis
-  xAxis: {
-    labels: {
-      rotation: -90
-  }
-  },
+  // // X Axis
+  // xAxis: {
+  // },
   // Colors
-  colors: ["#36605a", "#D05F4C", "#83373E"],
+  colors: ["#ddb460", "#3e8e9d", "#d05f4c"],
   // Additional Plot Options
   plotOptions: {
     column: {
