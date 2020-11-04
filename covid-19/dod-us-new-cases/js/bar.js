@@ -70,7 +70,7 @@ Highcharts.chart("hcContainer", {
   yAxis: [
     {
       title: {
-        text: "New Cases",
+        text: "U.S. New Cases",
       },
     },
     {
