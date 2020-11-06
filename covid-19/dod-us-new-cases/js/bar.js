@@ -21,7 +21,7 @@ Highcharts.chart("hcContainer", {
         pointFormatter: function () {
           // console.log(this)
           return `<span style="color:${this.color}">\u25CF </span> ${this.series.name}:
-          <b>` + Highcharts.numberFormat(this.y, 0, ".", ",") +  `</b><br>`
+          <b>` + Highcharts.numberFormat(this.y, 0, ".", ",") + `</b><br>`
         },
       }
     },
@@ -44,7 +44,7 @@ Highcharts.chart("hcContainer", {
   },
   // Chart Title and Subtitle
   title: {
-    text: "Comparing New US and DoD Case Trends",
+    text: "Comparing New U.S. and DoD Case Trends",
   },
   subtitle: {
     text: "Different scales are used for comparison. Note dual axis.",
