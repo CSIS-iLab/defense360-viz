@@ -72,7 +72,6 @@ Highcharts.chart("hcContainer", {
       title: {
         text: "U.S. New Cases",
       },
-      max: 320000,
     },
     {
       title: {
