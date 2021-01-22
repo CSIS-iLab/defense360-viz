@@ -78,7 +78,7 @@ Highcharts.chart("hcContainer", {
         text: "New DoD Cases",
       },
       opposite: true,
-      max: 2500,
+      max: 5500,
     },
   ],
 
