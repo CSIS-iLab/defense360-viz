@@ -37,10 +37,10 @@ Highcharts.chart("hcContainer", {
       }
     },
   ],
-
   // General Chart Options
   chart: {
     type: "column",
+    spacingBottom: 60,
   },
   // Chart Title and Subtitle
   title: {
@@ -54,7 +54,8 @@ Highcharts.chart("hcContainer", {
     enabled: true,
     href: false,
     text:
-      "CSIS Defense360 | Source:Johns Hopkins Coronavirus Resource Center & Coronavirus: DoD Response",
+      "CSIS Defense360<br>Source:Johns Hopkins Coronavirus Resource Center<br>& Coronavirus: DoD Response",
+    position: { y: -30 }
   },
   // Chart Legend
   legend: {
@@ -71,8 +72,7 @@ Highcharts.chart("hcContainer", {
     {
       title: {
         text: "New U.S. Cases",
-      },
-      max: 320000,
+      }
     },
     {
       title: {
