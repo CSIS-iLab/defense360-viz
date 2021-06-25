@@ -29,7 +29,7 @@ function callChart(defense_system) {
         gapi.client.sheets.spreadsheets.values
           .get({
             spreadsheetId: SPREADSHEET_ID,
-            range: "'" + defense_system + "'!A:Z"
+            range: "'" + defense_system + "'!A:AD"
           })
           .then(function(sheet) {
             var sheetData = {
