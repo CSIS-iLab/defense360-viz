@@ -9,7 +9,7 @@ $(function() {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1OzJwZ8wTlflcKsb_yKfmGchhkAzUkQ-fexGwY-c-sAk',
-      googleSpreadsheetWorksheet: 2
+      googleSpreadsheetRange: "USACE Deployed",
     },
     // General Chart Options
     chart: {

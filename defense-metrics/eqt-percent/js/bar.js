@@ -3,7 +3,7 @@ $(function() {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1q1q47_2LnWz3EfTZcedhtsNuzjQ-wTbtPxc77cs_nyU',
-      googleSpreadsheetWorksheet: 1
+      googleSpreadsheetRange: "Sheet1",
     },
     // General Chart Options
     chart: {

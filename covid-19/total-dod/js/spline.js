@@ -7,7 +7,7 @@ Highcharts.chart("hcContainer", {
   // Load Data in from Google Sheets
   data: {
     googleSpreadsheetKey: "1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk",
-    googleSpreadsheetWorksheet: 3,
+    googleSpreadsheetRange: "DOD Total",
     dateFormat: "mm/dd/YYYY",
   },
   // General Chart Options

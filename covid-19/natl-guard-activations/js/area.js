@@ -9,7 +9,7 @@ $(function () {
     // Load Data in from Google Sheets
     data: {
       googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 4,
+      googleSpreadsheetRange: "National Guard Activations",
       dateFormat: 'mm/dd/YYYY'
     },
     // General Chart Options

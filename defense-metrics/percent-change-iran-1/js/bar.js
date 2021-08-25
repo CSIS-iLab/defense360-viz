@@ -6,7 +6,7 @@ $(function() {
 
   Highcharts.data({
     googleSpreadsheetKey: '1iyFmcEFrG0Msxk6P5RSp0BfypBaDo389JEwk8opLnyg',
-      googleSpreadsheetWorksheet: 1,
+      googleSpreadsheetRange: "Sheet1",
       switchRowsAndColumns: true,
       parsed: function(columns) {
         $.each(columns, function (i, code) {

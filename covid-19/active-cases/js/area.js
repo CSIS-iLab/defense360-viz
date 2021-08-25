@@ -3,7 +3,7 @@
       // Load Data in from Google Sheets
       data: {
         googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-        googleSpreadsheetWorksheet: 1,
+        googleSpreadsheetRange: "Active Cases",
         dateFormat: 'mm/dd/YYYY'
       },
       // General Chart Options
