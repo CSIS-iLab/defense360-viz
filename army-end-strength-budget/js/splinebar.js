@@ -3,6 +3,7 @@ $(function () {
 
   Highcharts.data({
     googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: "1z3i0mILf9PGGhCh42lSh6BejOt9P3eolANl8ic0MnZA",
     googleSpreadsheetRange: "Sheet1",
     switchRowsAndColumns: true,

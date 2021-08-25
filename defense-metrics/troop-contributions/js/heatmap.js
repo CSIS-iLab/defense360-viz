@@ -4,7 +4,8 @@ let num_countries = 0
 var seriesData = []
 
 Highcharts.data({
-  googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
+  googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: '1MiSw1PR0niNG8hHS69lUHco9y1PZ_kvCFd43641ywRA',
   googleSpreadsheetRange: "Sheet1",
   parsed: function(columns) {
     console.log(columns)

@@ -14,7 +14,8 @@ $(function() {
     // beforeParse: function (csv) {
     //   console.log(csv)
     // },
-    // googleSpreadsheetKey: '1NyJlNTTLUrdhVjhVWO0f3BYnV4uWnCuUnoyOFaEBn2Q',
+    // googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: '1NyJlNTTLUrdhVjhVWO0f3BYnV4uWnCuUnoyOFaEBn2Q',
     // googleSpreadsheetWorksheet: 1,
     // switchRowsAndColumns: true,
     parsed: function(columns) {

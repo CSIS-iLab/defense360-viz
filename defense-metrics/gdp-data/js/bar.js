@@ -6,6 +6,7 @@ $(function() {
 
   Highcharts.data({
     // Load Data in from Google Sheets
+    googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: '1tB3mPWfNDwpItnwHcWZ_4eM1RL2vsRnHF9RndAVHZYI',
       googleSpreadsheetRange: "Sheet1",
       switchRowsAndColumns: true,

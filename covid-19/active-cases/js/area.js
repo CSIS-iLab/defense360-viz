@@ -2,7 +2,8 @@
     $('#hcContainer').highcharts({
       // Load Data in from Google Sheets
       data: {
-        googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
+        googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
         googleSpreadsheetRange: "Active Cases",
         dateFormat: 'mm/dd/YYYY'
       },

@@ -5,6 +5,7 @@ $(function() {
   var fiveLose = []
 
   Highcharts.data({
+    googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: '1cXkZZeQQ8Ztlp_p1VGUhbRlBMf_ulNFA9IqVTJzd3eA',
       googleSpreadsheetRange: "Sheet1",
       switchRowsAndColumns: true,
