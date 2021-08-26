@@ -9,7 +9,7 @@ Highcharts.chart("hcContainer", {
     googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: "1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk",
     googleSpreadsheetRange: "DOD Total",
-    dateFormat: "mm/dd/YYYY",
+    // dateFormat: "mm/dd/YYYY",
   },
   // General Chart Options
   chart: {
@@ -100,13 +100,8 @@ Highcharts.chart("hcContainer", {
               month: "numeric",
               day: "numeric",
             });
-            const [
-              { value: mo },
-              ,
-              { value: da },
-              ,
-              { value: ye },
-            ] = dtf.formatToParts(dateObj);
+            const [{ value: mo }, , { value: da }, , { value: ye }] =
+              dtf.formatToParts(dateObj);
             let formattedDate = `${mo}/${da}/${ye}`;
             return (
               "Total Cases as of " +
