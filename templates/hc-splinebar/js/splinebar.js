@@ -5,8 +5,9 @@ $(function() {
   var seriesData = []
 
   Highcharts.data({
+    googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: '1YvXIYCYaIIxqS19oHXDbd7VebrsHDssYXdcF8AftNFg',
-      googleSpreadsheetWorksheet: 1,
+      googleSpreadsheetRange: "Sheet1",
       switchRowsAndColumns: true,
       parsed: function(columns) {
         $.each(columns, function (i, code) {

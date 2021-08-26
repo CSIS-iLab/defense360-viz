@@ -6,8 +6,9 @@ $(function() {
   var fiveActual = ['$2,142M', '$8,580M', '$238M', '$324M', '$7M']
 
   Highcharts.data({
+    googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: '17Paq5u7wNkLkDgmhbGur15KBSWjG3JIjzNaLd5hRDvs',
-      googleSpreadsheetWorksheet: 1,
+      googleSpreadsheetRange: "Sheet1",
       switchRowsAndColumns: true,
       parsed: function(columns) {
         $.each(columns, function (i, code) {

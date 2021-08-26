@@ -3,3 +3,4 @@ templates/*/node_modules
 */node_modules
 templates/*/.cache
 */.cache
+/googlesheetsv4-updater

@@ -8,8 +8,9 @@ $(function () {
   $('#hcContainer').highcharts({
     // Load Data in from Google Sheets
     data: {
-      googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 4,
+      googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
+      googleSpreadsheetRange: "National Guard Activations",
       dateFormat: 'mm/dd/YYYY'
     },
     // General Chart Options

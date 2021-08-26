@@ -9,7 +9,8 @@ Highcharts.setOptions({
 
 Highcharts.data({
   // Load Data in from Google Sheets
-  googleSpreadsheetKey: "1MCR0HCuxns-n3Q4ev10JnT9ugLh83GuuUYzK6X4kFgw",
+  googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: "1MCR0HCuxns-n3Q4ev10JnT9ugLh83GuuUYzK6X4kFgw",
   googleSpreadsheetWorksheet: 1,
   switchRowsAndColumns: true,
   parsed: function parsed(columns) {

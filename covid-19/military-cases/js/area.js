@@ -3,8 +3,9 @@ $(function () {
   $('#hcContainer').highcharts({
     // Load Data in from Google Sheets
     data: {
-      googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
-      googleSpreadsheetWorksheet: 2,
+      googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
+    googleSpreadsheetKey: '1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk',
+      googleSpreadsheetRange: "Military Cases",
       dateFormat: 'mm/dd/YYYY'
     },
     // General Chart Options
