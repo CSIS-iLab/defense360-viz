@@ -72,53 +72,53 @@ Highcharts.chart("hcContainer", {
       lineWidth: 3,
     },
   },
-  annotations: [
-    {
-      labels: [
-        {
-          useHTML: true,
-          point: {
-            x: 110,
-            y: 55,
-          },
-          style: {
-            fontSize: "13px",
-          },
-          shape: "rect",
-          overflow: "none",
-          formatter: function () {
-            let s = this.series.chart.series;
-            let total = s[0].points[s[0].points.length - 1].y;
+  // annotations: [
+  //   {
+  //     labels: [
+  //       {
+  //         useHTML: true,
+  //         point: {
+  //           x: 110,
+  //           y: 55,
+  //         },
+  //         style: {
+  //           fontSize: "13px",
+  //         },
+  //         shape: "rect",
+  //         overflow: "none",
+  //         formatter: function () {
+  //           let s = this.series.chart.series;
+  //           let total = s[0].points[s[0].points.length - 1].y;
 
-            let secDate = s[0].points[s[0].points.length - 1].x;
-            let gmtDate = new Date(secDate);
-            let dateObj = new Date(
-              gmtDate.getTime() - gmtDate.getTimezoneOffset() * -60000
-            );
-            const dtf = new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-            });
-            const [{ value: mo }, , { value: da }, , { value: ye }] =
-              dtf.formatToParts(dateObj);
-            let formattedDate = `${mo}/${da}/${ye}`;
-            return (
-              "Total Cases as of " +
-              formattedDate +
-              ": <b>" +
-              Highcharts.numberFormat(total, 0, ".", ",") +
-              "</b>"
-            );
-          },
-        },
-      ],
-      labelOptions: {
-        borderRadius: 1,
-        backgroundColor: "#f5f5f5",
-        borderWidth: 1,
-        borderColor: "#AAA",
-      },
-    },
-  ],
+  //           let secDate = s[0].points[s[0].points.length - 1].x;
+  //           let gmtDate = new Date(secDate);
+  //           let dateObj = new Date(
+  //             gmtDate.getTime() - gmtDate.getTimezoneOffset() * -60000
+  //           );
+  //           const dtf = new Intl.DateTimeFormat("en-US", {
+  //             year: "numeric",
+  //             month: "numeric",
+  //             day: "numeric",
+  //           });
+  //           const [{ value: mo }, , { value: da }, , { value: ye }] =
+  //             dtf.formatToParts(dateObj);
+  //           let formattedDate = `${mo}/${da}/${ye}`;
+  //           return (
+  //             "Total Cases as of " +
+  //             formattedDate +
+  //             ": <b>" +
+  //             Highcharts.numberFormat(total, 0, ".", ",") +
+  //             "</b>"
+  //           );
+  //         },
+  //       },
+  //     ],
+  //     labelOptions: {
+  //       borderRadius: 1,
+  //       backgroundColor: "#f5f5f5",
+  //       borderWidth: 1,
+  //       borderColor: "#AAA",
+  //     },
+  //   },
+  // ],
 });
