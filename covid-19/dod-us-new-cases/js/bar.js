@@ -4,6 +4,7 @@ Highcharts.chart("hcContainer", {
     googleAPIKey: "AIzaSyBgDqxsDf6bkqy1_GV4rM6ejMCGcqzwzHU",
     googleSpreadsheetKey: "1eBpERcIQQAXDiA99uMDdEAWaXDC-EmWOlHgoiiihZMk",
     googleSpreadsheetRange: "Sheet5",
+    // googleSpreadsheetRange: "copy-of-sheet5",
     dateFormat: 'mm/dd/YYYY'
   },
 
@@ -77,13 +78,24 @@ Highcharts.chart("hcContainer", {
       title: {
         text: "New U.S. Cases",
       },
+      labels: {
+        formatter: function() {
+          return this.value / 1000000 + 'M';
+        }
+      },
     },
     {
       title: {
         text: "New DoD Cases",
       },
       opposite: true,
-      max: 5500,
+      // labels: {
+      //   formatter: function() {
+      //     return this.value / 100000 + 'K';
+      //   }
+      // },
+      max: 30000,
+
     },
   ],
 
