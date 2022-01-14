@@ -82,6 +82,7 @@ Highcharts.chart("hcContainer", {
           return this.value / 1000000 + 'M';
         }
       },
+      max: 2000000,
     },
     {
       title: {
@@ -89,7 +90,6 @@ Highcharts.chart("hcContainer", {
       },
       opposite: true,
       max: 30000,
-
     },
   ],
 
