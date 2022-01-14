@@ -77,13 +77,19 @@ Highcharts.chart("hcContainer", {
       title: {
         text: "New U.S. Cases",
       },
+      labels: {
+        formatter: function() {
+          return this.value / 1000000 + 'M';
+        }
+      },
     },
     {
       title: {
         text: "New DoD Cases",
       },
       opposite: true,
-      max: 5500,
+      max: 30000,
+
     },
   ],
 
